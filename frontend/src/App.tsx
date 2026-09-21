@@ -327,7 +327,7 @@ export default function App() {
   if (bootError) {
     return (
       <div className="boot-err" role="alert">
-        <h1>Asteris could not load data</h1>
+        <h1>ARGUS could not load data</h1>
         <p>{bootError}</p>
         <p>Start the backend on :8000 or add replay files to <code>public/replay/</code>.</p>
       </div>

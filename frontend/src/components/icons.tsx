@@ -25,7 +25,7 @@ export const NODE_ICON = {
   engine: Cpu,
 }
 
-/** Asteris mark: asterisk-like star (reference logo) */
+/** ARGUS mark: asterisk-like star (reference logo) */
 export function Logo({ size = 34 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden="true" style={{ filter: 'drop-shadow(0 0 5px rgba(140, 180, 255, 0.55))' }}>

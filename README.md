@@ -1,4 +1,4 @@
-# Drosophila Gate — shipping document verification
+# ARGUS — Autonomous Review & Guidance for Uncertain Shipping
 
 An inbox reader for a shipping company: it classifies incoming email (document-comparison
 request / new SI / invoice query / general / spam), and for document-comparison emails it extracts

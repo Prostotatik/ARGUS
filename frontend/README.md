@@ -1,4 +1,4 @@
-# Asteris frontend
+# ARGUS frontend
 
 Vite + React + TypeScript control-room dashboard for the shipping-document verification pipeline
 (inbox -> classifier -> 7 field agents -> aggregator/compare -> fly-brain confidence gate -> report).

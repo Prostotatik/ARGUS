@@ -49,8 +49,8 @@ export default function Sidebar({ stats, engine, mode, online, canProcessAll, bu
       <div className="brand">
         <Logo />
         <div>
-          <b>Asteris</b>
-          <span>Document verification</span>
+          <b>ARGUS</b>
+          <span title="Autonomous Review &amp; Guidance for Uncertain Shipping">Shipping document verification</span>
         </div>
       </div>
       <div className={`sys ${online ? 'on' : 'off'}`}>

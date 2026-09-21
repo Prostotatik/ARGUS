@@ -1,4 +1,4 @@
-# sdoc backend - shipping document verification ("Drosophila Gate")
+# sdoc backend - shipping document verification (product name: ARGUS)
 
 Python 3.10, FastAPI, numpy. Package `sdoc`. Pipeline (every node is a real call and emits a trace event):
 
