@@ -209,6 +209,13 @@ export default function FlyPanel({ fly, gate, gateState, reduced, feedback, onRe
   }, [fly, activeList])
   const susp = taughtSusp ?? gate?.suspicion ?? 0
   const shownSusp = feedback ? feedback.after : susp
+  // Display-only reframing: the backend's real decision variable is `suspicion` (low = confident,
+  // high = escalate; that's what NodePopover/ReportView/Timeline show verbatim, unchanged). This
+  // panel is the flashy "how sure are we" readout, so it shows the same number as an intuitive
+  // confidence percentage instead (100% = confident, drops toward 0% approaching escalation) -
+  // nothing about the gate's actual math changes.
+  const confPct = Math.round((1 - shownSusp) * 100)
+  const confThrPct = Math.round((1 - thr) * 100)
 
   // hover: which inputs feed a Kenyon cell / which cells an input feeds (real wiring from flybrain.json)
   const [hover, setHover] = useState<Hover>(null)
@@ -309,8 +316,8 @@ export default function FlyPanel({ fly, gate, gateState, reduced, feedback, onRe
           <span className="fg-t">Confidence Gate{lit && taughtSusp != null && !feedback && <em className="fg-sim" title="Re-evaluated with the weights you taught this session. REPLAY cannot change the backend; the documented update rule is applied locally.">simulated</em>}</span>
           {lit ? (
             <>
-              <strong className={escalate ? 'warn' : 'ok'}><CountUp value={shownSusp} decimals={2} ms={feedback ? 1100 : 650} /></strong>
-              <span className="fg-s">suspicion &middot; threshold {thr.toFixed(2)}</span>
+              <strong className={escalate ? 'warn' : 'ok'}><CountUp value={confPct} decimals={0} suffix="%" ms={feedback ? 1100 : 650} /></strong>
+              <span className="fg-s">confidence &middot; escalates below {confThrPct}%</span>
               <span className={`fg-v ${escalate ? 'warn' : 'ok'}`}>{escalate ? 'Escalate to human' : 'Confident'}</span>
             </>
           ) : (
@@ -320,7 +327,7 @@ export default function FlyPanel({ fly, gate, gateState, reduced, feedback, onRe
 
         {layout && fly && <StaticNet layout={layout} fly={fly} inColor={inColor} />}
 
-        <svg className="fly-svg" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={lit ? `Gate decision: suspicion ${shownSusp.toFixed(2)} versus threshold ${thr.toFixed(2)}, ${escalate ? 'escalate' : 'confident'}` : 'Fly network idle'}>
+        <svg className="fly-svg" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={lit ? `Gate decision: ${confPct}% confidence, escalates below ${confThrPct}%, ${escalate ? 'escalate' : 'confident'}` : 'Fly network idle'}>
           <defs>
             <radialGradient id="decg"><stop offset="0" stopColor="#fff" /><stop offset=".35" stopColor="var(--dec)" /><stop offset="1" stopColor="var(--dec)" stopOpacity="0" /></radialGradient>
             <filter id="flyglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" /></filter>
@@ -417,8 +424,8 @@ export default function FlyPanel({ fly, gate, gateState, reduced, feedback, onRe
 
       <div className="meter" aria-hidden="true">
         <div className="m-track">
-          <div className={`m-fill ${escalate ? 'warn' : 'ok'}`} style={{ transform: `scaleX(${lit ? Math.min(1, shownSusp) : 0})` }} />
-          <div className="m-thr" style={{ left: `${thr * 100}%` }} title={`threshold ${thr.toFixed(2)}`} />
+          <div className={`m-fill ${escalate ? 'warn' : 'ok'}`} style={{ transform: `scaleX(${lit ? Math.max(0, confPct / 100) : 0})` }} />
+          <div className="m-thr" style={{ left: `${confThrPct}%` }} title={`escalates below ${confThrPct}% confidence`} />
         </div>
       </div>
 

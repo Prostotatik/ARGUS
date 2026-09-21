@@ -124,7 +124,10 @@ export default function BeadCanvas({ nodes, active, bypass, reduced, scale }: Pr
   useEffect(() => {
     const cv = ref.current
     if (!cv) return
-    const dpr = Math.min(2, window.devicePixelRatio || 1)
+    // capped at 1.5 (not 2): full device pixel ratio here buys little visible sharpness for a soft
+    // glow trail but roughly doubles fill-rate cost, which is what caused visible lag on weaker GPUs
+    // during a fast multi-agent run.
+    const dpr = Math.min(1.5, window.devicePixelRatio || 1)
     const sc = Math.max(0.3, scale)
     cv.width = Math.round(W * sc * dpr)
     cv.height = Math.round(H * sc * dpr)
@@ -164,7 +167,8 @@ export default function BeadCanvas({ nodes, active, bypass, reduced, scale }: Pr
           const alpha = a * b.br * edgeFade
           if (alpha < 0.02) continue
           const r = b.sz * 3.6 * (1 + fl * 0.25)
-          for (let g = 0; g < 3; g++) {
+          const segments = mode === 'flow' ? 2 : 3 // fewer trail segments while several agents run at once
+          for (let g = 0; g < segments; g++) {
             const uu = u - g * 0.0075
             if (uu < 0) break
             const fi = uu * (SAMPLES - 1)
@@ -183,8 +187,15 @@ export default function BeadCanvas({ nodes, active, bypass, reduced, scale }: Pr
       ctx.globalCompositeOperation = 'source-over'
     }
 
+    let lastIdleDraw = 0
     const loop = (now: number) => {
       raf = requestAnimationFrame(loop)
+      // when nothing is processing, cap the ambient shimmer to ~15fps instead of 60fps: it still
+      // reads as "alive" but doesn't burn a full frame budget on an idle screen.
+      if (!live.current.active) {
+        if (now - lastIdleDraw < 66) { last = now; return }
+        lastIdleDraw = now
+      }
       const dt = Math.min(0.06, (now - last) / 1000)
       last = now
       draw(now, dt, false)

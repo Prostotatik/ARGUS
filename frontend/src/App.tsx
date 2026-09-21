@@ -16,8 +16,9 @@ import HelpOverlay from './components/HelpOverlay'
 import DepthBg from './components/DepthBg'
 
 type View = 'graph' | 'report'
-type Speed = 1 | 2 | 4
-const SPEEDS: Speed[] = [1, 2, 4]
+type Speed = 0.25 | 0.5 | 1
+const SPEEDS: Speed[] = [0.25, 0.5, 1]
+const DEFAULT_SPEED: Speed = 0.5
 
 /** documented plasticity of the backend gate (backend/sdoc/flybrain.py): LTD w*=(1-eta_dep), LTP w+=eta_pot*(1-w); suspicion = 1-exp(-sum(w[active])/tau) */
 const ETA_DEP = 0.6
@@ -57,7 +58,7 @@ export default function App() {
   const [busyAll, setBusyAll] = useState(false)
   const [toast, setToast] = useState<{ text: string; kind: 'info' | 'error' } | null>(null)
   const [bootError, setBootError] = useState<string | null>(null)
-  const [speed, setSpeed] = useState<Speed>(1)
+  const [speed, setSpeed] = useState<Speed>(DEFAULT_SPEED)
   const [auto, setAuto] = useState(false)
   const [help, setHelp] = useState(false)
   /** REPLAY/mock only: KC weights after the human teaching done in this session (documented rule, applied locally) */
