@@ -122,7 +122,13 @@ def result(email_id: str) -> dict:
 
 
 @app.post("/api/process_all")
-async def process_all(force_engine: str | None = Query(None, pattern="^(rules|gemini)$"), concurrency: int = 8):
+async def process_all(force_engine: str | None = Query(
+        "rules", pattern="^(rules|gemini)$",
+        description="Bulk endpoint (all 520 emails) - defaults to 'rules' even if a key is configured, "
+                    "same reasoning as run_all/export_replay's CLI default: an operator clicking "
+                    "'process entire inbox' in LIVE mode should not silently spend a live key's whole "
+                    "daily quota. Pass ?force_engine=gemini to opt in explicitly."),
+        concurrency: int = 8):
     ids = INBOX.ids()
 
     async def gen() -> AsyncIterator[str]:
