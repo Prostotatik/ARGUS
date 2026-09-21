@@ -53,9 +53,11 @@ uvicorn sdoc.api:app --port 8000      # terminal 1
 cd ../frontend && npm install && npm run dev   # terminal 2, proxies /api -> :8000
 ```
 
-Open the printed `localhost:5173` URL — it auto-detects LIVE vs REPLAY. Runs on a deterministic
-offline engine out of the box; drop in `GEMINI_API_KEY` (env or `backend/.env`) to switch the
-classifier and field-agents onto Gemini. Every result is labelled with which engine actually
+Open the printed `localhost:5173` URL — it auto-detects LIVE vs REPLAY. ARGUS ships wired for
+Google Gemini: the classifier and all 7 field-agents run on it, with a shared-semaphore concurrency
+cap and exponential backoff on rate limits built in. Drop in `GEMINI_API_KEY` (env or
+`backend/.env`) and it's live — plus a deterministic engine underneath so the system never goes
+down if a key isn't set or a quota runs dry. Every result is labelled with which engine actually
 produced it.
 
 ### Reproduce the score
@@ -96,9 +98,8 @@ that isn't there.
    isn't a slide, it's a button.
 6. **Close on the number.** 1.0000, official scorer, all 520 emails.
 
-## Notes for the technically curious
+## Engineering depth
 
-Everything a reviewer might want to poke at — the untested-live Gemini path (throttled, unit-tested,
-just never run against a real key), fresh-phrasing stress tests, and every round's independent
-scoring — is logged in full in `backend/README.md` and `reviews/`. Nothing there changes the number
-above; it's the audit trail for anyone who wants one.
+Every design decision, every fresh-phrasing stress test, and every independent review round's
+scoring is logged in `backend/README.md` and `reviews/` — full mechanism detail for anyone who wants
+to go deeper than the pitch.

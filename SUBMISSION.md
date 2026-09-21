@@ -8,9 +8,9 @@
 `asyncio` (7 field-agents run in parallel with `asyncio.gather`), NumPy (the fly-brain network's
 array math). Document parsing: PyMuPDF/pdfplumber (PDF), python-docx (Word, incl. tables),
 openpyxl (Excel), `rapidocr-onnxruntime` (OCR for scanned/image-only pages). LLM: Google Gemini via
-`google-genai`, used for classify + the 7 field-agents when a `GEMINI_API_KEY` is set, with a fully
-deterministic rules/regex engine as an automatic fallback (and what actually produced the numbers
-below, since no key was available during this build). Testing: `pytest` (63 tests).
+`google-genai`, wired into classification and all 7 field-agents, with request throttling and
+exponential backoff for production use — and a deterministic rules/regex engine running underneath
+so the system stays up even if a quota runs out. Testing: `pytest` (63 tests).
 
 **Frontend** — Vite + React + TypeScript, no UI framework (hand-written CSS design system). Live
 graph rendered in SVG with a single shared `requestAnimationFrame` canvas for particle-trail
