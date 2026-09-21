@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: VITAL SOLUTIONS PTE. LTD.
+  77 ROBINSON ROAD; #21-01 ROBINSON 77; SINGAPORE 068896
+notify party/intermediate consignee: KTP CO., LTD
+port of loading: NANTONG, CHINA (CNNTG)
+pod: KOPER, SLOVENIA (SIKOP)
+total containers: 1 x 20'GP
+gross weight (kg): 21,895 KG
+vessel: MARCOPOLO 810 V.BS005
+voyage no.: 11S
+description of goods: UNCOATED WOODFREE PAPER IN REAMS
+b/l no.: HLCUSIN032963347
+booking reference: 27274231
+freight: PREPAID

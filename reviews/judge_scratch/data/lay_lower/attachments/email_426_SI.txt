@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: KTP CO., LTD
+  KTP BLDG., 36 SANGWON-GIL; SEOUNGDONG-GU, SEOUL, SOUTH KOREA; TEL:02-2285-6025
+notify: PACIFIC OFFICE (M) SDN BHD
+port of loading (pol): BUATAN, INDONESIA (IDBUA)
+discharge port: NEW YORK, US (USNYC)
+no. of containers: 10 x 40'HC
+gross weight: 219,740 KG
+vessel: VISION 202 V.002
+voy. no: QI540A
+commodity: COATED IVORY BOARD
+hs code: 48105900
+booking ref: MCLSINJEA2506211
+oc no.: 5SUS-36957
+freight: PREPAID

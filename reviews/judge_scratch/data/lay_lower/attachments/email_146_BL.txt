@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify party: SAFQA LIMITED
+port of loading (pol): PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge (pod): HOCHIMINH CITY, VIETNAM (VNSGN)
+no. of containers: 3 x 40'HC
+gross wt (kgs): 66,654 KG
+vessel: VISION 202 V.002
+voyage: 11S
+description of goods: COATED IVORY BOARD
+b/l no.: SIN213865890
+booking reference: SIN260127961
+freight: PREPAID

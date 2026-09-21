@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+to the order of: HABRAS INTERNATIONAL LIMITED
+  OFFICE 1204, THE BURLINGTON TOWER; BUSINESS BAY, DUBAI, UAE
+notify party: HABRAS INTERNATIONAL LIMITED
+port of loading (pol): NHAVA SHEVA, INDIA (INNSA)
+pod: LONG BEACH, US (USLGB)
+no. of containers: 4 x 20'FCL
+gross weight (kg): 82,932 KG
+vessel name: NAP 914 V.BS007
+voyage no.: QI540A
+description of goods: FUJITO PAPERONE INKJET PAPER
+bl no.: SINF11325797
+booking no.: ONEYSINF06734
+freight: PREPAID

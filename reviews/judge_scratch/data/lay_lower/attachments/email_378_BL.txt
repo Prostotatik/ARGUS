@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: TOAN LUC PAPER JOINT STOCK COMPANY
+  LOT B, TAN DONG HIEP B IZ; DI AN, BINH DUONG, VIETNAM
+notify party/intermediate consignee: EAST BRIGHT FZ-LLC
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+discharge port: GDANSK, POLAND (PLGDN)
+no. of containers or packages: 12 x 40'HC
+gross wt (kgs): 277,788 KG
+export carrier (vessel, voyage): INDO SUKSES 65 V.51NW1
+voyage: QI540A
+commodity: PAPERONE DIGITAL COPIER PAPER
+b/l number: SIJ1843905
+booking reference: SIJ5295806
+freight: PREPAID

@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper: Asia Pacific Paperboard Trading Pte Ltd
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+Consignee: Safqa Limited
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+Notify Party: Safqa Limited
+Port of Loading (POL): Port Klang (Westport), Malaysia (Mypkg)
+Port of Discharge (POD): Hochiminh City, Vietnam (Vnsgn)
+No. of Containers: 3 X 40'Hc
+Gross Wt (kgs): 66,654 Kg
+Vessel: Vision 202 V.002
+Voyage: 11S
+Description of Goods: Coated Ivory Board
+B/L No.: SIN213865890
+Booking Reference: SIN260127961
+Freight: Prepaid

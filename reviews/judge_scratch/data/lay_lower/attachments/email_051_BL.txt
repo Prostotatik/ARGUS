@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+to the order of: KPP-ANTALIS (SINGAPORE) PTE. LTD.
+  8 TEMASEK BOULEVARD; #42-01 SUNTEC TOWER 3; SINGAPORE 038988
+notify: KPP-ANTALIS (SINGAPORE) PTE. LTD.
+port of loading: NHAVA SHEVA, INDIA (INNSA)
+pod: SAVANNAH, US (USSAV)
+container count: 3 x 20'FCL
+gross wt (kgs): 60,645 KG
+vessel name: PACIFIC SUN 1 V.251073E
+voyage no.: BS291
+commodity: UNCOATED WOODFREE PAPER IN REAMS
+bill of lading no.: HLCUSIN613750606
+booking reference: 85361530
+freight: PREPAID

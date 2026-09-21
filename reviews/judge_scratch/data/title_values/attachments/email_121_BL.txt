@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper: April Fine Paper Trading (Middle East) Fze
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+Consignee: Clifford Paper Inc
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+Notify Party: Clifford Paper Inc
+Port of Loading: Nantong, China (Cnntg)
+Discharge Port: Brisbane, Australia (Aubne)
+No. of Containers: 1 X 20'Gp
+Gross Weight毛重(KGS): 21,342 Kg
+Vessel Name: Le Havre V.Qi540A
+Voyage No.: Bs012
+Description: Fujito Paperone Inkjet Paper
+B/L NUMBER: MCLSIN3934835
+BOOKING NO.: MCLSINJEA2564208
+Freight: Prepaid

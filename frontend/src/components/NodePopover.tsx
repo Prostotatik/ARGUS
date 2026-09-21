@@ -113,6 +113,12 @@ export default function NodePopover({ nodeId, anchor, panelW, panelH, pinned, no
           <dt>Active KCs</dt><dd>{g.kc_active?.length ?? 0}{g.winner_kc != null ? ` (winner #${g.winner_kc})` : ''}</dd>
         </dl>
         {g.reason && <p className="pop-line">{g.reason}</p>}
+        {(g.drivers?.length ?? 0) > 0 && (
+          <dl className="kv">
+            <dt>Drivers</dt>
+            <dd>{g.drivers!.map((d) => `${d.input.replace(/[_:]/g, ' ')} ${Math.round(d.share * 100)}%`).join(' · ')}</dd>
+          </dl>
+        )}
         <p className="pop-dim">Network architecture inspired by the fruit fly's olfactory system.</p>
       </>
     )

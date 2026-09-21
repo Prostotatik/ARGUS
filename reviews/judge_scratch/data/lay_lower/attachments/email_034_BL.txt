@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: UAB NOVAKOPA
+  SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
+notify: UAB NOVAKOPA
+port of loading (pol): SINGAPORE (SGSIN)
+discharge port: CONAKRY, GUINEA (GNCKY)
+container count: 5 x 40'HC
+gross wt (kgs): 105,815 KG
+ocean vessel: INDO SUKSES 65 V.51NW1
+voy.: BS291
+description of goods: UNCOATED WOODFREE PAPER IN REAMS
+b/l no.: YMJAI946474367
+booking ref: I136959440
+freight: PREPAID

@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper: April Fine Paper Trading
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+To the Order of: 3S Paper Products Sdn Bhd
+  NO 12, JALAN INDUSTRI 3/6; RAWANG INTEGRATED INDUSTRIAL PARK; 48000 RAWANG, SELANGOR, MALAYSIA
+Notify Party: Pacific Office (M) Sdn Bhd
+Load Port: Buatan, Indonesia (Idbua)
+PORT OF DISCHARGE: Jebel Ali, Uae (Aejea)
+Container Count: 15 X 20'Gp
+Gross Wt (kgs): 310,125 KG
+Vessel: Indo Sukses 65 V.51Nw1
+Voyage No.: 11S
+Description of Goods: Fujito Paperone Inkjet Paper
+BL No.: MCLSIN7562208
+Booking Ref: MCLSINJEA2563536
+Freight: Prepaid

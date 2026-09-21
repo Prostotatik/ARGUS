@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: ROXCEL TRADING GMBH
+  OPERNRING 3-5; 1010 VIENNA, AUSTRIA
+notify party: ROXCEL TRADING GMBH
+port of loading: BUATAN, INDONESIA (IDBUA)
+port of discharge: MERSIN, TURKEY (TRMER)
+no. of containers: 1 x 40'HC
+gross wt (kgs): 20,648 KG
+ocean vessel: NAP 914 V.BS007
+voyage no.: BS291
+commodity: PAPERBOARD
+b/l number: SIN980061558
+booking no.: SIN108358328
+freight: PREPAID

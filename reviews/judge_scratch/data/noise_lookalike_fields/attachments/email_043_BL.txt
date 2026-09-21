@@ -1,0 +1,24 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Net Weight: 1,000 KG
+Tare Weight: 500 KG
+Total Packages: 12
+Container No: TCLU1234567
+Port of Transshipment: COLOMBO
+Place of Delivery: KARACHI
+Shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+Consignee (Non-Negotiable): PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+Notify: PACIFIC OFFICE (M) SDN BHD
+Port of Loading (POL): NHAVA SHEVA, INDIA (INNSA)
+POD: KLAIPEDA, LITHUANIA (LTKLJ)
+No. of Containers: 5 x 20'GP
+Gross Weight毛重(KGS): 68,649 KG
+Vessel Name: NAP 914 V.BS007
+Voyage: 051NW1
+Description of Goods: PAPERBOARD
+B/L No.: SIJ5991022
+Booking Reference: SIJ9014767
+Freight: PREPAID

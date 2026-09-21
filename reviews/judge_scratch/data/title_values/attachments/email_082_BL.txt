@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Far East (M) Sdn Bhd
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+Consignee (Non-Negotiable): Safqa Limited
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+Notify Party: Safqa Limited
+Port of Loading: Nhava Sheva, India (Innsa)
+Port of Discharge (POD): Callao, Peru (Pecll)
+No. of Containers: 3 X 40'Hc
+Gross Wt (kgs): 61,026 Kg
+Export Carrier (vessel, voyage): Le Havre V.Qi540A
+Voy. No: 051Nw1
+Description: Asia Symbol Food Service Board (Cupstock/Hi-Bulk) - Allinone
+BL No.: YMJAI868058911
+Booking Ref: I352909656
+Freight: Prepaid

@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+to the order of: BALL & DOGGETT AUSTRALIA PTY LTD
+  43-45 METROPOLITAN ROAD; ENFIELD NSW 2136, AUSTRALIA
+notify: BALL & DOGGETT AUSTRALIA PTY LTD
+pol: SINGAPORE (SGSIN)
+discharge port: PYEONGTAEK, SOUTH KOREA (KRPTK)
+no. of containers or packages: 6 x 40'HC
+gross weight毛重(kgs): 135,930 KG
+vessel: INDO SUKSES 65 V.51NW1
+voy. no: 11S
+description: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+bl no.: HLCUSIN986143410
+booking reference: 36971179
+freight: PREPAID

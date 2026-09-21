@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Fine Paper Trading (Middle East) Fze
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+CONSIGNEE: Vital Solutions Pte. Ltd.
+  77 ROBINSON ROAD; #21-01 ROBINSON 77; SINGAPORE 068896
+Notify Party: Vital Solutions Pte. Ltd.
+Port of Loading: Nhava Sheva, India (Innsa)
+POD: Mombasa, Kenya (Kemba)
+Container Count: 3 X 20'Gp
+Gross Wt (kgs): 23,114 Kg
+Ocean Vessel: PACIFIC SUN 1 V.251073E
+Voyage: Qi540A
+Description of Goods: Uncoated Woodfree Paper In Reams
+Bill of Lading No.: SINF87558867
+Booking Reference: Oneysinf53396
+Freight: Prepaid

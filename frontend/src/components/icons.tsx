@@ -28,19 +28,19 @@ export const NODE_ICON = {
 /** Asteris mark: asterisk-like star (reference logo) */
 export function Logo({ size = 34 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden="true" style={{ filter: 'drop-shadow(0 0 5px rgba(140, 180, 255, 0.55))' }}>
       <defs>
-        <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#dbe7ff" />
-          <stop offset="1" stopColor="#7aa7ff" />
+        <linearGradient id="asteris-lg" gradientUnits="userSpaceOnUse" x1="6" y1="4" x2="34" y2="36">
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="1" stopColor="#8fb4ff" />
         </linearGradient>
       </defs>
-      <g stroke="url(#lg)" strokeWidth="3.4" strokeLinecap="round" fill="none">
-        <path d="M20 5v30" />
-        <path d="M7 12.5l26 15" />
-        <path d="M33 12.5l-26 15" />
+      <g stroke="url(#asteris-lg)" strokeWidth="3.2" strokeLinecap="round" fill="none">
+        <path d="M20 4.5v31" />
+        <path d="M6.6 12.2l26.8 15.6" />
+        <path d="M33.4 12.2L6.6 27.8" />
       </g>
-      <circle cx="20" cy="20" r="2.6" fill="#eaf1ff" />
+      <circle cx="20" cy="20" r="2.8" fill="#fff" />
     </svg>
   )
 }

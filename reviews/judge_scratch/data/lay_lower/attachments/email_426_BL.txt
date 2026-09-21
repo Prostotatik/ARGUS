@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: KTP CO., LTD
+  KTP BLDG., 36 SANGWON-GIL; SEOUNGDONG-GU, SEOUL, SOUTH KOREA; TEL:02-2285-6025
+notify party: PACIFIC OFFICE (M) SDN BHD
+port of loading: BUATAN, INDONESIA (IDBUA)
+port of discharge: KLAIPEDA, LITHUANIA (USNYC)
+total containers: 11 x 40'HC
+gross wt (kgs): 219,740 KG
+vessel name: VISION 202 V.002
+voy.: QI540A
+description of goods: COATED IVORY BOARD
+bl no.: MCLSIN8077113
+booking no.: MCLSINJEA2506211
+freight: PREPAID

@@ -6,33 +6,40 @@ interface Item { ev: TraceEvent; gap: number }
 /**
  * Paces trace events onto the screen. REPLAY: gaps derived from recorded t_ms deltas (clamped so the
  * animation is watchable). LIVE: events are released as they arrive with a small minimum gap.
+ * `speed` divides every gap (1x / 2x / 4x playback); `paused` freezes the queue without dropping events.
  */
-export function usePlayer(reduced: boolean) {
+export function usePlayer(reduced: boolean, speed = 1) {
   const [shown, setShown] = useState<TraceEvent[]>([])
   const [playing, setPlaying] = useState(false)
+  const [paused, setPaused] = useState(false)
   const queue = useRef<Item[]>([])
   const timer = useRef<number | null>(null)
+  const inflight = useRef<Item | null>(null)
   const closed = useRef(true)
-  const lastT = useRef(0)
   const reducedRef = useRef(reduced)
   reducedRef.current = reduced
+  const speedRef = useRef(speed)
+  speedRef.current = speed
+  const pausedRef = useRef(false)
 
   const stopTimer = () => {
     if (timer.current != null) { window.clearTimeout(timer.current); timer.current = null }
   }
 
   const drain = useCallback(() => {
-    if (timer.current != null) return
+    if (timer.current != null || pausedRef.current) return
     const item = queue.current.shift()
     if (!item) {
       if (closed.current) setPlaying(false)
       return
     }
+    inflight.current = item
     timer.current = window.setTimeout(() => {
       timer.current = null
+      inflight.current = null
       setShown((s) => s.concat(item.ev))
       drain()
-    }, item.gap)
+    }, Math.max(6, item.gap / speedRef.current))
   }, [])
 
   const gapFor = (ev: TraceEvent, dt: number | null) => {
@@ -44,10 +51,10 @@ export function usePlayer(reduced: boolean) {
   /** start a fresh run; `keep` retains already-shown events (retry). */
   const begin = useCallback((keep = false) => {
     stopTimer()
+    inflight.current = null
     queue.current = []
     closed.current = false
-    lastT.current = 0
-    if (!keep) setShown([])
+    if (!keep) { pausedRef.current = false; setPaused(false); setShown([]) }
     setPlaying(true)
   }, [])
 
@@ -58,7 +65,7 @@ export function usePlayer(reduced: boolean) {
 
   const end = useCallback(() => {
     closed.current = true
-    if (!queue.current.length && timer.current == null) setPlaying(false)
+    if (!queue.current.length && timer.current == null && !pausedRef.current) setPlaying(false)
   }, [])
 
   /** REPLAY convenience */
@@ -77,7 +84,8 @@ export function usePlayer(reduced: boolean) {
 
   const skip = useCallback(() => {
     stopTimer()
-    const rest = queue.current.map((i) => i.ev)
+    const rest = [...(inflight.current ? [inflight.current] : []), ...queue.current].map((i) => i.ev)
+    inflight.current = null
     queue.current = []
     if (rest.length) setShown((s) => s.concat(rest))
     if (closed.current) setPlaying(false)
@@ -85,13 +93,34 @@ export function usePlayer(reduced: boolean) {
 
   const reset = useCallback(() => {
     stopTimer()
+    inflight.current = null
     queue.current = []
     closed.current = true
+    pausedRef.current = false
+    setPaused(false)
     setShown([])
     setPlaying(false)
   }, [])
 
+  const pause = useCallback(() => {
+    if (pausedRef.current) return
+    pausedRef.current = true
+    setPaused(true)
+    if (timer.current != null && inflight.current) {
+      stopTimer()
+      queue.current.unshift(inflight.current)
+      inflight.current = null
+    }
+  }, [])
+
+  const resume = useCallback(() => {
+    if (!pausedRef.current) return
+    pausedRef.current = false
+    setPaused(false)
+    drain()
+  }, [drain])
+
   useEffect(() => () => stopTimer(), [])
 
-  return { shown, playing, begin, push, end, playAll, skip, reset }
+  return { shown, playing, paused, begin, push, end, playAll, skip, reset, pause, resume }
 }

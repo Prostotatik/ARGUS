@@ -17,7 +17,7 @@ class Inbox:
         if self._emails is None:
             d = self.root / "inbox"
             emails: dict[str, dict] = {}
-            for p in sorted(d.glob("email_*.json")):
+            for p in sorted(d.glob("*.json")):
                 rec = json.loads(p.read_text(encoding="utf-8"))
                 emails[rec["email_id"]] = rec
             self._emails = emails

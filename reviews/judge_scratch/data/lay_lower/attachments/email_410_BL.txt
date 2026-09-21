@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+notify party: PACIFIC OFFICE (M) SDN BHD
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (SGSIN)
+port of discharge (pod): ASHDOD, ISRAEL (ILASH)
+total containers: 15 x 40'HC
+gross weight: 324,210 KG
+ocean vessel: VISION 202 V.002
+voyage no.: BS012
+description of goods: PAPERONE DIGITAL COPIER PAPER
+bill of lading no.: MCLSIN0358929
+booking no.: MCLSINJEA2588085
+freight: PREPAID

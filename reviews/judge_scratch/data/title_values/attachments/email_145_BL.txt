@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Fine Paper Trading (Middle East) Fze
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+Consignee (Non-Negotiable): Pacific Office (M) Sdn Bhd
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+Notify Party: Pacific Office (M) Sdn Bhd
+Port of Loading (POL): Nantong, China (Cnntg)
+POD: Busan, South Korea (Krpus)
+Total Containers: 15 X 20'Fcl
+Gross Weight毛重(KGS): 313,380 KG
+Vessel Name: Nap 914 V.Bs007
+Voyage: Bs012
+Description of Goods: Multipurpose Paper - A4 - Paperone Copier
+B/L No.: MCLSIN6944869
+BOOKING NO.: MCLSINJEA2559463
+Freight: Prepaid

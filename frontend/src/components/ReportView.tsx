@@ -138,8 +138,8 @@ export default function ReportView({ result, nodes, mode, busy, feedback, onBack
           <table className="cmp">
             <thead><tr><th>Field</th><th>Shipping Instruction (SI)</th><th>Bill of Lading (BL)</th><th aria-label="Verdict">Result</th><th /></tr></thead>
             <tbody>
-              {(fields.length ? fields : FIELD_KEYS.map((k) => ({ field: k, si_value: null, bl_value: null, match: false }) as FieldResult)).map((f) => (
-                <tr key={f.field} className={f.match ? 'ok' : 'bad'}>
+              {(fields.length ? fields : FIELD_KEYS.map((k) => ({ field: k, si_value: null, bl_value: null, match: false }) as FieldResult)).map((f, ri) => (
+                <tr key={`${result.email_id}:${f.field}:${f.match}`} className={!fields.length || f.match ? 'ok' : 'bad'} style={{ '--ri': ri } as React.CSSProperties}>
                   <th scope="row"><i style={{ background: FIELD_COLOR[f.field as keyof typeof FIELD_COLOR] ?? '#6ea8ff' }} />{label(f.field)}</th>
                   <td><b>{val(f.si_value)}</b>{f.si_evidence && <em title={f.si_evidence}>{f.si_evidence}</em>}</td>
                   <td><b>{val(f.bl_value)}</b>{f.bl_evidence && <em title={f.bl_evidence}>{f.bl_evidence}</em>}</td>

@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee (non-negotiable): EAST BRIGHT FZ-LLC
+  RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
+notify party: EAST BRIGHT FZ-LLC
+load port: SINGAPORE (SGSIN)
+port of discharge (pod): YANGON, MYANMAR (MMRGN)
+total containers: 6 x 20'GP
+gross weight (kg): 127,692 KG
+ocean vessel: PACIFIC SUN 1 V.251073E
+voy. no: 2545E
+commodity: FUJITO PAPERONE INKJET PAPER
+hs code: 48025500
+booking reference: PSGSE4591966
+oc no.: 5AAT-39551
+freight: PREPAID

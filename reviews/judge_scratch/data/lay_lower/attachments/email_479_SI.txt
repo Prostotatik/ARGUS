@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: ORIENT LINKS CO (LLC)
+  P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
+notify party: SAFQA LIMITED
+port of loading: BUATAN, INDONESIA (IDBUA)
+discharge port: PYEONGTAEK, SOUTH KOREA (KRPTK)
+no. of containers: 10 x 20'FCL
+gross wt (kgs): 236,690 KG
+export carrier (vessel, voyage): MARCOPOLO 810 V.BS005
+voy. no: 2545E
+commodity: COATED IVORY BOARD
+hs code: 48105900
+booking reference: 070500283325
+oc no.: 5RUS-84868
+freight: PREPAID

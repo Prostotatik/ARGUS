@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Fine Paper Trading
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+Consignee: Pacific Office (M) Sdn Bhd
+  NEW NO : 23, L-BLOCK, 17TH STREET; ANNA NAGAR EAST; CHENNAI, TAMIL NADU 600102; GST NO - 33AACFN6792L1ZU
+Notify: Nagappa Exports
+Port of Loading: Nhava Sheva, India (Innsa)
+Discharge Port: Mersin, Turkey (Trmer)
+Container Count: 11 X 40'Hc
+Gross Weight (KG): 264,180 KG
+Export Carrier (vessel, voyage): Solid 16 V.044Nw2
+Voy.: 11S
+Description of Goods: Paperboard
+Bill of Lading No.: HLCUSIN086376599
+BOOKING NO.: 16247314
+Freight: Prepaid

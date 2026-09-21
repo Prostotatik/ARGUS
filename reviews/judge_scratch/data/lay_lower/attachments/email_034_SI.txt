@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: UAB NOVAKOPA
+  SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
+notify party/intermediate consignee: UAB NOVAKOPA
+port of loading: SINGAPORE (SGSIN)
+pod: CONAKRY, GUINEA (GNCKY)
+no. of containers or packages: 5 x 40'HC
+gross wt (kgs): 105,815 KG
+vessel: INDO SUKSES 65 V.51NW1
+voyage: BS291
+description: UNCOATED WOODFREE PAPER IN REAMS
+hs code: 48025700
+booking reference: I136959440
+oc no.: 5SUS-64090
+freight: PREPAID

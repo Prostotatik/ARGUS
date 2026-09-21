@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: VITAL SOLUTIONS PTE. LTD.
+  77 ROBINSON ROAD; #21-01 ROBINSON 77; SINGAPORE 068896
+notify party: KTP CO., LTD
+port of loading: NANTONG, CHINA (CNNTG)
+port of discharge: KOPER, SLOVENIA (SIKOP)
+no. of containers: 1 x 20'GP
+gross wt (kgs): 21,895 KG
+ocean vessel: MARCOPOLO 810 V.BS005
+voyage: 11S
+description of goods: UNCOATED WOODFREE PAPER IN REAMS
+hs code: 48025700
+booking no.: 27274231
+oc no.: 5RCY-83061
+freight: PREPAID

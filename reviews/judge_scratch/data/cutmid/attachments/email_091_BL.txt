@@ -1,0 +1,12 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper/Exporter: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+Consignee: ORIENT LINKS CO (LLC)
+  P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
+Notify Party/Intermediate Consignee: VITAL SOLUTIONS PTE. LTD.
+Port of Loading: NHAVA SHEVA, INDIA (INNSA)
+POD: CALLAO, PERU (PECLL)
+No. of Containers or Packages: 2 x 40'HC
+Gross Wt (kgs): 6

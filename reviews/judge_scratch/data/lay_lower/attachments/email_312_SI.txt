@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: 3S PAPER PRODUCTS SDN BHD
+  NO 12, JALAN INDUSTRI 3/6; RAWANG INTEGRATED INDUSTRIAL PARK; 48000 RAWANG, SELANGOR, MALAYSIA
+notify party/intermediate consignee: 3S PAPER PRODUCTS SDN BHD
+pol: NANTONG, CHINA (CNNTG)
+discharge port: BRISBANE, AUSTRALIA (AUBNE)
+no. of containers or packages: 10 x 40'HC
+gross wt (kgs): 237,010 KG
+vessel: INDO SUKSES 65 V.51NW1
+voyage: 11S
+description of goods: COATED IVORY BOARD
+hs code: 48105900
+booking ref: MCLSINJEA2559551
+oc no.: 5AKR-84269
+freight: PREPAID

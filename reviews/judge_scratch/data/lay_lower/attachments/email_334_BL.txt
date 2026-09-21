@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: INTERNATIONAL FOREST PRODUCTS LLC
+  RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
+notify party: EAST BRIGHT FZ-LLC
+load port: SINGAPORE (SGSIN)
+port of discharge: YANGON, MYANMAR (MMRGN)
+no. of containers or packages: 6 x 20'GP
+gross weight (kg): 127,692 KG
+vessel name: PACIFIC SUN 1 V.251073E
+voy. no: 2545E
+kinds of packages; description of goods: FUJITO PAPERONE INKJET PAPER
+bl no.: OOLU9942376769
+booking ref: PSGSE4591966
+freight: PREPAID

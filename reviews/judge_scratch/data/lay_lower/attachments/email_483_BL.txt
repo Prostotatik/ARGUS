@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+to the order of: UAB NOVAKOPA
+  SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
+notify party/intermediate consignee: 3S PAPER PRODUCTS SDN BHD
+pol: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+port of discharge (pod): HOUSTON, US (USHOU)
+total containers: 10 x 20'GP
+gross weight毛重(kgs): 238,630 KG
+ocean vessel: NAP 914 V.BS007
+voy. no: QI540A
+kinds of packages; description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+bill of lading no.: SINF81794151
+booking ref: ONEYSINF52638
+freight: PREPAID

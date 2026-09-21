@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+to the order of: SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify: SAFQA LIMITED
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+pod: HOCHIMINH CITY, VIETNAM (VNSGN)
+total containers: 3 x 40'HC
+gross weight毛重(kgs): 66,654 KG
+vessel name: VISION 202 V.002
+voyage: 11S
+description: COATED IVORY BOARD
+hs code: 48105900
+booking reference: SIN260127961
+oc no.: 5RUS-14351
+freight: PREPAID

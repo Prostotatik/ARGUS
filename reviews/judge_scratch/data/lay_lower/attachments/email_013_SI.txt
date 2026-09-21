@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: ROXCEL TRADING GMBH
+  OPERNRING 3-5; 1010 VIENNA, AUSTRIA
+notify party: ROXCEL TRADING GMBH
+port of loading: SINGAPORE (SGSIN)
+port of discharge (pod): MOMBASA, KENYA (KEMBA)
+no. of containers: 3 x 40'HC
+gross weight毛重(kgs): 67,311 KG
+vessel: VISION 202 V.002
+voy.: 11S
+kinds of packages; description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+hs code: 48109200
+booking no.: SIJ3754330
+oc no.: 5RFR-36541
+freight: PREPAID

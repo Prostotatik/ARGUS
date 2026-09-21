@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee (non-negotiable): INTERNATIONAL FOREST PRODUCTS LLC
+  6 HOLLIS STREET; SUITE 100; FRAMINGHAM, MA 01702, USA
+notify party/intermediate consignee: INTERNATIONAL FOREST PRODUCTS LLC
+load port: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: HOCHIMINH CITY, VIETNAM (VNSGN)
+total containers: 1 x 40'HC
+gross weight: 21,479 KG
+vessel name: NAP 914 V.BS007
+voy.: BS012
+kinds of packages; description of goods: FUJITO PAPERONE INKJET PAPER
+hs code: 48025500
+booking ref: SIN966851612
+oc no.: 5RMY-27530
+freight: PREPAID

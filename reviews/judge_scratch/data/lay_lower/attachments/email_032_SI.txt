@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee (non-negotiable): TOPKOPY MIDDLE EAST FZE
+  P.O. BOX 17436; JEBEL ALI FREE ZONE, DUBAI, UAE
+notify party: TOPKOPY MIDDLE EAST FZE
+port of loading (pol): RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+discharge port: KARACHI, PAKISTAN (PKKHI)
+total containers: 3 x 40'HC
+gross wt (kgs): 64,092 KG
+ocean vessel: LE HAVRE V.QI540A
+voyage no.: 051NW1
+description of goods: PAPERBOARD
+hs code: 48109200
+booking no.: PSGSE1586578
+oc no.: 5AAT-09134
+freight: PREPAID

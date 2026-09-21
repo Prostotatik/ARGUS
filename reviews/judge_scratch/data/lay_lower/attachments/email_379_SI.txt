@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: ROXCEL TRADING GMBH
+  OPERNRING 3-5; 1010 VIENNA, AUSTRIA
+notify party/intermediate consignee: ROXCEL TRADING GMBH
+port of loading: NANTONG, CHINA (CNNTG)
+port of discharge: HOUSTON, US (USHOU)
+total containers: 12 x 20'FCL
+gross weight毛重(kgs): 272,232 KG
+vessel: NAP 914 V.BS007
+voyage no.: 11S
+kinds of packages; description of goods: COATED IVORY BOARD
+hs code: 48105900
+booking reference: 070500212125
+oc no.: 5RUS-90203
+freight: PREPAID

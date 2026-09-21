@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee (non-negotiable): CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+notify party: CLIFFORD PAPER INC
+port of loading: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+discharge port: SAVANNAH, US (USSAV)
+no. of containers: 1 x 20'GP
+gross weight毛重(kgs): 20,065 KG
+vessel: MMSS 2507 V.257087E
+voyage no.: 2545E
+kinds of packages; description of goods: UNCOATED WOODFREE PAPER IN REAMS
+bill of lading no.: MCLSIN0010618
+booking no.: MCLSINJEA2517534
+freight: PREPAID

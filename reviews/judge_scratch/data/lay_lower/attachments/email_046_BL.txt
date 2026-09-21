@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify: MOORIM SP CO., LTD
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+pod: SAVANNAH, US (USSAV)
+no. of containers or packages: 12 x 20'FCL
+gross weight毛重(kgs): 257,340 KG
+vessel name: MARCOPOLO 810 V.BS005
+voy.: BS291
+description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+b/l number: EGLV552312432921
+booking reference: 070500227799
+freight: PREPAID

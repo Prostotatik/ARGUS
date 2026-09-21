@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: KPP-ANTALIS (SINGAPORE) PTE. LTD.
+  8 TEMASEK BOULEVARD; #42-01 SUNTEC TOWER 3; SINGAPORE 038988
+notify party: 3S PAPER PRODUCTS SDN BHD
+port of loading: SINGAPORE (SGSIN)
+discharge port: LONG BEACH, US (TRMER)
+no. of containers or packages: 6 x 20'GP
+gross wt (kgs): 139,536 KG
+ocean vessel: LE HAVRE V.QI540A
+voyage: BS291
+description: FUJITO PAPERONE INKJET PAPER
+bill of lading no.: SIJ5304289
+booking ref: SIJ7317912
+freight: PREPAID

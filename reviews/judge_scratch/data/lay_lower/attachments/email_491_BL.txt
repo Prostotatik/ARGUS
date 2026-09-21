@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: AL GURG STATIONERY LLC
+  P.O. BOX 5069; DUBAI, UNITED ARAB EMIRATES
+notify party/intermediate consignee: AL GURG STATIONERY LLC
+port of loading (pol): BUATAN, INDONESIA (IDBUA)
+discharge port: GDANSK, POLAND (PLGDN)
+no. of containers or packages: 1 x 40'HC
+gross weight: 20,164 KG
+vessel: MARCOPOLO 810 V.BS005
+voy. no: 2545E
+kinds of packages; description of goods: PAPERONE DIGITAL COPIER PAPER
+b/l no.: MCLSIN4604067
+booking no.: MCLSINJEA2520078
+freight: PREPAID

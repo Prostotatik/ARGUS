@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee (non-negotiable): PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+notify: PACIFIC OFFICE (M) SDN BHD
+pol: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+discharge port: MERSIN, TURKEY (TRMER)
+no. of containers or packages: 1 x 40'HC
+gross weight (kg): 20,381 KG
+ocean vessel: NAP 914 V.BS007
+voy. no: QI540A
+description of goods: COATED IVORY BOARD
+bill of lading no.: YMJAI430980500
+booking no.: I978820812
+freight: PREPAID

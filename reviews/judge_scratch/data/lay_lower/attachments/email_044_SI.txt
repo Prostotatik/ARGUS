@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify party/intermediate consignee: SAFQA LIMITED
+port of loading (pol): BUATAN, INDONESIA (IDBUA)
+port of discharge: APAPA, NIGERIA (NGAPP)
+no. of containers or packages: 2 x 40'HC
+gross wt (kgs): 47,192 KG
+vessel name: INDO SUKSES 65 V.51NW1
+voyage no.: QI540A
+description of goods: PAPERBOARD
+hs code: 48109200
+booking no.: SIJ4510762
+oc no.: 5RMY-26838
+freight: PREPAID

@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee (non-negotiable): CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+notify: CLIFFORD PAPER INC
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+discharge port: SAVANNAH, US (USSAV)
+no. of containers: 15 x 40'HC
+gross weight毛重(kgs): 322,590 KG
+export carrier (vessel, voyage): NAP 914 V.BS007
+voy.: BS291
+commodity: UNCOATED WOODFREE PAPER IN REAMS
+hs code: 48025700
+booking no.: MSDUL0942598562
+oc no.: 5APH-57532
+freight: PREPAID

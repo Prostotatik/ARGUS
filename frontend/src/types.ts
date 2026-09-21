@@ -59,6 +59,8 @@ export interface GateInfo {
   input_vector?: number[]
   kc_active?: number[]
   winner_kc?: number | null
+  /** per-input share of the drive that pushed suspicion up (backend explain()) */
+  drivers?: { input: string; index: number; share: number }[]
 }
 
 export interface EvidenceItem {
@@ -129,6 +131,12 @@ export interface FlyBrain {
   history?: { ts: string | number; before: number; after: number; verdict: string }[]
   /** true when we generated a schematic layout because backend/replay did not provide one */
   schematic?: boolean
+  /** set by the UI in REPLAY/mock when the user taught the net in this session (weights are a local simulation) */
+  taught?: boolean
+  /** optional plasticity constants (backend may export them; UI falls back to the documented defaults in REPLAY) */
+  eta_dep?: number
+  eta_pot?: number
+  tau?: number
 }
 
 export interface ReviewBody {
@@ -147,9 +155,16 @@ export interface Health {
   n_emails?: number
 }
 
+/** one Kenyon cell whose KC->decision weight changed after a human verdict */
+export interface KcDelta { i: number; before: number; after: number }
+
 export interface FlyFeedback {
   before: number
   after: number
   verdict: string
   simulated: boolean
+  /** per-KC weight change on the KCs that fired for this email (real diff when LIVE, documented rule applied locally when REPLAY) */
+  kc?: KcDelta[]
+  /** bumps on every new review so animations restart */
+  nonce?: number
 }

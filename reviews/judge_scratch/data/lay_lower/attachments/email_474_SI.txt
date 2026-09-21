@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+notify party: CLIFFORD PAPER INC
+port of loading: BUATAN, INDONESIA (IDBUA)
+port of discharge: NEW YORK, US (USNYC)
+no. of containers: 15 x 40'HC
+gross weight (kg): 334,605 KG
+vessel: PACIFIC SUN 1 V.251073E
+voyage no.: 051NW1
+description: PAPERBOARD
+hs code: 48109200
+booking reference: 77693663
+oc no.: 5ALT-43925
+freight: PREPAID

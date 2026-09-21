@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: ORIENT LINKS CO (LLC)
+  P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
+notify party/intermediate consignee: ORIENT LINKS CO (LLC)
+port of loading: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+port of discharge: CONAKRY, GUINEA (GNCKY)
+no. of containers: 5 x 20'GP
+gross weight毛重(kgs): 103,800 KG
+export carrier (vessel, voyage): LE HAVRE V.QI540A
+voy. no: 051NW1
+description: FUJITO PAPERONE INKJET PAPER
+hs code: 48025500
+booking reference: ONEYSINF67240
+oc no.: 5RAE-04991
+freight: PREPAID

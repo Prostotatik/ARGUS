@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+notify party: PACIFIC OFFICE (M) SDN BHD
+port of loading (pol): PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: FREMANTLE, AUSTRALIA (AUFRE)
+no. of containers or packages: 12 x 20'FCL
+gross weight: 271,932 KG
+vessel name: NAP 914 V.BS007
+voy.: 2545E
+commodity: COATED IVORY BOARD
+hs code: 48105900
+booking no.: SIN994938743
+oc no.: 5APH-02716
+freight: PREPAID

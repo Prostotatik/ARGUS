@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+to the order of: PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+notify party: PACIFIC OFFICE (M) SDN BHD
+pol: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+pod: FREMANTLE, AUSTRALIA (AUFRE)
+container count: 12 x 20'FCL
+gross weight毛重(kgs): 271,932 KG
+export carrier (vessel, voyage): NAP 914 V.BS007
+voy. no: 2545E
+description: COATED IVORY BOARD
+b/l number: SIN163234672
+booking reference: SIN994938743
+freight: PREPAID

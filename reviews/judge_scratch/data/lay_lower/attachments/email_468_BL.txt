@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee (non-negotiable): ROXCEL TRADING GMBH
+  OPERNRING 3-5; 1010 VIENNA, AUSTRIA
+notify party: ROXCEL TRADING GMBH
+pol: RUGAO/NANTONG/SHANGHAI, CHINA (SGSIN)
+pod: ASHDOD, ISRAEL (ILASH)
+total containers: 3 x 40'HC
+gross weight毛重(kgs): 20,456 KG
+vessel: MARCOPOLO 810 V.BS005
+voy.: QI540A
+description of goods: FUJITO PAPERONE INKJET PAPER
+bl no.: MCLSIN2031954
+booking ref: MCLSINJEA2519666
+freight: PREPAID

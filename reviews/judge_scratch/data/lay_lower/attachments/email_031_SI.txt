@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee (non-negotiable): VITAL SOLUTIONS PTE. LTD.
+  77 ROBINSON ROAD; #21-01 ROBINSON 77; SINGAPORE 068896
+notify party: VITAL SOLUTIONS PTE. LTD.
+port of loading: NHAVA SHEVA, INDIA (INNSA)
+port of discharge: MOMBASA, KENYA (KEMBA)
+no. of containers: 1 x 20'GP
+gross wt (kgs): 21,114 KG
+vessel name: PACIFIC SUN 1 V.251073E
+voy.: QI540A
+description of goods: UNCOATED WOODFREE PAPER IN REAMS
+hs code: 48025700
+booking ref: ONEYSINF53396
+oc no.: 5RCY-36057
+freight: PREPAID

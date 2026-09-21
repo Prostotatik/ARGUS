@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: UAB NOVAKOPA
+  SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
+notify party: UAB NOVAKOPA
+port of loading: NANTONG, CHINA (CNNTG)
+port of discharge: HOCHIMINH CITY, VIETNAM (VNSGN)
+no. of containers or packages: 12 x 20'GP
+gross weight: 268,980 KG
+vessel: MARCOPOLO 810 V.BS005
+voyage: BS012
+commodity: FUJITO PAPERONE INKJET PAPER
+hs code: 48025500
+booking no.: MSDUL0942588899
+oc no.: 5APH-57298
+freight: PREPAID

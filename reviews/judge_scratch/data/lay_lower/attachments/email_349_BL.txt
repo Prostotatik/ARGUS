@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: 3S PAPER PRODUCTS SDN BHD
+  NO 12, JALAN INDUSTRI 3/6; RAWANG INTEGRATED INDUSTRIAL PARK; 48000 RAWANG, SELANGOR, MALAYSIA
+notify party/intermediate consignee: 3S PAPER PRODUCTS SDN BHD
+port of loading (pol): NANTONG, CHINA (CNNTG)
+discharge port: VALPARAISO, CHILE (CLVAP)
+no. of containers: 4 x 20'FCL
+gross weight (kg): 94,708 KG
+vessel name: VISION 202 V.002
+voyage no.: 2545E
+description: PAPERBOARD
+bl no.: SINF29894062
+booking no.: ONEYSINF60787
+freight: PREPAID

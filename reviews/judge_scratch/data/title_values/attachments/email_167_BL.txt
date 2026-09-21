@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper: April Far East (M) Sdn Bhd
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+Consignee: Pacific Office (M) Sdn Bhd
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+Notify Party: East Bright Fz-Llc
+POL: Singapore (Sgsin)
+Port of Discharge (POD): Callao, Peru (Pecll)
+Total Containers: 3 X 20'Gp
+Gross Weight毛重(KGS): 62,664 Kg
+Ocean Vessel: Vision 202 V.002
+Voyage: Qi540A
+Description: Fujito Paperone Inkjet Paper
+B/L No.: EGLV196931572791
+Booking Reference: 070500294096
+Freight: Prepaid

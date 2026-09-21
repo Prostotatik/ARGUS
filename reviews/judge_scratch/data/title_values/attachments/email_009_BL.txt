@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper/Exporter: Asia Pacific Paperboard Trading Pte Ltd
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+Consignee (Non-Negotiable): Pacific Office (M) Sdn Bhd
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+Notify: Pacific Office (M) Sdn Bhd
+POL: Port Klang (Westport), Malaysia (Mypkg)
+Discharge Port: Mersin, Turkey (Trmer)
+No. of Containers or Packages: 1 X 40'Hc
+Gross Weight (KG): 20,381 Kg
+Ocean Vessel: Nap 914 V.Bs007
+Voy. No: Qi540A
+Description of Goods: Coated Ivory Board
+Bill of Lading No.: YMJAI430980500
+Booking No.: I978820812
+Freight: Prepaid

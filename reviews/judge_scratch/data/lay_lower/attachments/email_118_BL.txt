@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee (non-negotiable): EAST BRIGHT FZ-LLC
+  RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
+notify party: EAST BRIGHT FZ-LLC
+port of loading: BUATAN, INDONESIA (IDBUA)
+port of discharge (pod): LONG BEACH, US (USLGB)
+no. of containers or packages: 3 x 40'HC
+gross wt (kgs): 67,668 KG
+vessel name: SOLID 16 V.044NW2
+voy. no: BS012
+description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+b/l no.: HLCUSIN329271296
+booking ref: 66676008
+freight: PREPAID

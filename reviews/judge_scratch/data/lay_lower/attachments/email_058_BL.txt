@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+to the order of: CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+notify: CLIFFORD PAPER INC
+port of loading: SINGAPORE (SGSIN)
+discharge port: MERSIN, TURKEY (TRMER)
+no. of containers or packages: 4 x 40'HC
+gross weight: 81,512 KG
+export carrier (vessel, voyage): MARCOPOLO 810 V.BS005
+voy. no: BS291
+description: COATED IVORY BOARD
+bill of lading no.: YMJAI782911467
+booking ref: I866912517
+freight: PREPAID

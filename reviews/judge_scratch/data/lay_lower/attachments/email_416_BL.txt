@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: VITAL SOLUTIONS PTE. LTD.
+  77 ROBINSON ROAD; #21-01 ROBINSON 77; SINGAPORE 068896
+notify party: VITAL SOLUTIONS PTE. LTD.
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+pod: LONG BEACH, US (USLGB)
+no. of containers or packages: 5 x 40'HC
+gross weight: 106,625 KG
+export carrier (vessel, voyage): MMSS 2507 V.257087E
+voyage no.: 051NW1
+description: COATED IVORY BOARD
+bill of lading no.: EGLV585125389218
+booking ref: 070500278519
+freight: PREPAID

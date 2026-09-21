@@ -1,0 +1,24 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Net Weight: 1,000 KG
+Tare Weight: 500 KG
+Total Packages: 12
+Container No: TCLU1234567
+Port of Transshipment: COLOMBO
+Place of Delivery: KARACHI
+Shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+Consignee: CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+Notify Party: CLIFFORD PAPER INC
+Port of Loading: NANTONG, CHINA (CNNTG)
+Discharge Port: BRISBANE, AUSTRALIA (AUBNE)
+No. of Containers: 1 x 20'GP
+Gross Weight毛重(KGS): 21,342 KG
+Vessel Name: LE HAVRE V.QI540A
+Voyage No.: BS012
+Description: FUJITO PAPERONE INKJET PAPER
+B/L NUMBER: MCLSIN3934835
+BOOKING NO.: MCLSINJEA2564208
+Freight: PREPAID

@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: 3S PAPER PRODUCTS SDN BHD
+  NO 12, JALAN INDUSTRI 3/6; RAWANG INTEGRATED INDUSTRIAL PARK; 48000 RAWANG, SELANGOR, MALAYSIA
+notify party/intermediate consignee: PACIFIC OFFICE (M) SDN BHD
+port of loading (pol): BUATAN, INDONESIA (IDBUA)
+port of discharge: JEBEL ALI, UAE (AEJEA)
+no. of containers: 15 x 20'GP
+gross weight: 310,125 KG
+export carrier (vessel, voyage): INDO SUKSES 65 V.51NW1
+voy.: 11S
+commodity: FUJITO PAPERONE INKJET PAPER
+hs code: 48025500
+booking ref: MCLSINJEA2563536
+oc no.: 5RSG-54195
+freight: PREPAID

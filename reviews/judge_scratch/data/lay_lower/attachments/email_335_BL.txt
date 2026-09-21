@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee (non-negotiable): TOPKOPY MIDDLE EAST FZE
+  P.O. BOX 17436; JEBEL ALI FREE ZONE, DUBAI, UAE
+notify party: ROXCEL TRADING GMBH
+port of loading (pol): SINGAPORE (SGSIN)
+port of discharge: VALPARAISO, CHILE (CLVAP)
+container count: 5 x 20'FCL
+gross weight (kg): 109,765 KG
+vessel: MMSS 2507 V.257087E
+voy.: 2545E
+description: COATED IVORY BOARD
+b/l no.: SINF25625313
+booking no.: ONEYSINF55251
+freight: PREPAID

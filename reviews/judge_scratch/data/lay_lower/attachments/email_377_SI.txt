@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee (non-negotiable): VITAL SOLUTIONS PTE. LTD.
+  77 ROBINSON ROAD; #21-01 ROBINSON 77; SINGAPORE 068896
+notify party: VITAL SOLUTIONS PTE. LTD.
+pol: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: YANGON, MYANMAR (MMRGN)
+no. of containers: 6 x 20'FCL
+gross weight: 126,870 KG
+vessel: NAP 914 V.BS007
+voy. no: 2545E
+description: PAPERONE DIGITAL COPIER PAPER
+hs code: 48025600
+booking no.: MCLSINJEA2590797
+oc no.: 5RFR-72781
+freight: PREPAID

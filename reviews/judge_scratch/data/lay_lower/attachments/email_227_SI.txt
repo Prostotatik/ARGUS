@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+to the order of: KPP-ANTALIS (SINGAPORE) PTE. LTD.
+  8 TEMASEK BOULEVARD; #42-01 SUNTEC TOWER 3; SINGAPORE 038988
+notify: CLIFFORD PAPER INC
+load port: NANTONG, CHINA (CNNTG)
+port of discharge (pod): KLAIPEDA, LITHUANIA (LTKLJ)
+no. of containers or packages: 3 x 40'HC
+gross weight: 71,916 KG
+vessel name: VISION 202 V.002
+voy. no: QI540A
+commodity: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+hs code: 48109200
+booking reference: ONEYSINF85366
+oc no.: 5SUS-49878
+freight: PREPAID

@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: BALL & DOGGETT AUSTRALIA PTY LTD
+  43-45 METROPOLITAN ROAD; ENFIELD NSW 2136, AUSTRALIA
+notify party: BALL & DOGGETT AUSTRALIA PTY LTD
+port of loading: NANTONG, CHINA (CNNTG)
+pod: KLAIPEDA, LITHUANIA (LTKLJ)
+no. of containers: 15 x 20'FCL
+gross wt (kgs): 348,705 KG
+ocean vessel: VISION 202 V.002
+voyage no.: 2545E
+kinds of packages; description of goods: UNCOATED WOODFREE PAPER IN REAMS
+hs code: 48025700
+booking no.: SIJ3505573
+oc no.: 5RUS-85736
+freight: PREPAID

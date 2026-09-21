@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Far East (M) Sdn Bhd
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+To the Order of: Ball & Doggett Australia Pty Ltd
+  43-45 METROPOLITAN ROAD; ENFIELD NSW 2136, AUSTRALIA
+Notify: Ball & Doggett Australia Pty Ltd
+POL: Singapore (Sgsin)
+Discharge Port: Pyeongtaek, South Korea (Krptk)
+No. of Containers or Packages: 6 X 40'Hc
+Gross Weight毛重(KGS): 135,930 KG
+Vessel: Indo Sukses 65 V.51Nw1
+Voy. No: 11S
+Description: Asia Symbol Food Service Board (Cupstock/Hi-Bulk) - Allinone
+BL No.: HLCUSIN986143410
+Booking Reference: 36971179
+Freight: Prepaid

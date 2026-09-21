@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: AL GURG STATIONERY LLC
+  P.O. BOX 5069; DUBAI, UNITED ARAB EMIRATES
+notify: ROXCEL TRADING GMBH
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge (pod): CALLAO, PERU (PECLL)
+no. of containers: 1 x 40'HC
+gross weight毛重(kgs): 20,262 KG
+export carrier (vessel, voyage): NAP 914 V.BS007
+voy. no: BS291
+kinds of packages; description of goods: FUJITO PAPERONE INKJET PAPER
+b/l number: MEDUUD479851
+booking no.: MSDUL0942558328
+freight: PREPAID

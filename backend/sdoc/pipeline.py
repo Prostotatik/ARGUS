@@ -217,10 +217,10 @@ class Pipeline:
         fallback = any(e.get("fallback") for e in st.errors)
         doc_conf = min(si.type_confidence, bl.type_confidence)
         ocr = si.ocr_used or bl.ocr_used
-        x = build_input_vector(fields, classifier_conf=cls.confidence, doc_type_conf=doc_conf, ocr_used=ocr,
-                               engine_fallback=fallback, doc_trigger=False)
-        st.gate_vector = [float(v) for v in x]
         det = decision["review_reason"] if decision["status"] == "NEEDS_REVIEW" else None
+        x = build_input_vector(fields, classifier_conf=cls.confidence, doc_type_conf=doc_conf, ocr_used=ocr,
+                               engine_fallback=fallback, doc_trigger=bool(det))
+        st.gate_vector = [float(v) for v in x]
         ev("gate", "start", "flynet", "fly-brain confidence gate")
         t = time.perf_counter()
         gd = self.gate.decide(x, deterministic_reason=det)

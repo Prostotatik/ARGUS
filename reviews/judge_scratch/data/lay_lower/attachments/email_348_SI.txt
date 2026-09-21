@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee (non-negotiable): ORIENT LINKS CO (LLC)
+  P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
+notify party: INTERNATIONAL FOREST PRODUCTS LLC
+port of loading: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+port of discharge: JEBEL ALI, UAE (AEJEA)
+total containers: 15 x 20'FCL
+gross wt (kgs): 334,845 KG
+vessel name: LE HAVRE V.QI540A
+voyage no.: BS291
+description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+hs code: 48109200
+booking reference: I661287585
+oc no.: 5AAT-75676
+freight: PREPAID

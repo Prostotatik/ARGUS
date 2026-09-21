@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+to the order of: SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify party/intermediate consignee: HABRAS INTERNATIONAL LIMITED
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: VALPARAISO, CHILE (CLVAP)
+container count: 12 x 40'HC
+gross weight毛重(kgs): 262,224 KG
+vessel: PACIFIC SUN 1 V.251073E
+voy.: QI540A
+commodity: PAPERBOARD
+hs code: 48109200
+booking ref: MSDUL0942562608
+oc no.: 5RSG-56411
+freight: PREPAID

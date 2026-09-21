@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: ROXCEL TRADING GMBH
+  OPERNRING 3-5; 1010 VIENNA, AUSTRIA
+notify party/intermediate consignee: ROXCEL TRADING GMBH
+pol: BUATAN, INDONESIA (IDBUA)
+port of discharge: MERSIN, TURKEY (TRMER)
+container count: 1 x 40'HC
+gross weight: 20,648 KG
+export carrier (vessel, voyage): NAP 914 V.BS007
+voy.: BS291
+description: PAPERBOARD
+hs code: 48109200
+booking no.: SIN108358328
+oc no.: 5RAE-63425
+freight: PREPAID

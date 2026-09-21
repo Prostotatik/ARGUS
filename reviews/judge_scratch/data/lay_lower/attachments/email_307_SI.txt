@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee (non-negotiable): BALL & DOGGETT AUSTRALIA PTY LTD
+  43-45 METROPOLITAN ROAD; ENFIELD NSW 2136, AUSTRALIA
+notify party: BALL & DOGGETT AUSTRALIA PTY LTD
+port of loading (pol): NANTONG, CHINA (CNNTG)
+discharge port: KOPER, SLOVENIA (SIKOP)
+container count: 1 x 40'HC
+gross weight: 23,869 KG
+vessel: PACIFIC SUN 1 V.251073E
+voy.: BS012
+commodity: FUJITO PAPERONE INKJET PAPER
+hs code: 48025500
+booking ref: I239231260
+oc no.: 5RSG-43260
+freight: PREPAID

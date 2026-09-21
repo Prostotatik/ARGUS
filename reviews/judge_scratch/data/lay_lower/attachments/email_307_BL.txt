@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: BALL & DOGGETT AUSTRALIA PTY LTD
+  43-45 METROPOLITAN ROAD; ENFIELD NSW 2136, AUSTRALIA
+notify party: BALL & DOGGETT AUSTRALIA PTY LTD
+port of loading: NANTONG, CHINA (CNNTG)
+discharge port: KOPER, SLOVENIA (SIKOP)
+no. of containers: 1 x 40'HC
+gross weight毛重(kgs): 23,869 KG
+vessel name: PACIFIC SUN 1 V.251073E
+voy. no: BS012
+description of goods: FUJITO PAPERONE INKJET PAPER
+bl no.: YMJAI143637189
+booking ref: I239231260
+freight: PREPAID

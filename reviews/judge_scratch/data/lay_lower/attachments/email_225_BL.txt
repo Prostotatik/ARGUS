@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: AL GURG STATIONERY LLC
+  OPERNRING 3-5; 1010 VIENNA, AUSTRIA
+notify party/intermediate consignee: TOAN LUC PAPER JOINT STOCK COMPANY
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge (pod): GDANSK, POLAND (PLGDN)
+no. of containers: 1 x 40'HC
+gross weight: 22,596 KG
+vessel: PACIFIC SUN 1 V.251073E
+voyage no.: BS291
+commodity: PAPERBOARD
+bill of lading no.: SIN556503334
+booking ref: SIN911415208
+freight: PREPAID

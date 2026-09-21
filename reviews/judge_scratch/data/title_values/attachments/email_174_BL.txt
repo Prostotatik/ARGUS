@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper/Exporter: April Fine Paper Trading (Middle East) Fze
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+Consignee (Non-Negotiable): Toan Luc Paper Joint Stock Company
+  LOT B, TAN DONG HIEP B IZ; DI AN, BINH DUONG, VIETNAM
+Notify Party/Intermediate Consignee: Moorim Sp Co., Ltd
+Load Port: Rugao/Nantong/Shanghai, China (Cnsha)
+POD: Hochiminh City, Vietnam (Gncky)
+Total Containers: 1 X 20'Fcl
+Gross Weight毛重(KGS): 20,532 Kg
+Vessel Name: Vision 202 V.002
+Voyage: Bs012
+Kinds of Packages; Description of Goods: Fujito Paperone Inkjet Paper
+B/L No.: OOLU1252056647
+Booking Reference: PSGSE4231220
+Freight: Prepaid

@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+notify party: CLIFFORD PAPER INC
+pol: NANTONG, CHINA (CNNTG)
+pod: BRISBANE, AUSTRALIA (AUBNE)
+container count: 1 x 20'GP
+gross weight: 20,842 KG
+vessel name: LE HAVRE V.QI540A
+voyage no.: BS012
+kinds of packages; description of goods: FUJITO PAPERONE INKJET PAPER
+hs code: 48025500
+booking reference: MCLSINJEA2564208
+oc no.: 5RAE-73753
+freight: PREPAID

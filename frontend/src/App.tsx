@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Activity, FileText, Network, Play, SkipForward } from 'lucide-react'
-import type { EmailRow, FlyBrain, FlyFeedback, GateInfo, Result, ReviewBody, Stats, TraceEvent } from './types'
+import { Activity, FileText, Keyboard, Network, Pause, Play, SkipForward } from 'lucide-react'
+import type { EmailRow, FlyBrain, FlyFeedback, GateInfo, KcDelta, Result, ReviewBody, Stats, TraceEvent } from './types'
 import { FIELD_KEYS } from './types'
 import { deriveStats, detectSource, type DataSource } from './data/source'
 import { foldEvents, reportOf, STATUS_COLOR } from './data/graphState'
@@ -12,8 +12,30 @@ import GraphPanel from './components/GraphPanel'
 import FlyPanel from './components/FlyPanel'
 import Timeline from './components/Timeline'
 import ReportView from './components/ReportView'
+import HelpOverlay from './components/HelpOverlay'
+import DepthBg from './components/DepthBg'
 
 type View = 'graph' | 'report'
+type Speed = 1 | 2 | 4
+const SPEEDS: Speed[] = [1, 2, 4]
+
+/** documented plasticity of the backend gate (backend/sdoc/flybrain.py): LTD w*=(1-eta_dep), LTP w+=eta_pot*(1-w); suspicion = 1-exp(-sum(w[active])/tau) */
+const ETA_DEP = 0.6
+const ETA_POT = 0.5
+function applyRule(fly: FlyBrain, w: number[], active: number[], verdict: string): { next: number[]; kc: KcDelta[]; before: number; after: number } {
+  const k = Math.round(fly.n_kc * (fly.kc_sparsity ?? 0.05))
+  const tau = fly.tau ?? 0.15 * Math.max(1, k)
+  const sus = (ww: number[]) => 1 - Math.exp(-active.reduce((a, i) => a + (ww[i] ?? 0), 0) / tau)
+  const next = w.slice()
+  const kc: KcDelta[] = []
+  for (const i of active) {
+    const b = w[i] ?? 0
+    const a = verdict === 'escalation_unneeded' ? b * (1 - (fly.eta_dep ?? ETA_DEP)) : b + (fly.eta_pot ?? ETA_POT) * (1 - b)
+    next[i] = a
+    kc.push({ i, before: b, after: a })
+  }
+  return { next, kc, before: sus(w), after: sus(next) }
+}
 const MODE_TEXT = { live: 'LIVE', replay: 'REPLAY', mock: 'MOCK' } as const
 const MODE_HINT = {
   live: 'Connected to the backend (SSE)',
@@ -35,8 +57,15 @@ export default function App() {
   const [busyAll, setBusyAll] = useState(false)
   const [toast, setToast] = useState<{ text: string; kind: 'info' | 'error' } | null>(null)
   const [bootError, setBootError] = useState<string | null>(null)
+  const [speed, setSpeed] = useState<Speed>(1)
+  const [auto, setAuto] = useState(false)
+  const [help, setHelp] = useState(false)
+  /** REPLAY/mock only: KC weights after the human teaching done in this session (documented rule, applied locally) */
+  const [simW, setSimW] = useState<number[] | null>(null)
 
-  const player = usePlayer(reduced)
+  const player = usePlayer(reduced, speed)
+  const visibleRef = useRef<string[]>([])
+  const onVisible = useCallback((ids: string[]) => { visibleRef.current = ids }, [])
   const runRef = useRef(0)
   const abortRef = useRef<AbortController | null>(null)
   const toastTimer = useRef<number | null>(null)
@@ -131,6 +160,65 @@ export default function App() {
   const gateShown = gate && nodes.gate?.state === 'done' ? gate : null
   const errored = Object.values(nodes).some((n) => n.state === 'error')
   const fb = feedback && feedback.id === selectedId ? feedback.fb : null
+  const flyEff = useMemo<FlyBrain | null>(() => (fly && simW ? { ...fly, weights: simW, taught: true } : fly), [fly, simW])
+
+  // ---- transport: keyboard, auto-play (streams through the visible list, throttled)
+  const step = useCallback((dir: 1 | -1) => {
+    const ids = visibleRef.current
+    if (!ids.length) return
+    const i = selectedId ? ids.indexOf(selectedId) : -1
+    const next = i < 0 ? (dir > 0 ? 0 : ids.length - 1) : Math.min(ids.length - 1, Math.max(0, i + dir))
+    if (next !== i) void select(ids[next])
+  }, [selectedId, select])
+
+  const startAuto = useCallback(() => {
+    setAuto(true)
+    if (!selectedId && visibleRef.current.length) void select(visibleRef.current[0])
+  }, [selectedId, select])
+
+  const togglePlay = useCallback(() => {
+    if (!auto && !player.playing) { startAuto(); return }
+    if (player.paused) player.resume(); else player.pause()
+  }, [auto, player, startAuto])
+
+  useEffect(() => {
+    if (!auto || player.paused || player.playing || !selectedId || !source) return
+    // current run finished: dwell so the result is readable, then advance (never faster than ~1 email / 0.45 s, 1.4 s in LIVE)
+    const dwell = Math.max(source.mode === 'live' ? 1400 : 450, 2100 / speed)
+    let t = 0
+    const advance = () => {
+      if (document.hidden) { t = window.setTimeout(advance, 1000); return }
+      const ids = visibleRef.current
+      const i = ids.indexOf(selectedId)
+      if (i < 0 || i >= ids.length - 1) { setAuto(false); say('Auto-play reached the end of the list.'); return }
+      void select(ids[i + 1])
+    }
+    t = window.setTimeout(advance, dwell)
+    return () => window.clearTimeout(t)
+  }, [auto, player.paused, player.playing, selectedId, speed, source, select, say])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return
+      const t = e.target as HTMLElement | null
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return
+      const k = e.key
+      if (k === '?' || (k === '/' && e.shiftKey)) { e.preventDefault(); setHelp((h) => !h); return }
+      if (k === 'Escape') { setHelp(false); return }
+      if (help) return
+      if (k === 'j' || k === 'J') { e.preventDefault(); step(1) }
+      else if (k === 'k' || k === 'K') { e.preventDefault(); step(-1) }
+      else if (k === ' ' || k === 'Spacebar') { e.preventDefault(); togglePlay() }
+      else if (k === 'r' || k === 'R') { if (selectedId) { e.preventDefault(); void select(selectedId) } }
+      else if (k === 'a' || k === 'A') { e.preventDefault(); if (auto) setAuto(false); else startAuto() }
+      else if (k === '1' || k === '2' || k === '4') setSpeed(Number(k) as Speed)
+      else if (k === 'g' || k === 'G') setView((v) => (v === 'graph' ? 'report' : 'graph'))
+    }
+    const onKeyUp = (e: KeyboardEvent) => { if (e.key === ' ' && !(e.target instanceof HTMLInputElement) && !(e.target instanceof HTMLTextAreaElement)) e.preventDefault() }
+    window.addEventListener('keydown', onKey)
+    window.addEventListener('keyup', onKeyUp)
+    return () => { window.removeEventListener('keydown', onKey); window.removeEventListener('keyup', onKeyUp) }
+  }, [help, step, togglePlay, selectedId, select, auto, startAuto])
 
   // ---- retry
   const retry = useCallback(async () => {
@@ -170,18 +258,37 @@ export default function App() {
     if (!source || !result || !selectedId) return
     setBusy(true)
     try {
+      const prevW = fly?.weights ? fly.weights.slice() : null
       const { result: upd, feedback: f } = await source.review(selectedId, body, result)
       setOverrides((o) => ({ ...o, [selectedId]: upd }))
       const nextRows = rowsRef.current.map((r) => (r.email_id === selectedId ? { ...r, result: { ...upd, events: undefined } } : r))
       setRows(nextRows)
-      if (f) setFeedback({ id: selectedId, fb: f })
-      if (source.mode === 'live') { void source.loadFly().then(setFly).catch(() => undefined) }
+      const act = gate?.kc_active ?? result.gate?.kc_active ?? []
+      let fbFinal: FlyFeedback | null = f ? { ...f, nonce: Date.now() } : null
+      if (source.mode === 'live') {
+        // real per-KC before/after: diff the exported weights around the review
+        try {
+          const nf = await source.loadFly()
+          setFly(nf)
+          if (fbFinal && prevW && nf.weights) {
+            const kc = act.map((i) => ({ i, before: prevW[i] ?? 0, after: nf.weights![i] ?? 0 })).filter((d) => Math.abs(d.after - d.before) > 1e-9)
+            fbFinal = { ...fbFinal, kc }
+          }
+        } catch { /* keep the suspicion-only feedback */ }
+      } else if (fly && fly.weights && act.length) {
+        // REPLAY/mock: no backend, so apply the documented Hebbian rule to the exported weights locally (labelled simulated)
+        const verdict = f?.verdict ?? body.escalation_verdict ?? (result.gate?.escalate ? 'escalation_correct' : 'escalation_unneeded')
+        const r = applyRule(fly, simW ?? fly.weights, act, verdict)
+        setSimW(r.next)
+        fbFinal = { before: r.before, after: r.after, verdict, simulated: true, kc: r.kc, nonce: Date.now() }
+      }
+      if (fbFinal) setFeedback({ id: selectedId, fb: fbFinal })
       void refreshStats(source, nextRows)
       say(source.mode === 'live' ? 'Review saved; report and fly net updated.' : 'Review applied locally (REPLAY mode: simulated, nothing was sent).')
     } finally {
       setBusy(false)
     }
-  }, [source, result, selectedId, refreshStats, say])
+  }, [source, result, selectedId, refreshStats, say, fly, gate, simW])
 
   const processAll = useCallback(async () => {
     if (!source?.processAll) return
@@ -218,6 +325,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <DepthBg variant="page" reduced={reduced} />
       <a className="skip" href="#emails">Skip to emails</a>
       <Sidebar
         stats={stats}
@@ -238,8 +346,8 @@ export default function App() {
           </div>
           <div className="c-tools">
             <div className="seg" role="tablist" aria-label="Center view">
-              <button type="button" role="tab" aria-selected={view === 'graph'} className={view === 'graph' ? 'on' : ''} onClick={() => setView('graph')}><Network size={14} /> Pipeline</button>
-              <button type="button" role="tab" aria-selected={view === 'report'} className={view === 'report' ? 'on' : ''} onClick={() => setView('report')}><FileText size={14} /> Report</button>
+              <button type="button" role="tab" aria-label="Pipeline" aria-selected={view === 'graph'} className={view === 'graph' ? 'on' : ''} onClick={() => setView('graph')}><Network size={14} /><span className="lbl"> Pipeline</span></button>
+              <button type="button" role="tab" aria-label="Report" aria-selected={view === 'report'} className={view === 'report' ? 'on' : ''} onClick={() => setView('report')}><FileText size={14} /><span className="lbl"> Report</span></button>
             </div>
             {selectedId && (
               player.playing
@@ -249,12 +357,26 @@ export default function App() {
             <span className={`mode-pill m-${mode}`} title={MODE_HINT[mode]}>
               <span className="dot" />
               {MODE_TEXT[mode]}
+              <span className="pill-eng" title="Engine that produced the LLM-capable nodes (gemini = LLM, rules = deterministic offline parsers)">{engine} engine</span>
               <Activity size={14} />
             </span>
           </div>
         </header>
 
         <div className="c-body">
+          {view === 'graph' && (
+            <div className="transport" role="group" aria-label="Playback">
+              <button type="button" className={`btn small tp-main${auto ? ' on' : ''}`} onClick={() => { if (auto && !player.paused) player.pause(); else if (auto) player.resume(); else startAuto() }} aria-pressed={auto && !player.paused} title="Stream through the emails in the list (Space)">
+                {auto && !player.paused ? <Pause size={13} /> : <Play size={13} />}
+                {auto ? (player.paused ? 'Paused' : 'Streaming inbox') : 'Play inbox'}
+              </button>
+              {auto && <button type="button" className="btn small ghost" onClick={() => { setAuto(false); player.resume() }} title="Stop auto-play (A)">Stop</button>}
+              <div className="seg tp-speed" role="radiogroup" aria-label="Playback speed">
+                {SPEEDS.map((sp) => <button key={sp} type="button" role="radio" aria-checked={speed === sp} className={speed === sp ? 'on' : ''} onClick={() => setSpeed(sp)}>{sp}x</button>)}
+              </div>
+              <button type="button" className="ib" onClick={() => setHelp(true)} aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)"><Keyboard size={14} /></button>
+            </div>
+          )}
           {view === 'graph' ? (
             <>
               <GraphPanel
@@ -302,13 +424,14 @@ export default function App() {
       </main>
 
       <div className="right" id="emails">
-        <EmailList rows={rows} selectedId={selectedId} onSelect={(id) => void select(id)} />
+        <EmailList rows={rows} selectedId={selectedId} onSelect={(id) => void select(id)} onVisible={onVisible} reduced={reduced} />
         <FlyPanel
-          fly={fly}
+          fly={flyEff}
           gate={gateShown}
           gateState={active ? nodes.gate?.state ?? 'pending' : 'idle'}
           reduced={reduced}
           feedback={fb}
+          onResetTaught={simW ? () => { setSimW(null); setFeedback(null) } : undefined}
         />
       </div>
 
@@ -316,6 +439,7 @@ export default function App() {
 
       <div className="sr-only" aria-live="polite">{result ? `${result.headline ?? ''}` : ''}</div>
       {toast && <div className={`toast ${toast.kind}`} role="status">{toast.text}</div>}
+      {help && <HelpOverlay onClose={() => setHelp(false)} />}
     </div>
   )
 }

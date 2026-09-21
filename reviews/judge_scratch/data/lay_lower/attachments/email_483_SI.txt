@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: UAB NOVAKOPA
+  SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
+notify: 3S PAPER PRODUCTS SDN BHD
+port of loading: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+discharge port: HOUSTON, US (USHOU)
+no. of containers or packages: 10 x 20'GP
+gross weight毛重(kgs): 238,630 KG
+ocean vessel: NAP 914 V.BS007
+voy. no: QI540A
+kinds of packages; description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+hs code: 48109200
+booking reference: ONEYSINF52638
+oc no.: 5RSG-40911
+freight: PREPAID

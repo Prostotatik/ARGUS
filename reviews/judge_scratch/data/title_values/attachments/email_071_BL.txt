@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Far East (M) Sdn Bhd
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+Consignee: Habras International Limited
+  OFFICE 1204, THE BURLINGTON TOWER; BUSINESS BAY, DUBAI, UAE
+NOTIFY PARTY: Habras International Limited
+Load Port: Port Klang (Westport), Malaysia (Mypkg)
+Discharge Port: Cebu, Philippines (Mmrgn)
+No. of Containers: 8 X 40'Hc
+GROSS WEIGHT: 132,006 KG
+Vessel: Le Havre V.Qi540A
+Voy.: 051Nw1
+Description of Goods: Coated Ivory Board
+Bill of Lading No.: YMJAI566246287
+BOOKING NO.: I334270866
+Freight: Prepaid

@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+notify party: CLIFFORD PAPER INC
+port of loading (pol): RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+port of discharge: APAPA, NIGERIA (NGAPP)
+no. of containers or packages: 3 x 20'GP
+gross weight毛重(kgs): 91,524 KG
+vessel name: MMSS 2507 V.257087E
+voyage: 2545E
+commodity: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+b/l no.: SIJ2999119
+booking reference: SIJ1485646
+freight: PREPAID

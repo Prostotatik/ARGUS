@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: ORIENT LINKS CO (LLC)
+  P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
+notify party: 3S PAPER PRODUCTS SDN BHD
+port of loading (pol): PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+pod: CALLAO, PERU (PECLL)
+no. of containers: 7 x 20'GP
+gross weight毛重(kgs): 132,516 KG
+vessel: VISION 202 V.002
+voy. no: QI540A
+commodity: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+b/l number: SIJ2206447
+booking no.: SIJ4212309
+freight: PREPAID

@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee (non-negotiable): PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+notify: ROXCEL TRADING GMBH
+pol: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: MOMBASA, KENYA (AUBNE)
+no. of containers: 10 x 40'HC
+gross weight毛重(kgs): 238,590 KG
+ocean vessel: INDO SUKSES 65 V.51NW1
+voyage no.: BS291
+kinds of packages; description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+bill of lading no.: EGLV765728941347
+booking no.: 070500250988
+freight: PREPAID

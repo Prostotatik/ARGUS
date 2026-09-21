@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: VITAL SOLUTIONS PTE. LTD.
+  77 ROBINSON ROAD; #21-01 ROBINSON 77; SINGAPORE 068896
+notify party: VITAL SOLUTIONS PTE. LTD.
+load port: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: YANGON, MYANMAR (MMRGN)
+container count: 6 x 20'FCL
+gross weight: 126,870 KG
+vessel: NAP 914 V.BS007
+voyage: 2545E
+kinds of packages; description of goods: PAPERONE DIGITAL COPIER PAPER
+b/l number: MCLSIN4760440
+booking reference: MCLSINJEA2590797
+freight: PREPAID

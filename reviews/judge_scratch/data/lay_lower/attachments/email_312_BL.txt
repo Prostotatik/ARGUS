@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+to the order of: 3S PAPER PRODUCTS SDN BHD
+  NO 12, JALAN INDUSTRI 3/6; RAWANG INTEGRATED INDUSTRIAL PARK; 48000 RAWANG, SELANGOR, MALAYSIA
+notify party: KPP-ANTALIS (SINGAPORE) PTE. LTD.
+port of loading: NANTONG, CHINA (CNNTG)
+discharge port: BRISBANE, AUSTRALIA (AUBNE)
+no. of containers: 10 x 40'HC
+gross weight: 237,010 KG
+vessel name: INDO SUKSES 65 V.51NW1
+voy. no: 11S
+description: COATED IVORY BOARD
+b/l no.: MCLSIN4033810
+booking reference: MCLSINJEA2559551
+freight: PREPAID

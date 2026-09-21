@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Fine Paper Trading
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+Consignee: Clifford Paper Inc
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+Notify Party/Intermediate Consignee: Clifford Paper Inc
+POL: Singapore, Singapore (Mypkg)
+PORT OF DISCHARGE: Savannah, Us (Ussav)
+No. of Containers or Packages: 15 X 40'Hc
+Gross Weight (KG): 322,590 KG
+Vessel Name: Nap 914 V.Bs007
+Voy.: Bs291
+Description of Goods: Uncoated Woodfree Paper In Reams
+B/L No.: MEDUUD104478
+Booking No.: MSDUL0942598562
+Freight: Prepaid

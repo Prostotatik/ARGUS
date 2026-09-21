@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: MOORIM SP CO., LTD
+  656, GANGNAM-DAERO, GANGNAM-GU; SEOUL, SOUTH KOREA; T. 82-2-3485-1500
+notify party: UAB NOVAKOPA
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+discharge port: CALLAO, PERU (PECLL)
+no. of containers or packages: 1 x 40'HC
+gross weight (kg): 21,577 KG
+vessel name: MMSS 2507 V.257087E
+voy. no: 11S
+kinds of packages; description of goods: PAPERONE DIGITAL COPIER PAPER
+hs code: 48025600
+booking ref: MSDUL0942518196
+oc no.: 5RSG-00133
+freight: PREPAID

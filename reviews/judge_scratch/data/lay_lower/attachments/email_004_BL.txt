@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+to the order of: UAB NOVAKOPA
+  RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
+notify party: UAB NOVAKOPA
+port of loading (pol): NANTONG, CHINA (CNNTG)
+pod: KARACHI, PAKISTAN (PKKHI)
+container count: 6 x 40'HC
+gross weight (kg): 131,058 KG
+export carrier (vessel, voyage): NAP 914 V.BS007
+voyage: BS012
+commodity: COATED IVORY BOARD
+bill of lading no.: SINF88496965
+booking ref: ONEYSINF32871
+freight: PREPAID

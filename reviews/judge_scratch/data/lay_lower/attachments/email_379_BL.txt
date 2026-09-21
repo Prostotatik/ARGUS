@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee (non-negotiable): ROXCEL TRADING GMBH
+  OPERNRING 3-5; 1010 VIENNA, AUSTRIA
+notify: ROXCEL TRADING GMBH
+load port: NANTONG, CHINA (CNNTG)
+port of discharge: HOUSTON, US (USHOU)
+no. of containers or packages: 12 x 20'FCL
+gross weight: 272,232 KG
+vessel: NAP 914 V.BS007
+voyage: 11S
+description: COATED IVORY BOARD
+bl no.: EGLV485157919711
+booking reference: 070500212125
+freight: PREPAID

@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: BALL & DOGGETT AUSTRALIA PTY LTD
+  43-45 METROPOLITAN ROAD; ENFIELD NSW 2136, AUSTRALIA
+notify: BALL & DOGGETT AUSTRALIA PTY LTD
+port of loading: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+port of discharge: CONAKRY, GUINEA (GNCKY)
+container count: 5 x 20'GP
+gross weight: 102,720 KG
+export carrier (vessel, voyage): LE HAVRE V.QI540A
+voy.: BS012
+kinds of packages; description of goods: PAPERBOARD
+bl no.: SIJ4576832
+booking no.: SIJ1021923
+freight: PREPAID

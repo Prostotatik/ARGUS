@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+notify party: CLIFFORD PAPER INC
+pol: BUATAN, INDONESIA (IDBUA)
+port of discharge: NEW YORK, US (USNYC)
+no. of containers: 3 x 40'HC
+gross weight (kg): 60,258 KG
+vessel: INDO SUKSES 65 V.51NW1
+voy.: 2545E
+description of goods: UNCOATED WOODFREE PAPER IN REAMS
+hs code: 48025700
+booking reference: SIN827235909
+oc no.: 5RMY-60567
+freight: PREPAID

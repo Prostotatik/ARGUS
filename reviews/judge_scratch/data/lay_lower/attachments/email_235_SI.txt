@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: CERIEX
+  ZONE INDUSTRIELLE; CONAKRY, GUINEA
+notify party: CERIEX
+load port: NANTONG, CHINA (CNNTG)
+discharge port: APAPA, NIGERIA (NGAPP)
+no. of containers or packages: 4 x 20'GP
+gross weight毛重(kgs): 94,380 KG
+export carrier (vessel, voyage): INDO SUKSES 65 V.51NW1
+voy.: 11S
+description: FUJITO PAPERONE INKJET PAPER
+hs code: 48025500
+booking no.: ONEYSINF69411
+oc no.: 5RMY-80053
+freight: PREPAID

@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee (non-negotiable): SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify: SAFQA LIMITED
+pol: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+pod: GDANSK, POLAND (PLGDN)
+total containers: 2 x 20'FCL
+gross weight毛重(kgs): 42,486 KG
+vessel: MARCOPOLO 810 V.BS005
+voyage: 051NW1
+description of goods: PAPERBOARD
+bill of lading no.: SINF13662103
+booking ref: ONEYSINF88629
+freight: PREPAID

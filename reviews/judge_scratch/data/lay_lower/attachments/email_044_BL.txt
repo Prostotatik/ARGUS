@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify party: SAFQA LIMITED
+port of loading: BUATAN, INDONESIA (IDBUA)
+port of discharge: APAPA, NIGERIA (NGAPP)
+no. of containers: 2 x 40'HC
+gross weight毛重(kgs): 47,192 KG
+ocean vessel: INDO SUKSES 65 V.51NW1
+voyage: QI540A
+commodity: PAPERBOARD
+b/l number: SIJ0034324
+booking ref: SIJ4510762
+freight: PREPAID

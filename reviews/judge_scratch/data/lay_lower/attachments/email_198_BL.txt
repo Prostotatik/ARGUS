@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: UAB NOVAKOPA
+  SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
+notify: UAB NOVAKOPA
+load port: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+port of discharge: APAPA, NIGERIA (NGAPP)
+total containers: 5 x 20'FCL
+gross weight: 105,675 KG
+ocean vessel: LE HAVRE V.QI540A
+voy.: BS291
+commodity: UNCOATED WOODFREE PAPER IN REAMS
+bill of lading no.: OOLU2447174654
+booking no.: PSGSE2140665
+freight: PREPAID

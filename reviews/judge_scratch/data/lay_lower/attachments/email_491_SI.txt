@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+to the order of: AL GURG STATIONERY LLC
+  P.O. BOX 5069; DUBAI, UNITED ARAB EMIRATES
+notify: AL GURG STATIONERY LLC
+port of loading (pol): BUATAN, INDONESIA (IDBUA)
+port of discharge: GDANSK, POLAND (PLGDN)
+no. of containers: 1 x 40'HC
+gross weight毛重(kgs): 20,164 KG
+vessel name: MARCOPOLO 810 V.BS005
+voy. no: 2545E
+kinds of packages; description of goods: PAPERONE DIGITAL COPIER PAPER
+hs code: 48025600
+booking no.: MCLSINJEA2520078
+oc no.: 5RUS-43614
+freight: PREPAID

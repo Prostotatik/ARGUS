@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper (principal or seller): ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify party/intermediate consignee: SAFQA LIMITED
+load port: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge (pod): KLAIPEDA, LITHUANIA (LTKLJ)
+no. of containers or packages: 1 x 20'FCL
+gross weight: 21,401 KG
+export carrier (vessel, voyage): NAP 914 V.BS007
+voyage no.: QI540A
+description: PAPERBOARD
+bill of lading no.: SIJ1783099
+booking reference: SIJ9741926
+freight: PREPAID

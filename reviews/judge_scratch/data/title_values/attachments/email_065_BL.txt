@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Fine Paper Trading (Middle East) Fze
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+To the Order of: International Forest Products Llc
+  6 HOLLIS STREET; SUITE 100; FRAMINGHAM, MA 01702, USA
+Notify: Habras International Limited
+Load Port: Port Klang (Westport), Malaysia (Mypkg)
+POD: Busan, South Korea (Vnsgn)
+No. of Containers or Packages: 1 X 40'Hc
+GROSS WEIGHT: 21,479 Kg
+Vessel Name: Nap 914 V.Bs007
+Voyage No.: Bs012
+Description of Goods: Fujito Paperone Inkjet Paper
+BL No.: SIN742054932
+Booking Reference: SIN966851612
+Freight: Prepaid

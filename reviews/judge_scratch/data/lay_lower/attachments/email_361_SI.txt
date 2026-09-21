@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+to the order of: PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+notify party/intermediate consignee: ROXCEL TRADING GMBH
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: BRISBANE, AUSTRALIA (AUBNE)
+no. of containers or packages: 10 x 40'HC
+gross wt (kgs): 239,590 KG
+vessel name: INDO SUKSES 65 V.51NW1
+voy. no: BS291
+description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+hs code: 48109200
+booking reference: 070500250988
+oc no.: 5RSG-98645
+freight: PREPAID

@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: TOPKOPY MIDDLE EAST FZE
+  P.O. BOX 17436; JEBEL ALI FREE ZONE, DUBAI, UAE
+notify: SAFQA LIMITED
+port of loading: NHAVA SHEVA, INDIA (INNSA)
+discharge port: CONAKRY, GUINEA (GNCKY)
+no. of containers or packages: 10 x 20'FCL
+gross wt (kgs): 222,690 KG
+export carrier (vessel, voyage): PACIFIC SUN 1 V.251073E
+voyage: QI540A
+description of goods: PAPERONE DIGITAL COPIER PAPER
+hs code: 48025600
+booking no.: I961183673
+oc no.: 5RMY-65766
+freight: PREPAID

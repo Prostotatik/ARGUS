@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+to the order of: AL GURG STATIONERY LLC
+  P.O. BOX 5069; DUBAI, UNITED ARAB EMIRATES
+notify party/intermediate consignee: AL GURG STATIONERY LLC
+port of loading (pol): PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+pod: BALTIMORE, US (USBAL)
+total containers: 10 x 20'GP
+gross weight毛重(kgs): 229,130 KG
+vessel: LE HAVRE V.QI540A
+voy. no: 2545E
+description: COATED IVORY BOARD
+hs code: 48105900
+booking reference: PSGSE9225014
+oc no.: 5RMY-25762
+freight: PREPAID

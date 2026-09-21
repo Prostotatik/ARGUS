@@ -1,0 +1,51 @@
+{
+ "emails_total": 520,
+ "processed": 520,
+ "classified": {
+  "INVOICE_QUERY": 75,
+  "BL_COMPARISON": 220,
+  "SI_REQUEST": 125,
+  "GENERAL": 60,
+  "SPAM": 40
+ },
+ "comparisons": 114,
+ "mismatches": 46,
+ "needs_review": 20,
+ "discrepancies_found": 72,
+ "accuracy_vs_labels": 1.0,
+ "top_issues": [
+  {
+   "label": "container_count mismatch",
+   "count": 19
+  },
+  {
+   "label": "port_of_discharge mismatch",
+   "count": 13
+  },
+  {
+   "label": "gross_weight_kg mismatch",
+   "count": 12
+  },
+  {
+   "label": "notify_party mismatch",
+   "count": 8
+  },
+  {
+   "label": "consignee mismatch",
+   "count": 7
+  },
+  {
+   "label": "shipper mismatch",
+   "count": 7
+  },
+  {
+   "label": "port_of_loading mismatch",
+   "count": 6
+  },
+  {
+   "label": "needs review: wrong doc type",
+   "count": 5
+  }
+ ],
+ "engine": "rules"
+}

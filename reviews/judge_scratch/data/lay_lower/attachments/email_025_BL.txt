@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee (non-negotiable): CERIEX
+  ZONE INDUSTRIELLE; CONAKRY, GUINEA
+notify: ROXCEL TRADING GMBH
+port of loading (pol): PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+discharge port: BUSAN, SOUTH KOREA (AUFRE)
+total containers: 5 x 20'GP
+gross weight (kg): 135,126 KG
+vessel name: MMSS 2507 V.257087E
+voy.: 11S
+description of goods: MULTIPURPOSE PAPER - A4 - PAPERONE COPIER
+bill of lading no.: SIN204711671
+booking no.: SIN902294131
+freight: PREPAID

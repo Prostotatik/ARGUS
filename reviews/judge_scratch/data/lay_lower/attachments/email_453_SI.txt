@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: BALL & DOGGETT AUSTRALIA PTY LTD
+  43-45 METROPOLITAN ROAD; ENFIELD NSW 2136, AUSTRALIA
+notify party: BALL & DOGGETT AUSTRALIA PTY LTD
+pol: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+port of discharge (pod): CONAKRY, GUINEA (GNCKY)
+total containers: 5 x 20'GP
+gross wt (kgs): 102,720 KG
+ocean vessel: LE HAVRE V.QI540A
+voyage: BS012
+description of goods: PAPERBOARD
+hs code: 48109200
+booking no.: SIJ1021923
+oc no.: 5RSG-78584
+freight: PREPAID

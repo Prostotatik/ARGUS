@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+SHIPPER: April Fine Paper Trading
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+To the Order of: Pacific Office (M) Sdn Bhd
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+Notify Party: Pacific Office (M) Sdn Bhd
+PORT OF LOADING: Buatan, Indonesia (Idbua)
+Port of Discharge (POD): Yangon, Myanmar (Mmrgn)
+Container Count: 4 X 40'Hc
+GROSS WEIGHT: 81,100 Kg
+Export Carrier (vessel, voyage): Marcopolo 810 V.Bs005
+Voyage No.: Bs012
+Description of Goods: Fujito Paperone Inkjet Paper
+BL No.: MCLSIN3910651
+Booking Ref: MCLSINJEA2580170
+Freight: Prepaid

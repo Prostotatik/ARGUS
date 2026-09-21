@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee: EAST BRIGHT FZ-LLC
+  RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
+notify party: EAST BRIGHT FZ-LLC
+port of loading: BUATAN, INDONESIA (IDBUA)
+port of discharge: LONG BEACH, US (USLGB)
+container count: 3 x 40'HC
+gross weight毛重(kgs): 67,668 KG
+export carrier (vessel, voyage): SOLID 16 V.044NW2
+voyage no.: BS012
+commodity: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+hs code: 48109200
+booking reference: 66676008
+oc no.: 5AAT-35058
+freight: PREPAID

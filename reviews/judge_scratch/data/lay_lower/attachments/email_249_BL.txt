@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee (non-negotiable): UAB NOVAKOPA
+  SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
+notify party/intermediate consignee: UAB NOVAKOPA
+port of loading: NANTONG, CHINA (CNNTG)
+port of discharge: GDANSK, POLAND (PLGDN)
+no. of containers or packages: 5 x 20'FCL
+gross weight: 115,545 KG
+ocean vessel: INDO SUKSES 65 V.51NW1
+voy. no: 051NW1
+description of goods: MULTIPURPOSE PAPER - A4 - PAPERONE COPIER
+b/l no.: MCLSIN0811556
+booking ref: MCLSINJEA2526060
+freight: PREPAID

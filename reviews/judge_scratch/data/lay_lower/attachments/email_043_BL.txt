@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee (non-negotiable): PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+notify: PACIFIC OFFICE (M) SDN BHD
+port of loading (pol): NHAVA SHEVA, INDIA (INNSA)
+pod: KLAIPEDA, LITHUANIA (LTKLJ)
+no. of containers: 5 x 20'GP
+gross weight毛重(kgs): 68,649 KG
+vessel name: NAP 914 V.BS007
+voyage: 051NW1
+description of goods: PAPERBOARD
+b/l no.: SIJ5991022
+booking reference: SIJ9014767
+freight: PREPAID

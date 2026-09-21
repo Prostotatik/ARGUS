@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee (non-negotiable): KPP-ANTALIS (SINGAPORE) PTE. LTD.
+  8 TEMASEK BOULEVARD; #42-01 SUNTEC TOWER 3; SINGAPORE 038988
+notify party/intermediate consignee: CLIFFORD PAPER INC
+port of loading: NANTONG, CHINA (CNNTG)
+pod: KLAIPEDA, LITHUANIA (LTKLJ)
+no. of containers or packages: 3 x 40'HC
+gross weight毛重(kgs): 71,916 KG
+vessel: VISION 202 V.002
+voy.: QI540A
+kinds of packages; description of goods: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+b/l number: SINF63514846
+booking reference: ONEYSINF85366
+freight: PREPAID

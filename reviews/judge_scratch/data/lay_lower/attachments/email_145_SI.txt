@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+consignee (non-negotiable): PACIFIC OFFICE (M) SDN BHD
+  LOT 6, JALAN P/7; SECTION 13, 43650 BANDAR BARU BANGI; SELANGOR, MALAYSIA
+notify party/intermediate consignee: PACIFIC OFFICE (M) SDN BHD
+port of loading: NANTONG, CHINA (CNNTG)
+port of discharge (pod): BUSAN, SOUTH KOREA (KRPUS)
+total containers: 15 x 20'FCL
+gross weight: 313,380 KG
+vessel: NAP 914 V.BS007
+voy. no: BS012
+commodity: MULTIPURPOSE PAPER - A4 - PAPERONE COPIER
+hs code: 48025600
+booking reference: MCLSINJEA2559463
+oc no.: 5RSG-68872
+freight: PREPAID

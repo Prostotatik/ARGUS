@@ -1,0 +1,12 @@
+# core
+fastapi>=0.115
+uvicorn>=0.30
+numpy>=1.26
+pymupdf>=1.24          # PDF text layer (and optional OCR hook when tesseract is installed)
+python-docx>=1.1       # docx incl. tables
+openpyxl>=3.1          # xlsx
+# LLM path (only used when GEMINI_API_KEY is set)
+google-genai>=1.0
+# tests
+pytest>=8.0
+httpx>=0.27            # FastAPI TestClient

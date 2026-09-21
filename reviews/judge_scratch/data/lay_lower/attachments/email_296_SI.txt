@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+consignee: SAFQA LIMITED
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+notify: SAFQA LIMITED
+port of loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: KLAIPEDA, LITHUANIA (LTKLJ)
+container count: 1 x 20'FCL
+gross weight毛重(kgs): 21,401 KG
+export carrier (vessel, voyage): NAP 914 V.BS007
+voyage: QI540A
+description: PAPERBOARD
+hs code: 48109200
+booking no.: SIJ9741926
+oc no.: 5AKR-76492
+freight: PREPAID

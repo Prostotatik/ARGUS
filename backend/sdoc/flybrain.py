@@ -63,7 +63,7 @@ INPUT_NAMES: list[str] = (
         "internal_inconsistency",                    # 27  document contradicts itself (table vs total)
         "format_normalised",                         # 28  benign normalisation applied (format difference ignored, fuzzy label)
         "engine_fallback",                           # 29  LLM node failed, rules twin used
-        "doc_trigger",                               # 30  missing attachment / wrong doc type / unreadable
+        "deterministic_trigger",                     # 30  missing attachment / wrong doc type / unreadable / blank value
         "missing_value",                             # 31  required value blank
     ]
 )
@@ -350,7 +350,7 @@ class FlyBrain:
 # ---------------------------------------------------------------------------
 ANOMALY_KINDS = [
     "low_conf_mismatch", "low_conf_only", "near_miss_typo", "ocr_text", "many_mismatches",
-    "inconsistent_document", "ambiguous_parse", "engine_fallback_mismatch", "weak_doc_type", "doc_trigger",
+    "inconsistent_document", "ambiguous_parse", "engine_fallback_low_conf", "weak_doc_type", "doc_trigger",
 ]
 
 
@@ -371,6 +371,8 @@ def synthetic_normal(rng: np.random.Generator) -> np.ndarray:
         x[28] = 0.5                                       # fuzzy label alignment (benign)
     if rng.random() < 0.04:
         x[24] = rng.uniform(0.0, 0.15)
+    if rng.random() < 0.10:
+        x[29] = 1.0                                       # Gemini node failed, rules twin gave a confident answer
     return x
 
 
@@ -403,10 +405,10 @@ def synthetic_anomaly(rng: np.random.Generator, kind: str) -> np.ndarray:
         x[26] = 1.0
         x[5 + int(rng.integers(0, 2))] = 1.0
         x[7 + 5 + int(rng.integers(0, 2))] = rng.uniform(0.3, 0.8)
-    elif kind == "engine_fallback_mismatch":
+    elif kind == "engine_fallback_low_conf":
         x[29] = 1.0
         x[f] = 1.0
-        x[7 + f] = rng.uniform(0.1, 0.5)
+        x[7 + f] = rng.uniform(0.4, 0.9)
     elif kind == "weak_doc_type":
         x[23] = rng.uniform(0.6, 1.0)
         x[24] = rng.uniform(0.3, 0.9)

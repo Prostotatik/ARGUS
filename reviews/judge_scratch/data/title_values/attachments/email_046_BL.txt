@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper (Principal or Seller): April Fine Paper Trading (Middle East) Fze
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+Consignee: Safqa Limited
+  P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
+Notify: Moorim Sp Co., Ltd
+Port of Loading: Port Klang (Westport), Malaysia (Mypkg)
+POD: Savannah, Us (Ussav)
+No. of Containers or Packages: 12 X 20'Fcl
+Gross Weight毛重(KGS): 257,340 KG
+Vessel Name: Marcopolo 810 V.Bs005
+Voy.: Bs291
+Description of Goods: Asia Symbol Food Service Board (Cupstock/Hi-Bulk) - Allinone
+B/L NUMBER: EGLV552312432921
+Booking Reference: 070500227799
+Freight: Prepaid

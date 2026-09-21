@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee (non-negotiable): ORIENT LINKS CO (LLC)
+  P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
+notify: SAFQA LIMITED
+port of loading: BUATAN, INDONESIA (IDBUA)
+port of discharge (pod): PYEONGTAEK, SOUTH KOREA (KRPTK)
+no. of containers: 10 x 20'FCL
+gross weight (kg): 236,690 KG
+vessel: MARCOPOLO 810 V.BS005
+voyage: 2545E
+description of goods: COATED IVORY BOARD
+bl no.: EGLV260055955017
+booking reference: 070500283325
+freight: PREPAID

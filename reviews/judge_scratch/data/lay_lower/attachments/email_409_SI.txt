@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper/exporter: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee: EAST BRIGHT FZ-LLC
+  RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
+notify party: EAST BRIGHT FZ-LLC
+pol: SINGAPORE (SGSIN)
+discharge port: MERSIN, TURKEY (TRMER)
+container count: 12 x 20'GP
+gross weight (kg): 262,428 KG
+ocean vessel: PACIFIC SUN 1 V.251073E
+voy.: QI540A
+description: COATED IVORY BOARD
+hs code: 48105900
+booking no.: 070500282137
+oc no.: 5RMY-11842
+freight: PREPAID

@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee (non-negotiable): KTP CO., LTD
+  KTP BLDG., 36 SANGWON-GIL; SEOUNGDONG-GU, SEOUL, SOUTH KOREA; TEL:02-2285-6025
+notify: KTP CO., LTD
+port of loading: NANTONG, CHINA (CNNTG)
+port of discharge: CALLAO, PERU (PECLL)
+container count: 10 x 20'GP
+gross weight (kg): 206,510 KG
+export carrier (vessel, voyage): PACIFIC SUN 1 V.251073E
+voy. no: 11S
+commodity: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+hs code: 48109200
+booking no.: 070500246333
+oc no.: 5RFR-12797
+freight: PREPAID

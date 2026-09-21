@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+consignee: CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+notify party: CLIFFORD PAPER INC
+port of loading: NANTONG, CHINA (CNNTG)
+discharge port: BRISBANE, AUSTRALIA (AUBNE)
+no. of containers: 1 x 20'GP
+gross weight毛重(kgs): 21,342 KG
+vessel name: LE HAVRE V.QI540A
+voyage no.: BS012
+description: FUJITO PAPERONE INKJET PAPER
+b/l number: MCLSIN3934835
+booking no.: MCLSINJEA2564208
+freight: PREPAID

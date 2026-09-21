@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FINE PAPER TRADING (MIDDLE EAST) FZE
+  #813, 4 EA, DUBAI AIRPORT FREE ZONE; P.O. BOX: 293775, DUBAI, UNITED ARAB EMIRATES
+to the order of: CERIEX
+  ZONE INDUSTRIELLE; CONAKRY, GUINEA
+notify party: CERIEX
+port of loading (pol): NANTONG, CHINA (CNNTG)
+port of discharge (pod): APAPA, NIGERIA (NGAPP)
+no. of containers: 4 x 20'GP
+gross wt (kgs): 94,380 KG
+ocean vessel: INDO SUKSES 65 V.51NW1
+voyage no.: 11S
+kinds of packages; description of goods: FUJITO PAPERONE INKJET PAPER
+bill of lading no.: SINF10725636
+booking no.: ONEYSINF69411
+freight: PREPAID

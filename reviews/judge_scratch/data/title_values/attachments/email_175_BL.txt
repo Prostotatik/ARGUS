@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+Shipper/Exporter: April Far East (M) Sdn Bhd
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+CONSIGNEE: Ktp Co., Ltd
+  KTP BLDG., 36 SANGWON-GIL; SEOUNGDONG-GU, SEOUL, SOUTH KOREA; TEL:02-2285-6025
+NOTIFY PARTY: Ktp Co., Ltd
+Port of Loading: Nantong, China (Cnntg)
+PORT OF DISCHARGE: Callao, Peru (Pecll)
+No. of Containers: 10 X 20'Gp
+GROSS WEIGHT: 206,510 KG
+Vessel Name: PACIFIC SUN 1 V.251073E
+Voyage: 11S
+Commodity: Asia Symbol Food Service Board (Cupstock/Hi-Bulk) - Allinone
+B/L No.: EGLV526772233060
+Booking No.: 070500246333
+Freight: Prepaid

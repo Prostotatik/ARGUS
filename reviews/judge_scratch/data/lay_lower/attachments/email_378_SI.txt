@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee (non-negotiable): TOAN LUC PAPER JOINT STOCK COMPANY
+  LOT B, TAN DONG HIEP B IZ; DI AN, BINH DUONG, VIETNAM
+notify party/intermediate consignee: EAST BRIGHT FZ-LLC
+load port: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
+port of discharge: GDANSK, POLAND (PLGDN)
+container count: 12 x 40'HC
+gross weight (kg): 277,788 KG
+vessel name: INDO SUKSES 65 V.51NW1
+voy. no: QI540A
+description: PAPERONE DIGITAL COPIER PAPER
+hs code: 48025600
+booking ref: SIJ5295806
+oc no.: 5RFR-60138
+freight: PREPAID

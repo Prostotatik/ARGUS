@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+shipper/exporter: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+consignee (non-negotiable): EAST BRIGHT FZ-LLC
+  RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
+notify party/intermediate consignee: EAST BRIGHT FZ-LLC
+port of loading: SINGAPORE (SGSIN)
+port of discharge: MERSIN, TURKEY (TRMER)
+no. of containers or packages: 12 x 20'GP
+gross wt (kgs): 262,428 KG
+vessel name: PACIFIC SUN 1 V.251073E
+voyage: QI540A
+kinds of packages; description of goods: COATED IVORY BOARD
+bl no.: EGLV578715841560
+booking no.: 070500282137
+freight: PREPAID

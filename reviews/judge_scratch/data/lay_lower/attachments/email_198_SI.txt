@@ -1,0 +1,19 @@
+SHIPPING INSTRUCTION
+========================================
+
+shipper (principal or seller): ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+to the order of: UAB NOVAKOPA
+  SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
+notify party/intermediate consignee: UAB NOVAKOPA
+port of loading: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+port of discharge (pod): APAPA, NIGERIA (NGAPP)
+container count: 5 x 20'FCL
+gross weight (kg): 105,675 KG
+vessel: LE HAVRE V.QI540A
+voyage: BS291
+description of goods: UNCOATED WOODFREE PAPER IN REAMS
+hs code: 48025700
+booking ref: PSGSE2140665
+oc no.: 5APH-04427
+freight: PREPAID
