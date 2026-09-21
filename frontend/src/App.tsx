@@ -174,8 +174,10 @@ export default function App() {
 
   const startAuto = useCallback(() => {
     setAuto(true)
-    if (!selectedId && visibleRef.current.length) void select(visibleRef.current[0])
-  }, [selectedId, select])
+    // "Play inbox" always starts a fresh run from the top of the currently visible list (not
+    // wherever you last clicked) - that's what makes it a rewatchable demo button.
+    if (visibleRef.current.length) void select(visibleRef.current[0])
+  }, [select])
 
   const togglePlay = useCallback(() => {
     if (!auto && !player.playing) { startAuto(); return }
