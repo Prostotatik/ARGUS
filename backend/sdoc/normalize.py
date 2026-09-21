@@ -78,6 +78,10 @@ _LEGAL_ABBREV: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"\bF\s*[.\-]?\s*Z\s*[.\-]?\s*L\.?\s*L\.?\s*C\.?\b", re.I), " FZLLC "),
     (re.compile(r"\bL\.?\s*L\.?\s*C\.?\b", re.I), " LLC "),
     (re.compile(r"\bS\s*/\s*B\b", re.I), " SDN BHD "),   # 'S/B' == 'SDN BHD'
+    # 'S/A' - Brazilian/Portuguese/Spanish slash form of 'Sociedade/Sociedad Anonima' == 'SA'
+    # (JUDGE Round 3 finding: not covered by the dotted-initialism collapse since it uses a slash,
+    # not dots - same fix shape as the 'S/B' line above).
+    (re.compile(r"\bS\s*/\s*A\b", re.I), " SA "),
 ]
 # Generic dotted-initialism collapse (Round 3): ANY run of 2-5 single letters each separated by a
 # dot ('S.A.', 'N.V.', 'B.V.', 'A.G.', 'K.K.', 'D.O.O.', 'S.A.R.L.', 'S.p.A.', 'C.V.', the 'O.O.'
