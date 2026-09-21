@@ -194,3 +194,137 @@ faithful local fallback for #1, LIVE has a working two-call implementation for #
 - No backend files touched.
 
 STATUS: OBJECTIONS=2
+
+## Round 2 - INNOVATOR, 2026-09-22
+
+Method: read ORCHESTRATION.md, CONTRACT.md, hackathon_info/idea.md, my own Round 1 review, developer.md Round 2,
+designer.md Round 2 in full before touching anything. `cd frontend && npm run build` (0 TS errors, 1899 modules,
+matches designer.md's count) both before and after this round (no edits made - see below). Real backend
+(`python -m uvicorn sdoc.api:app --port 8000`, no Gemini key -> `rules` engine, 520 emails) + Vite dev server
+(`npm run dev -- --port 5199 --strictPort`, proxy to :8000) run for both LIVE and REPLAY verification. Claude-in-Chrome
+extension not connected (`tabs_context_mcp` -> "extension is not connected", consistent with DEVELOPER/DESIGNER's
+Round 2 notes), so headless Chrome 153 driven directly over CDP (own Node 24 script, no npm deps, in scratchpad,
+reused/extended for this round) at 1536x1024 primary plus a 1024x768 tablet-breakpoint spot check. Screenshots in
+scratchpad (not committed to `reviews/shots/`, since none show a new defect - see below); numeric verification
+(API responses, `scrollHeight`) quoted directly in this report instead.
+
+### Verifying my own two Round 1 requests to DEVELOPER
+
+**Request #1 (expose `eta_dep`/`eta_pot`/`tau`/`init_w`) - IMPLEMENTED, verified against real data, no stopgap left to remove.**
+Read the real exported `frontend/public/replay/flybrain.json`: `{"eta_dep":0.6,"eta_pot":0.5,"tau":12,"init_w":0.9,"n_kc":1600,"n_inputs":32}`
+- present and correct. `App.tsx`'s local Hebbian simulator (`applyRule`, used only for the REPLAY/MOCK "teach the
+net" client-side animation - there is no backend to call there) reads `fly.eta_dep ?? ETA_DEP` etc.: the real
+number first, the `ETA_DEP=0.6`/`ETA_POT=0.5` module constants only as a fallback. I checked whether that fallback
+is now dead code to remove, per my own Round 1 ask ("remove the hardcoded mirror if so") - **it is not**: MOCK mode
+(`mock/index.ts schematicFly()`, used when there is no backend and no replay files) legitimately has no server-side
+plasticity constants at all (it never claims to be real data), so the fallback still does real work there, not just
+in REPLAY. Removing it would NaN the mock-mode Hebbian demo for no benefit. Verdict: request correctly implemented,
+nothing left to clean up - my Round 1 concern (values silently drifting from the backend) is resolved because REPLAY
+and LIVE now always read the real number first.
+
+**Request #2 (per-KC before/after directly in `POST /api/review`'s response) - IMPLEMENTED, verified live end-to-end.**
+Read `frontend/src/data/source.ts LiveSource.review()`: it now builds the `KcDelta[]` straight from
+`result.review.fly.kc_active`/`kc_weights_before`/`kc_weights_after` on the single review response, with the old
+second `GET /api/flybrain` call demoted to a compatibility fallback for a pre-Round-2 backend build (correct, not a
+hedge against something still needed today). Verified against the real running backend, not just by reading code:
+```
+POST /api/review/email_004 {"decision":"confirm_mismatch","escalation_verdict":"escalation_correct"}
+-> review.fly = {before:0.0, after:0.1175, n_kc_updated:3, kc_active:[451,1034,1099],
+                  kc_weights_before:[0.0,0.0,0.0], kc_weights_after:[0.5,0.5,0.5], simulated:false}
+```
+One HTTP round trip, matches `CONTRACT.md`'s documented shape exactly, matches what `source.ts` reads. Also verified
+the companion "skipped" shape (deterministic-trigger review) live:
+```
+POST /api/review/email_501 {"decision":"confirm_ok","escalation_verdict":"escalation_correct"}
+-> review.fly = {skipped:true, reason:"this escalation was a deterministic trigger, not a fly-gate decision - ..."}
+```
+Both shapes match `types.ts`/`FlyPanel.tsx`'s expectations exactly (see next section). Both my Round 1 requests are
+correctly and completely wired; no code changes were needed from me this round for either.
+
+### Verifying DESIGNER's two fixes (by name, re-derived independently, not just re-read)
+
+1. **Misleading Hebbian "no-op" message (DESIGNER's fix in `FlyPanel.tsx`) - CONFIRMED STILL PRESENT, confirmed correct against live data.**
+`FlyPanel.tsx` line ~425: `feedback?.skippedReason ? <div className="fly-fb dim">No fly-net weight update - {feedback.skippedReason}</div> : feedback ? <div className="fly-fb">Weights updated ...</div> : null`.
+This is exactly the branch DESIGNER added (screenshots `designer-r2-06/07/08-*.png` still on disk, matching their
+report). I independently re-drove both code paths against the live backend rather than trusting the screenshots
+alone: the deterministic-trigger review above (`email_501`) returns `{skipped:true,...}`, which `source.ts` turns
+into `feedback.skippedReason` set (not null), which is exactly the input DESIGNER's branch needs to render the
+honest message instead of a fake `0.63 -> 0.63`. The flynet-decided review above (`email_004`) returns a real
+`before`/`after`/`kc` delta, which renders the normal "Weights updated" line. Both are correct and match the
+component code as shipped. No regression.
+2. **Tablet layout (`@media (max-width: 1180px)` grid-row cap) - CONFIRMED STILL PRESENT, re-measured myself.**
+Selected an email in REPLAY at 1024x768 and read `document.body.scrollHeight` directly: **1037px** (DESIGNER's
+Round 2 number was also 1037px, pre-fix was 28,921px per their diagnosis) - the graph renders immediately in the
+viewport with no scroll, screenshot confirms the pipeline graph, sidebar stats, email list (short scrollable
+window, not all 520 rows) and fly panel all visible and correctly laid out in the stacked/narrow arrangement. No
+regression from anything DEVELOPER or I did not touch this round.
+
+### Delight features re-verified after both rounds of backend/frontend/designer changes - no regressions
+
+Live-clicked-through (not just read) in this session, both REPLAY and LIVE:
+- **Bead canvas trails**: visible and colour-per-agent in every screenshot taken this round (idle ambient flow,
+  mid-run, autoplay). No console errors.
+- **Full 1600-KC fly canvas**: `flybrain.json` confirmed to actually contain `n_kc:1600`, and the panel caption
+  reads "1600 of 1600 Kenyon cells drawn" in every screenshot - matches the real exported data, not a subsample.
+- **Count-up stats / sidebar**: sidebar numbers (520 emails, 117 compared, 72-73 discrepancies, 100.0% accuracy)
+  render correctly and update live after my API-triggered reviews changed backend state (stats went from 72 to 73
+  discrepancies after my test reviews, confirming the sidebar reads live backend state, not a frozen snapshot).
+- **Autoplay / "Play inbox"**: toggled with Space per the help overlay; "Streaming inbox"/"Stop" control appeared,
+  bead animation continued, no console errors during a multi-second run.
+- **Keyboard shortcuts + help overlay**: `?` opened the shortcuts panel (screenshot confirms all 8 bindings listed
+  correctly: j/k/Space/a/1-2-4/r/g/Esc/?), `j`/`j` moved the list selection down two rows, Esc closed the overlay.
+- **Hebbian weight-change data path**: both the real-update and the honest-skip paths verified live end-to-end
+  against the actual backend (see above) - this is the same animation/feedback code INNOVATOR Round 1 and DESIGNER
+  Round 2 already screenshotted; I verified the *data* feeding it is still correct after all Round 2 backend
+  changes (new `review_reason` value, `has_defect` kept on gate escalation, non-comparison NEEDS_REVIEW routing)
+  rather than re-capturing the same frames.
+- **LIVE mode end-to-end**: `?mode=live` against a real `uvicorn` process correctly showed the `LIVE` pill, "Process
+  entire inbox" control, real per-email `Review`/`OK`/`N defect(s)` chips, and even reflected a stat/caption change
+  ("Last human verdict (escalation correct): 0.00 -> 0.12") purely from my earlier raw-API test review, with no UI
+  action taken to produce it - confirms the frontend is reading live backend state faithfully, not caching stale
+  data.
+- Console clean (no errors/exceptions) across every state exercised this round: idle, mid-run, MISMATCH report,
+  help overlay, autoplay, tablet layout, LIVE mode, LIVE review round trip.
+
+### Critique of DEVELOPER (by name)
+
+No objections. Both of my Round 1 requests were implemented exactly as asked, additively, with no CONTRACT
+breakage, and I verified both against the real running backend rather than trusting the written claim. The
+`review.fly` shapes match `CONTRACT.md` byte-for-byte for both the flynet-decided and deterministic-skip cases.
+
+### Critique of DESIGNER (by name)
+
+No objections. Both defects DESIGNER found and fixed this round (the Hebbian skip-message gap, the tablet
+layout bug) are real fixes at the code level, and I re-verified both independently (re-deriving the
+`scrollHeight` number and re-driving both Hebbian response shapes against a live backend, rather than re-reading
+their screenshots as proof). One process note, not an objection: DESIGNER's Round 2 report frames the tablet fix
+as "not merely out-of-target polish, it was a real bug" and pushes back on DEVELOPER's Round 2 "risks a
+regression" framing - I have nothing to add to that exchange; my own re-measurement (1037px) matches DESIGNER's
+number exactly, so the fix is real and confirmed twice now.
+
+### Did not touch this round
+
+No code changes were needed or made - this was a pure verification round. `npm run build` was run only to confirm
+the pre-existing 0-TS-error baseline, not because anything was edited. No new delight features added: the brief is
+explicit that this is a short polish round on a same-day deadline, both my Round 1 requests are already resolved,
+and I found no regressions serious enough to need my own edit (DESIGNER already fixed the two real defects found
+this round, and re-verifying their fixes independently is more valuable with the remaining time than adding new
+surface area this close to the deadline).
+
+### Environment notes (not product objections)
+
+The backend process died silently twice during my testing session with no traceback in its own log (once on
+port 8300, once on port 8000 after several successful requests) - in both cases this was a background-shell
+lifecycle artifact of this sandbox (a `(cmd &)`-style background process gets reaped when the invoking shell
+recycles between tool calls), not a FastAPI/uvicorn crash; switching to the harness's own `run_in_background`
+mechanism kept it alive for the rest of the session. Flagging only so a future round doesn't mistake this sandbox
+quirk for a backend stability bug - `backend/README.md`'s own "Known gaps" (in-memory `RunState`, 409 on restart)
+is the real, already-documented caveat.
+
+### Files changed/added
+
+None. Verification-only round, per brief item 4 ("short polish round, not a new-features round... only add
+something new if it's cheap and clearly valuable"). No backend files read for editing purposes were modified;
+`frontend/` was not edited.
+
+STATUS: NO REMAINING OBJECTIONS
