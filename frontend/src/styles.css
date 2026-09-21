@@ -457,7 +457,13 @@ ul, ol { list-style: none; }
   html, body { overflow-y: auto; }
   .app {
     height: auto; min-height: 100vh; grid-template-columns: minmax(0, 1fr) 340px;
-    grid-template-rows: auto minmax(560px, auto) 178px; grid-template-areas: 'side side' 'center right' 'timeline timeline';
+    /* Fixed (not auto) max on the middle row: with 500+ emails in the list, an "auto" track lets
+       .right's content report an unbounded intrinsic height (one row per email), which stretches
+       this whole grid row - and therefore .center's graph viewport - to that height instead of a
+       normal tablet-sized panel (verified: unbounded track -> ~29000px page, graph centred ~14000px
+       down, i.e. completely off-screen). Capping the track forces .mail-list's own overflow:auto to
+       do its job instead. */
+    grid-template-rows: auto minmax(560px, 660px) 178px; grid-template-areas: 'side side' 'center right' 'timeline timeline';
   }
   .sidebar { padding: 14px 18px; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px 26px; }
   .sidebar .stats { display: flex; gap: 18px; border: 0; margin: 0; flex-wrap: wrap; }
@@ -465,7 +471,7 @@ ul, ol { list-style: none; }
   .sidebar .stat strong { font-size: 22px; }
   .sidebar .issues, .sidebar .side-foot, .sidebar .mode-note { display: none; }
   .sys { margin: 0; }
-  .right { min-height: 620px; }
+  .right { min-height: 620px; max-height: 660px; }
   .fchip { font-size: 11px; padding: 3px 5px; }
 }
 @media (max-width: 820px) {

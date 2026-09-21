@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+1. Shipper (Principal or Seller): APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+2. Consignee (Non-Negotiable): ORIENT LINKS CO (LLC)
+  P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
+3. Notify: INTERNATIONAL FOREST PRODUCTS LLC
+4. Port of Loading: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+5. Port of Discharge (POD): JEBEL ALI, UAE (AEJEA)
+6. No. of Containers or Packages: 15 x 20'FCL
+7. Gross Weight毛重(KGS): 334,845 KG
+8. Export Carrier (vessel, voyage): LE HAVRE V.QI540A
+9. Voy.: BS291
+10. Commodity: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+11. Bill of Lading No.: YMJAI344149782
+12. Booking Ref: I661287585
+13. Freight: PREPAID

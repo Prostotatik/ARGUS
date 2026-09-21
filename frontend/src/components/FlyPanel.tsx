@@ -422,7 +422,11 @@ export default function FlyPanel({ fly, gate, gateState, reduced, feedback, onRe
         </div>
       </div>
 
-      {feedback ? (
+      {feedback?.skippedReason ? (
+        <div className="fly-fb dim" role="status" key={feedback.nonce}>
+          <b>No fly-net weight update</b> &mdash; {feedback.skippedReason}
+        </div>
+      ) : feedback ? (
         <div className="fly-fb" role="status" key={feedback.nonce}>
           <b>Weights updated</b> after human verdict <em>{feedback.verdict.replace(/_/g, ' ')}</em>: suspicion {feedback.before.toFixed(2)} &rarr; {feedback.after.toFixed(2)}
           {kcd && kcd.length > 0 && <> &middot; {kcd.length} Kenyon cells, mean weight {(kcd.reduce((a, k) => a + k.before, 0) / kcd.length).toFixed(2)} &rarr; {(kcd.reduce((a, k) => a + k.after, 0) / kcd.length).toFixed(2)}</>}

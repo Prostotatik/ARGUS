@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+1. SHIPPER: APRIL FAR EAST (M) SDN BHD
+  TOWER 2, AVENUE 5, LEVEL 6; BANGSAR SOUTH CITY, NO. 8 JALAN KERINCHI; 59200 KUALA LUMPUR, MALAYSIA
+2. To the Order of: TOPKOPY MIDDLE EAST FZE
+  P.O. BOX 17436; JEBEL ALI FREE ZONE, DUBAI, UAE
+3. Notify Party/Intermediate Consignee: TOPKOPY MIDDLE EAST FZE
+4. Load Port: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
+5. Port of Discharge (POD): KARACHI, PAKISTAN (PKKHI)
+6. Container Count: 3 x 40'HC
+7. Gross Weight (KG): 64,092 KG
+8. Export Carrier (vessel, voyage): LE HAVRE V.QI540A
+9. Voyage: 051NW1
+10. Description: PAPERBOARD
+11. Bill of Lading No.: OOLU0262174596
+12. Booking Reference: PSGSE1586578
+13. Freight: PREPAID

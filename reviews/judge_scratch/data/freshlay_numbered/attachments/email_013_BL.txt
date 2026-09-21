@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+1. Shipper (Principal or Seller): ASIA PACIFIC PAPERBOARD TRADING PTE LTD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+2. Consignee (Non-Negotiable): ROXCEL TRADING GMBH
+  OPERNRING 3-5; 1010 VIENNA, AUSTRIA
+3. NOTIFY PARTY: ROXCEL TRADING GMBH
+4. POL: SINGAPORE (SGSIN)
+5. Port of Discharge: TUTICORIN, INDIA (KEMBA)
+6. Container Count: 3 x 40'HC
+7. Gross Weight毛重(KGS): 67,311 KG
+8. Export Carrier (vessel, voyage): VISION 202 V.002
+9. Voy. No: 11S
+10. Description: ASIA SYMBOL FOOD SERVICE BOARD (CUPSTOCK/HI-BULK) - ALLINONE
+11. B/L No.: SIJ4216073
+12. Booking No.: SIJ3754330
+13. Freight: PREPAID

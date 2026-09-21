@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+1. Shipper (Principal or Seller): APRIL FAR EAST (M) SDN BHD
+  80 RAFFLES PLACE, #50-01 UOB PLAZA 1; SINGAPORE 048624
+2. Consignee (Non-Negotiable): CLIFFORD PAPER INC
+  70 EAST STREET; RIDGEFIELD, NJ 07657, USA
+3. Notify Party: CLIFFORD PAPER INC
+4. Port of Loading: BUATAN, INDONESIA (IDBUA)
+5. Port of Discharge: NEW YORK, US (USNYC)
+6. No. of Containers or Packages: 4 x 40'HC
+7. Gross Weight (KG): 60,258 KG
+8. Ocean Vessel: INDO SUKSES 65 V.51NW1
+9. Voy.: 2545E
+10. Kinds of Packages; Description of Goods: UNCOATED WOODFREE PAPER IN REAMS
+11. B/L NUMBER: SIN597371470
+12. Booking No.: SIN827235909
+13. Freight: PREPAID

@@ -1,0 +1,18 @@
+BILL OF LADING (DRAFT)
+========================================
+
+1. Shipper/Exporter: APRIL FINE PAPER TRADING
+  ON BEHALF OF VITAL SOLUTIONS PTE LTD; 77 ROBINSON ROAD, #21-01; SINGAPORE 068896
+2. Consignee: ORIENT LINKS CO (LLC)
+  P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
+3. Notify Party/Intermediate Consignee: VITAL SOLUTIONS PTE. LTD.
+4. Port of Loading: NHAVA SHEVA, INDIA (INNSA)
+5. POD: CALLAO, PERU (PECLL)
+6. No. of Containers or Packages: 2 x 40'HC
+7. Gross Wt (kgs): 67,953 KG
+8. Ocean Vessel: VISION 202 V.002
+9. Voyage No.: QI540A
+10. Description of Goods: PAPERONE DIGITAL COPIER PAPER
+11. BL No.: HLCUSIN700516271
+12. Booking Ref: 36111554
+13. Freight: PREPAID
