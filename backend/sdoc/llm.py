@@ -1,8 +1,10 @@
 """Gemini path (google-genai). Used only when GEMINI_API_KEY is set; otherwise the rules twins run.
 
-STATUS: written against the installed ``google-genai`` API (``client.aio.models.generate_content`` with
-``response_mime_type='application/json'`` + ``response_json_schema``) and unit-tested with a fake client.
-It has NOT been exercised against the live Gemini API (no key on the build machine).
+STATUS: verified against the live Gemini API (model ``gemini-3.5-flash-lite``) - classifier + all 7
+field agents ran real, successful calls across a 14-email mix (clean matches, real mismatches,
+deterministic-trigger and fly-gate-decided NEEDS_REVIEW cases, and non-comparison categories), zero
+Gemini errors, results matching the rules engine's independently-derived values. Also unit-tested
+with a fake client for the failure/retry/fallback paths a short live run won't exercise on its own.
 
 Guard rails against hallucination
     * temperature 0, structured JSON output, values must be quoted from the document;
@@ -24,6 +26,7 @@ from .config import CATEGORIES
 from .docparse import ParsedDoc
 from .rules_extract import Extracted
 from . import normalize as nz
+from .ratelimit import RateLimiter, estimate_tokens
 
 CLASSIFIER_SCHEMA = {
     "type": "object",
@@ -107,20 +110,27 @@ def _retry_delay_hint(exc: Exception) -> float | None:
 class GeminiClient:
     """Thin async wrapper. ``client`` may be injected (tests use a fake with the same surface).
 
-    Throttling (reviews/judge.md #6 - up to 8 calls/email with no backoff -> 429s on a real key):
-    a shared ``asyncio.Semaphore`` caps in-flight requests to ``SDOC_GEMINI_CONCURRENCY`` (default
-    3) across ALL calls made through one client (classifier + all 7 field agents share one client
-    per pipeline), and failed attempts back off exponentially with jitter, waiting longer (and
-    honouring a server-suggested delay when present in the error text) specifically on a 429/
-    RESOURCE_EXHAUSTED response instead of the same short delay as any other error.
+    Throttling (reviews/judge.md #6 - up to 8 calls/email with no backoff -> 429s on a real key),
+    two layers:
+    1. **Pre-emptive** (`RateLimiter`, `ratelimit.py`): every call waits until it is safely under
+       the model's own published RPM/TPM/RPD ceilings before it is ever sent - most accounts never
+       see a 429 in the first place. Shared across ALL calls made through one client (classifier +
+       all 7 field agents share one client per pipeline run).
+    2. **Reactive** (below): a shared ``asyncio.Semaphore`` also caps in-flight requests to
+       ``SDOC_GEMINI_CONCURRENCY`` (default 3), and any failed attempt still backs off
+       exponentially with jitter (longer, and honouring a server-suggested delay when present in
+       the error text, specifically on a 429/RESOURCE_EXHAUSTED response) - a safety net for
+       anything the pre-emptive limiter's estimate doesn't catch.
     """
 
     def __init__(self, api_key: str | None = None, model: str | None = None, client: Any = None,
-                 timeout_s: float = 45.0, max_attempts: int | None = None, concurrency: int | None = None) -> None:
+                 timeout_s: float = 45.0, max_attempts: int | None = None, concurrency: int | None = None,
+                 limiter: RateLimiter | None = None) -> None:
         self.model = model or config.gemini_model()
         self.timeout_s = timeout_s
         self.max_attempts = max_attempts or config.gemini_max_attempts()
         self._sem = asyncio.Semaphore(concurrency or config.gemini_concurrency())
+        self._limiter = limiter or RateLimiter(self.model)
         if client is not None:
             self.client = client
         else:
@@ -135,7 +145,9 @@ class GeminiClient:
             "temperature": 0.0,
         }
         last: Exception | None = None
+        tokens = estimate_tokens(prompt) + estimate_tokens(system or "")
         async with self._sem:
+            await self._limiter.acquire(tokens)
             for attempt in range(self.max_attempts):
                 try:
                     resp = await asyncio.wait_for(

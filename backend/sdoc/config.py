@@ -57,7 +57,7 @@ def gemini_key() -> str | None:
 
 
 def gemini_model() -> str:
-    return os.environ.get("SDOC_GEMINI_MODEL", "gemini-2.5-flash")
+    return os.environ.get("SDOC_GEMINI_MODEL", "gemini-3.5-flash-lite")
 
 
 def gemini_concurrency() -> int:

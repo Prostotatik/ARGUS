@@ -1,7 +1,9 @@
 """``python -m sdoc.run_all``  - process every email and write backend/out/submission.json (+ results.json).
 
 Uses a fresh, freshly-calibrated fly gate (never the human-taught persisted one) so the run is reproducible.
-Engine: gemini when GEMINI_API_KEY is set, else rules (override with --engine).
+Engine defaults to `rules` regardless of a configured key - this generates the OFFICIAL scored
+submission across all 520 emails, and it should be deterministic and fast by default.
+Pass `--engine gemini` to exercise a live key across the whole set instead (mind its daily quota).
 """
 from __future__ import annotations
 
@@ -35,7 +37,11 @@ async def run(engine: str | None, concurrency: int = 8, limit: int | None = None
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--engine", choices=["rules", "gemini"], default=None)
+    ap.add_argument("--engine", choices=["rules", "gemini"], default="rules",
+                     help="defaults to 'rules' (deterministic, reproducible, no network/quota) even if a "
+                          "GEMINI_API_KEY is configured - this generates the OFFICIAL 520-email submission, "
+                          "and silently defaulting a bulk run onto a live key's daily quota is exactly the "
+                          "footgun this default avoids. Pass --engine gemini to opt in explicitly.")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--out", default=str(config.OUT_DIR))
     a = ap.parse_args()

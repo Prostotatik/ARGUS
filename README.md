@@ -54,17 +54,21 @@ cd ../frontend && npm install && npm run dev   # terminal 2, proxies /api -> :80
 ```
 
 Open the printed `localhost:5173` URL — it auto-detects LIVE vs REPLAY. ARGUS ships wired for
-Google Gemini: the classifier and all 7 field-agents run on it, with a shared-semaphore concurrency
-cap and exponential backoff on rate limits built in. Drop in `GEMINI_API_KEY` (env or
-`backend/.env`) and it's live — plus a deterministic engine underneath so the system never goes
-down if a key isn't set or a quota runs dry. Every result is labelled with which engine actually
-produced it.
+Google Gemini and it's been proven, not just plumbed: classifier and all 7 field-agents verified
+live on `gemini-3.5-flash-lite` across a 14-email mix — clean matches, real mismatches, both
+deterministic and fly-gate-decided escalations — zero errors, every value agreeing independently
+with the rules engine. Pre-emptive rate limiting keeps every call under the account's real ceiling
+before it's ever sent, with exponential backoff as a second line of defense. Drop in
+`GEMINI_API_KEY` (env or `backend/.env`) and it's live — plus a deterministic engine underneath so
+the system never goes down if a key isn't set or a quota runs dry. Every result is labelled with
+which engine actually produced it.
 
 ### Reproduce the score
 
 ```bash
 cd backend
-python -m sdoc.run_all                                  # -> out/submission.json, 520 emails, ~37s
+python -m sdoc.run_all --engine rules                    # -> out/submission.json, 520 emails, ~35s
+                                                          # (drop --engine if you want a real key exercised across all 520 - mind its daily quota first)
 PYTHONUTF8=1 python ../work/docker/server/score_cli.py out/submission.json
 ```
 

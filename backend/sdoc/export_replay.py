@@ -7,8 +7,9 @@ Writes ONLY into frontend/public/replay/ (CONTRACT.md):
     flybrain.json     fly-net structure + weights + calibration report
     submission.json   the scored-shape submission
 
-No ground-truth labels are written anywhere. Runs the real pipeline (engine: gemini if a key exists, else rules)
-with a fresh, freshly-calibrated fly gate.
+No ground-truth labels are written anywhere. Runs the real pipeline with a fresh, freshly-calibrated
+fly gate. Engine defaults to `rules` regardless of a configured key (`--engine gemini` opts in) -
+this walks all 520 emails, and REPLAY is meant to work with zero backend/key anyway.
 """
 from __future__ import annotations
 
@@ -27,7 +28,11 @@ from .submission import build_submission
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--engine", choices=["rules", "gemini"], default=None)
+    ap.add_argument("--engine", choices=["rules", "gemini"], default="rules",
+                     help="defaults to 'rules' even if a GEMINI_API_KEY is configured - this walks all 520 "
+                          "emails to build the static REPLAY bundle, and doing that against a live key by "
+                          "accident burns its daily quota for no benefit (REPLAY is meant to run with no "
+                          "backend at all). Pass --engine gemini to opt in explicitly.")
     ap.add_argument("--out", default=str(config.REPLAY_DIR))
     a = ap.parse_args()
     out = Path(a.out)

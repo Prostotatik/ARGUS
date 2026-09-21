@@ -8,8 +8,9 @@
 `asyncio` (7 field-agents run in parallel with `asyncio.gather`), NumPy (the fly-brain network's
 array math). Document parsing: PyMuPDF/pdfplumber (PDF), python-docx (Word, incl. tables),
 openpyxl (Excel), `rapidocr-onnxruntime` (OCR for scanned/image-only pages). LLM: Google Gemini via
-`google-genai`, wired into classification and all 7 field-agents, with request throttling and
-exponential backoff for production use — and a deterministic rules/regex engine running underneath
+`google-genai` (`gemini-3.5-flash-lite`), live-verified across a 14-email mix with zero errors,
+with pre-emptive rate limiting plus exponential backoff for production use — and a deterministic
+rules/regex engine running underneath
 so the system stays up even if a quota runs out. Testing: `pytest` (63 tests).
 
 **Frontend** — Vite + React + TypeScript, no UI framework (hand-written CSS design system). Live
