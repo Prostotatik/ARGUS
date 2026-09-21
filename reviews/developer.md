@@ -355,3 +355,28 @@ The orchestrator did real, hands-on live-key testing this round rather than dele
 
 STATUS: OBJECTIONS=1
 1. [Low, non-blocking, newly found] `export_replay`'s trace output is not byte-reproducible across reruns even under the safe, deterministic `rules` engine, because the 7 field-agent trace events are ordered by real `asyncio.gather` completion order rather than a fixed key - confirmed by literally reproducing it (`git status` showed ~490 committed trace files "changed" after a clean `rules`-engine `export_replay` run that should have been a no-op; diffed one file to confirm only event *order*/timing shifted, all values identical; working tree restored). Zero effect on `score_cli.py` (re-verified 1.0000) or on the already-committed, correct replay bundle judges will see - flagging as a hygiene/reproducibility gap in the export tool, not a scoring or UI-correctness defect, and as a caution against re-running `export_replay` casually this close to the deadline since the resulting diff will look far larger than it is.
+
+### Follow-up, same day - objection #1 closed by disclosure, plus the `process_all` risk (named in prose above, not previously numbered) fixed in code
+
+Two things happened after I filed the above: (a) the orchestrator committed `0e3bd63`, adding an explicit line to `backend/README.md`'s "Known gaps" documenting the event-ordering non-determinism as an intentional consequence of the 7 field agents genuinely running concurrently, with the reasoning "forcing a fixed order would mean faking the very thing the pitch stakes itself on - that the graph reflects real, not staged, execution"; (b) JUDGE's own Round 4 (93/100) independently reproduced my exact finding from a clean shell (488 files, parsed JSON diff confirming values identical/order differs) and ruled disclosure-not-fix "the right call... more consistent with the project's own stated values than silently forcing determinism would be" - I re-read that reasoning against my own finding and agree with it: I flagged this as a hygiene/reproducibility gap needing *disclosure*, and it is now disclosed, specifically, in the right place (`backend/README.md`'s Known gaps), not buried or contradicted. **Closing objection #1.**
+
+Separately, JUDGE's Round 4 independently found a real gap I had only named in prose (see "Real remaining risk to name plainly" above) but never numbered: `POST /api/process_all` (the live HTTP API's bulk endpoint, reachable from the frontend's "Process entire inbox" button) had no engine guard - `force_engine: str | None = Query(None, ...)` fell through to `Pipeline`'s `default_engine`, which resolves to `"gemini"` whenever a key is configured, exactly the same footgun `run_all.py`/`export_replay.py` were fixed against this round, just not mirrored onto the live API. The orchestrator fixed it directly, commit `e6eba91`.
+
+I read `backend/sdoc/api.py`'s `process_all` myself rather than taking the commit message on faith:
+
+```python
+@app.post("/api/process_all")
+async def process_all(force_engine: str | None = Query(
+        "rules", pattern="^(rules|gemini)$",
+        description="Bulk endpoint (all 520 emails) - defaults to 'rules' even if a key is configured, ..."),
+        concurrency: int = 8):
+```
+
+- Confirmed this is the same shape of fix as `run_all`/`export_replay`: `PIPE.run(eid, force_engine=force_engine)` now always receives the literal string `"rules"` unless a caller explicitly passes `?force_engine=gemini`, rather than `None` falling through to `Pipeline.default_engine` (which is `"gemini"` whenever a key exists - confirmed by re-reading `config.default_engine()` and `Pipeline.resolve_engine()`).
+- Went beyond reading the diff: wrote a live end-to-end check against the real FastAPI app (`fastapi.testclient.TestClient`, real `app` object, real key still present in `backend/.env` - confirmed via `config.gemini_key()` truthy, value never printed) that spies on every `PIPE.run(...)` call `process_all`'s SSE generator makes without a `force_engine` query param. Result: **all 520 calls requested `force_engine == "rules"`, zero requested `"gemini"`** - i.e. this is proven against the actual running code path, not just inferred from source.
+- Confirmed the frontend needs no change to benefit from this: `frontend/src/data/source.ts`'s `processAll()` calls `fetch('/api/process_all', ...)` with **no query string at all** (grepped, read the exact call site), so the "Process entire inbox" button was always going to inherit whatever the server-side default is - it now inherits the safe one automatically.
+- `python -m pytest -q` -> re-ran independently, **69 passed** (144s), unaffected by this change (no test currently exercises `process_all` specifically either before or after this fix - a real, if minor, coverage gap: unlike `run_all`/`export_replay`, which got a dedicated regression test in this same round, `process_all`'s fix shipped with no automated test pinning it, only my own ad hoc `TestClient` check above and JUDGE's own re-verification. Worth a `tests/test_api.py` case mirroring `test_bulk_tools_default_engine.py`'s intent for this endpoint if there's ever a Round 5, but not blocking - the behaviour is proven correct right now by two independent live checks, mine and JUDGE's).
+
+**This closes both my critique-level risk (named in prose, never numbered) and the numbered objection I actually filed (#1, above, resolved by disclosure).** I have no remaining objections of my own for this remit.
+
+STATUS: NO REMAINING OBJECTIONS
