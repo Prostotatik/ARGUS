@@ -38,4 +38,4 @@
 5. Report back to the orchestrator: what changed, verification evidence (commands + output numbers), remaining objections.
 
 ## Orchestrator state log (updated each iteration)
-- Iter 1: repo empty except hackathon_info; extracted zips to `work/`; no Gemini key; dispatched DEVELOPER backend + frontend bootstrap in parallel (next: DESIGNER -> INNOVATOR -> DEVELOPER -> JUDGE rounds).
+- Iter 1: extracted zips to work/; no Gemini key. Frontend DEVELOPER done (build ok, mock-verified only). Backend DEVELOPER running (aed1c7709c683df39). DESIGNER running (a6871a0356976604f). Next: INNOVATOR after DESIGNER; JUDGE after backend scores; then DEVELOPER round 2 wiring replay/live + CONTRACT requests in reviews/developer.md.
