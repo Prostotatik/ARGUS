@@ -418,3 +418,28 @@ Traced this myself (not copied from developer.md) after noticing DEVELOPER's Rou
 
 STATUS: OBJECTIONS=1
 1. [Low, non-blocking] The live HTTP API's `POST /api/process_all` has no engine guard against defaulting to `gemini` whenever a real key is present (the frontend's "Process entire inbox" button sends no `force_engine`), unlike `run_all.py`/`export_replay.py` which were correctly hardened to default to `rules` this exact round. A real key currently sits in `backend/.env` on this machine. Neither `README.md` nor `SUBMISSION.md`'s LIVE-mode instructions carry a one-line caution against clicking that button with a live key configured, even though DEVELOPER's own Round 4 review named this risk in prose. Does not affect the submitted/demoed REPLAY artifact (the demo scripts correctly use REPLAY throughout); relevant only to a teammate or judge who runs LIVE mode locally on this exact checkout and clicks "Process entire inbox." Fix (either is sufficient, neither is required before submission): add one line to the LIVE section of `README.md`/`SUBMISSION.md` ("don't click Process entire inbox with a live key configured"), or make `process_all` require an explicit `force_engine=gemini` to ever use Gemini (mirroring the CLI tools' now-safe default).
+
+### 9. Addendum - objection #1 fixed, closed (commit `e6eba91`)
+
+Read the fix myself in `backend/sdoc/api.py` rather than taking the commit message on faith:
+
+```python
+async def process_all(force_engine: str | None = Query(
+        "rules", pattern="^(rules|gemini)$",
+        description="Bulk endpoint (all 520 emails) - defaults to 'rules' even if a key is configured, "
+                    "same reasoning as run_all/export_replay's CLI default: an operator clicking "
+                    "'process entire inbox' in LIVE mode should not silently spend a live key's whole "
+                    "daily quota. Pass ?force_engine=gemini to opt in explicitly.",
+        ), concurrency: int = 8):
+```
+
+- Confirmed directly (not just by reading the diff): `inspect.signature(process_all).parameters['force_engine'].default` -> `Query(rules)` in a live Python session. Default really is `"rules"` now, not `None`.
+- Exactly mirrors the `run_all.py`/`export_replay.py` fix pattern from earlier this same round, applied to the one place that pattern hadn't reached yet - closes the gap at the root (server-side default) rather than only in a doc caution, which is a stronger fix than either of the two options I suggested.
+- Confirmed the coordinator's "zero frontend impact" claim myself: read `frontend/src/data/source.ts`'s `processAll()` - `fetch('/api/process_all', { method: 'POST' })`, no query string, no `force_engine` ever sent by the frontend for this call (`process()`/`retry()` are the only methods that ever set `force_engine`, and only when the caller explicitly passes `opts.forceEngine`). So "Process entire inbox" in the UI was always going to hit whatever the server-side default is - it now safely gets `rules` regardless of whether a key is configured, with zero code or behavior change needed on the frontend side.
+- Re-ran the full suite myself: `cd backend && python -m pytest -q` -> **69 passed** (143.8s), matching the coordinator's claim exactly, no regression from this one-line change.
+- Did not re-run the full 520-email `run_all`/`score_cli` chain for this addendum - the fix touches only `api.py`'s bulk HTTP endpoint (never called by `run_all.py`, `export_replay.py`, or `score_cli.py`), so it cannot affect the scored submission; re-verifying the same 1.0000 a third time in one round would not add information.
+- The one thing I did not independently re-verify live: actually starting `uvicorn` and hitting `POST /api/process_all` with no query string to watch it report `engine=rules` in real trace events end-to-end (as opposed to reading the function signature and the test suite passing). Given the fix is a one-line default-value change in a `Query(...)` declaration, directly inspected in a live interpreter, and the full test suite still passes, I judge this level of verification sufficient for a low-severity, purely-defensive fix this close to the deadline - noting the gap in method for the record rather than silently upgrading my confidence past what I actually checked.
+
+**Objection #1 is closed.** No remaining objections from JUDGE this round.
+
+STATUS: NO REMAINING OBJECTIONS
