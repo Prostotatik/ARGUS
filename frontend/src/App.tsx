@@ -212,7 +212,7 @@ export default function App() {
       else if (k === ' ' || k === 'Spacebar') { e.preventDefault(); togglePlay() }
       else if (k === 'r' || k === 'R') { if (selectedId) { e.preventDefault(); void select(selectedId) } }
       else if (k === 'a' || k === 'A') { e.preventDefault(); if (auto) setAuto(false); else startAuto() }
-      else if (k === '1' || k === '2' || k === '4') setSpeed(Number(k) as Speed)
+      else if (k === '1' || k === '2' || k === '3') setSpeed(SPEEDS[Number(k) - 1])
       else if (k === 'g' || k === 'G') setView((v) => (v === 'graph' ? 'report' : 'graph'))
     }
     const onKeyUp = (e: KeyboardEvent) => { if (e.key === ' ' && !(e.target instanceof HTMLInputElement) && !(e.target instanceof HTMLTextAreaElement)) e.preventDefault() }

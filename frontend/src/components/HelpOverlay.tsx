@@ -6,7 +6,7 @@ const KEYS: { k: string[]; d: string }[] = [
   { k: ['k'], d: 'Previous email' },
   { k: ['Space'], d: 'Play / pause. With nothing running it starts streaming the inbox' },
   { k: ['a'], d: 'Toggle auto-play (streams through the visible emails, throttled)' },
-  { k: ['1', '2', '4'], d: 'Playback speed 1x / 2x / 4x' },
+  { k: ['1', '2', '3'], d: 'Playback speed 0.25x / 0.5x / 1x' },
   { k: ['r'], d: 'Replay the selected email' },
   { k: ['g'], d: 'Switch between Pipeline and Report view' },
   { k: ['Esc'], d: 'Close popovers and this panel' },
