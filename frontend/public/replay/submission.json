@@ -3697,7 +3697,7 @@
  "email_512": {
   "category": "BL_COMPARISON",
   "status": "NEEDS_REVIEW",
-  "review_reason": "unreadable",
+  "review_reason": "missing_value",
   "has_defect": false,
   "defect_fields": []
  },

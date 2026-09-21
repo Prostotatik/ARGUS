@@ -427,6 +427,7 @@ ul, ol { list-style: none; }
 .review .row { display: flex; gap: 8px; flex-wrap: wrap; }
 .fix .row { grid-column: 1 / -1; }
 .review .fb { margin-top: 10px; font-size: 12px; color: #ffe0a0; }
+.review .fb-skip { color: var(--mute); font-style: italic; }
 .empty-state { display: grid; place-items: center; gap: 10px; padding: 60px 20px; color: var(--dim); text-align: center; }
 .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 100; max-width: min(640px, 92vw); padding: 10px 16px; border-radius: 12px; background: rgba(8, 14, 38, 0.96); border: 1px solid var(--line-strong); box-shadow: 0 10px 40px rgba(0, 0, 10, 0.7); font-size: 12.5px; }
 .toast.error { border-color: rgba(255, 93, 115, 0.6); color: #ffc0c9; }

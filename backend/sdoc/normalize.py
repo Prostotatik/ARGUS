@@ -50,9 +50,30 @@ _LEGAL_CANON = {
 }
 _LEGAL = {
     "LTD", "CO", "INC", "CORP", "LLC", "PTE", "PVT", "PTY", "SDN", "BHD", "GMBH", "FZE", "FZ", "FZC",
-    "FZCO", "PLC", "LLP", "AG", "SA", "BV", "NV", "JSC", "SAS", "SRL", "SPA", "OY", "CV", "DMCC",
-    "TBK", "LP", "THE", "AND",
+    "FZCO", "FZLLC", "PLC", "LLP", "AG", "SA", "BV", "NV", "JSC", "SAS", "SRL", "SPA", "OY", "CV",
+    "DMCC", "TBK", "LP", "THE", "AND",
 }
+# Leading (not trailing) corporate-form markers, e.g. Indonesian 'PT' ('Perseroan Terbatas' - the
+# local equivalent of 'Ltd', always a prefix): stripped from the front like 'THE' already was.
+_LEGAL_PREFIX = {"THE", "PT"}
+# Single/double-letter parenthetical local-registration tags real shipping companies use in their
+# own letterhead, e.g. 'XYZ (S) PTE LTD' for a Singapore entity - a very standard convention, not
+# specific to this dataset. Mapped to the spelled-out country/territory so '(S)' and 'SINGAPORE'
+# (spelled out elsewhere in the same name) are recognised as the same qualifier.
+_NAME_LOCALE_CODE = {
+    "S": "SINGAPORE", "M": "MALAYSIA", "HK": "HONG KONG", "UK": "UNITED KINGDOM", "US": "UNITED STATES",
+    "I": "INDONESIA", "T": "THAILAND", "V": "VIETNAM", "PH": "PHILIPPINES", "CH": "CHINA",
+}
+# Abbreviations/typographic variants that must be collapsed to a canonical form BEFORE the generic
+# non-alnum-strip + tokeniser runs (otherwise 'L.L.C.' tokenises to three bare letters 'L L C'
+# instead of the single suffix 'LLC', and 'S/B' - a real abbreviation of 'SDN BHD' seen in this
+# inbox's own documents - is lost as two single letters). Order matters: the more specific
+# 'FZ...LLC' pattern must run before the plain 'LLC' pattern so 'FZ-LLC' collapses to one token.
+_LEGAL_ABBREV: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"\bF\s*[.\-]?\s*Z\s*[.\-]?\s*L\.?\s*L\.?\s*C\.?\b", re.I), " FZLLC "),
+    (re.compile(r"\bL\.?\s*L\.?\s*C\.?\b", re.I), " LLC "),
+    (re.compile(r"\bS\s*/\s*B\b", re.I), " SDN BHD "),   # 'S/B' == 'SDN BHD'
+]
 
 
 @dataclass(frozen=True)
@@ -60,6 +81,7 @@ class NameKey:
     full: str
     core: str
     legal: frozenset[str]
+    qual: frozenset[str] = frozenset()
 
 
 def _ascii_upper(s: str) -> str:
@@ -70,9 +92,41 @@ def _ascii_upper(s: str) -> str:
 
 def norm_name(raw: str) -> NameKey:
     s = _ascii_upper(raw).replace("&", " AND ")
+    for pat, repl in _LEGAL_ABBREV:
+        s = pat.sub(repl, s)
+    # parenthetical qualifier, e.g. '(S)' / '(Malaysia)': not part of the core name, but not
+    # simply thrown away either - kept as a comparable qualifier (mirrors norm_port's 'qual').
+    quals: set[str] = set()
+
+    def _paren(m: re.Match) -> str:
+        inner = re.sub(r"[^A-Z0-9]+", " ", m.group(1)).strip()
+        if not inner:
+            return " "
+        canon = _NAME_LOCALE_CODE.get(inner) or (inner if inner in _COUNTRIES else None)
+        if canon is not None and len(inner.split()) <= 2:
+            quals.add(canon)
+            return " "
+        # not a recognised short locale tag (e.g. '(Middle East)', '(Holdings)') - a real,
+        # potentially distinguishing part of the entity's name: keep it, don't silently drop it.
+        return " " + inner + " "
+
+    s = re.sub(r"\(([^)]*)\)", _paren, s)
+    # a short trailing comma clause ('..., DUBAI') is a location tag appended by the sender, not
+    # part of the registered name - drop it (a real company name is never legitimately reduced to
+    # just a trailing ', City' with nothing else changing on the other document). Excludes a
+    # trailing legal suffix written after a comma ('KTP CO., LTD'), which is handled separately.
+    if "," in s:
+        head, _, tail = s.rpartition(",")
+        tail_toks = re.sub(r"[^A-Z0-9]+", " ", tail).split()
+        has_digit = any(ch.isdigit() for t in tail_toks for ch in t)
+        all_legal = tail_toks and all(t in _LEGAL or t in _LEGAL_CANON for t in tail_toks)
+        if head.strip() and 0 < len(tail_toks) <= 3 and not has_digit and not all_legal:
+            tail_norm = " ".join(tail_toks)
+            quals.add(_NAME_LOCALE_CODE.get(tail_norm, tail_norm))
+            s = head
     s = re.sub(r"[^A-Z0-9]+", " ", s)
     toks = [_LEGAL_CANON.get(t, t) for t in s.split()]
-    if toks and toks[0] == "THE":
+    while toks and toks[0] in _LEGAL_PREFIX:
         toks = toks[1:]
     full = " ".join(toks)
     # strip trailing legal-suffix run for the 'core'
@@ -80,7 +134,7 @@ def norm_name(raw: str) -> NameKey:
     legal: list[str] = []
     while core_toks and core_toks[-1] in _LEGAL and len(core_toks) > 1:
         legal.append(core_toks.pop())
-    return NameKey(full=full, core=" ".join(core_toks), legal=frozenset(legal))
+    return NameKey(full=full, core=" ".join(core_toks), legal=frozenset(legal), qual=frozenset(quals))
 
 
 def _sim(a: str, b: str) -> float:
@@ -94,29 +148,57 @@ class Cmp:
     near_miss: bool = False
 
 
-def names_equal(a: str, b: str) -> Cmp:
+def names_equal(a: str, b: str, near_miss_floor: float = 0.88) -> Cmp:
     ka, kb = norm_name(a), norm_name(b)
+    # both sides name an explicit (and different) registration/location qualifier: e.g. a
+    # Singapore entity '(S)' vs a Malaysia entity '(M)' of an otherwise identically-named group -
+    # a real, different legal entity, not a formatting difference, regardless of the core match.
+    qual_conflict = bool(ka.qual) and bool(kb.qual) and not (ka.qual <= kb.qual or kb.qual <= ka.qual)
     if ka.full == kb.full:
+        if qual_conflict:
+            return Cmp(False, "same name, different registration/location qualifier")
         return Cmp(True, None if a.strip() == b.strip() else "format differences ignored (case/punctuation)")
     if ka.core == kb.core and (ka.legal <= kb.legal or kb.legal <= ka.legal):
+        if qual_conflict:
+            return Cmp(False, "same core name, different registration/location qualifier")
         return Cmp(True, "legal-suffix difference ignored")
-    near = _sim(ka.core, kb.core) >= 0.88
+    near = _sim(ka.core, kb.core) >= near_miss_floor
     return Cmp(False, "near-identical text (possible typo)" if near else None, near)
 
 
 # ---------------------------------------------------------------------------
 # ports
 # ---------------------------------------------------------------------------
-_COUNTRIES = {
+# Common short/abbreviated forms real shipping documents use, which a formal country-name
+# database does not carry (kept small and hand-curated on purpose - these are genuine everyday
+# abbreviations, not dataset-specific facts).
+_COUNTRY_ABBREV = {
     "UAE", "UNITED ARAB EMIRATES", "US", "USA", "UNITED STATES", "UNITED STATES OF AMERICA", "UK", "UNITED KINGDOM",
-    "INDIA", "CHINA", "SINGAPORE", "MALAYSIA", "INDONESIA", "KENYA", "LITHUANIA", "VIETNAM", "VIET NAM",
-    "SOUTH KOREA", "KOREA", "SLOVENIA", "POLAND", "TURKEY", "TURKIYE", "ISRAEL", "NIGERIA", "GUINEA", "CHILE",
-    "PERU", "AUSTRALIA", "MYANMAR", "PAKISTAN", "JORDAN", "PHILIPPINES", "THAILAND", "JAPAN", "GERMANY",
-    "NETHERLANDS", "BELGIUM", "FRANCE", "ITALY", "SPAIN", "EGYPT", "SAUDI ARABIA", "KSA", "OMAN", "QATAR",
-    "BANGLADESH", "SRI LANKA", "TAIWAN", "HONG KONG", "HK", "BRAZIL", "MEXICO", "CANADA", "SOUTH AFRICA",
-    "TANZANIA", "GHANA", "MOROCCO", "GREECE", "RUSSIA", "UKRAINE", "AUSTRIA", "NEW ZEALAND", "CAMBODIA",
-    "PRC", "P R CHINA", "REPUBLIC OF KOREA", "R O KOREA",
+    "SOUTH KOREA", "KOREA", "S KOREA", "N KOREA", "NORTH KOREA", "KSA", "HK", "HONG KONG",
+    "RUSSIA", "TURKEY", "TURKIYE", "THE NETHERLANDS", "VIET NAM", "VIETNAM", "TAIWAN",
+    "PRC", "P R CHINA", "REPUBLIC OF KOREA", "R O KOREA", "IVORY COAST", "LAOS", "SYRIA", "BRUNEI",
+    "BOLIVIA", "VENEZUELA", "TANZANIA",
 }
+
+
+def _pycountry_names() -> set[str]:
+    try:
+        import pycountry
+    except Exception:  # noqa: BLE001 - optional dependency; fall back to the abbreviation list only
+        return set()
+    names: set[str] = set()
+    for c in pycountry.countries:
+        for attr in ("name", "official_name", "common_name"):
+            v = getattr(c, attr, None)
+            if v:
+                names.add(v.upper())
+    return names
+
+
+# Full country-name table = the ISO country-name database (any language-neutral English name/
+# official name/common name pycountry ships, ~250 countries) union the informal abbreviations
+# above. Generalises far beyond any one dataset's inbox instead of a short hand-picked list.
+_COUNTRIES = _COUNTRY_ABBREV | _pycountry_names()
 _UNLOCODE = {
     "SGSIN": "SINGAPORE", "CNNTG": "NANTONG", "CNSHA": "SHANGHAI", "MYPKG": "PORT KLANG", "INNSA": "NHAVA SHEVA",
     "IDBUA": "BUATAN", "AEJEA": "JEBEL ALI", "KEMBA": "MOMBASA", "INTUT": "TUTICORIN", "LTKLJ": "KLAIPEDA",
@@ -128,10 +210,11 @@ _UNLOCODE = {
 }
 _PORT_ALIASES = {
     "HO CHI MINH CITY": "HOCHIMINH CITY", "HO CHI MINH": "HOCHIMINH CITY", "HOCHIMINH": "HOCHIMINH CITY",
-    "SAIGON": "HOCHIMINH CITY", "PORT KELANG": "PORT KLANG", "PELABUHAN KLANG": "PORT KLANG",
+    "SAIGON": "HOCHIMINH CITY", "HCMC": "HOCHIMINH CITY", "PORT KELANG": "PORT KLANG",
+    "PELABUHAN KLANG": "PORT KLANG", "KLANG": "PORT KLANG",
     "PUSAN": "BUSAN", "JNPT": "NHAVA SHEVA", "JAWAHARLAL NEHRU": "NHAVA SHEVA", "NHAVASHEVA": "NHAVA SHEVA",
     "JEBELALI": "JEBEL ALI", "NEWYORK": "NEW YORK", "LONGBEACH": "LONG BEACH", "NEW YORK NEW JERSEY": "NEW YORK",
-    "NEW YORK NJ": "NEW YORK",
+    "NEW YORK NJ": "NEW YORK", "PTP": "TANJUNG PELEPAS",
 }
 
 
@@ -157,23 +240,44 @@ def norm_port(raw: str) -> PortKey:
         return " "
 
     s = re.sub(r"\(([^)]*)\)", paren, s)
-    # trailing bare UN/LOCODE e.g. "SINGAPORE SGSIN" is left alone; a value that IS a code maps to a name
     segs = [x.strip() for x in s.split(",") if x.strip()]
-    while len(segs) > 1 and (segs[-1] in _COUNTRIES or len(segs[-1]) <= 3):
+
+    def _seg_key(x: str) -> str:
+        return re.sub(r"[^A-Z0-9]+", " ", x).strip()
+
+    while len(segs) > 1 and (_seg_key(segs[-1]) in _COUNTRIES or len(_seg_key(segs[-1])) <= 3):
         segs.pop()
     head = ", ".join(segs)
     head = re.sub(r"[^A-Z0-9]+", " ", head).strip()
     head = re.sub(r"\s+", " ", head)
+    # 'PORT OF X' / 'X PORT' wrappers (but not a proper name that legitimately starts with
+    # 'PORT ...', e.g. 'PORT KLANG' - only a bare trailing 'PORT' word is stripped). Done before
+    # the trailing-country-word strip below so 'PORT OF SINGAPORE' -> 'SINGAPORE' first, instead
+    # of the country stripper mistaking the whole place name for a droppable country qualifier.
+    head = re.sub(r"^PORT OF ", "", head)
+    head = re.sub(r"\s+PORT$", "", head)
+    # a country name can also be appended without a comma ('PORT KLANG MALAYSIA', 'Port Klang -
+    # Malaysia' - the dash was already turned into a space above): strip it the same way. Requires
+    # at least one word to remain so a place name that IS itself a country (plain 'SINGAPORE') is
+    # never stripped down to nothing.
+    words = head.split()
+    for n in (3, 2, 1):
+        if len(words) > n and " ".join(words[-n:]) in _COUNTRIES:
+            head = " ".join(words[:-n])
+            break
+    # a bare trailing UN/LOCODE with no separator ('SINGAPORE SGSIN'): pull it into `code`.
+    words = head.split()
+    if len(words) > 1 and re.fullmatch(r"[A-Z]{5}", words[-1]) and words[-1] in _UNLOCODE:
+        code = code or words[-1]
+        head = " ".join(words[:-1])
     if head in _UNLOCODE:
         code = code or head
         head = _UNLOCODE[head]
     head = _PORT_ALIASES.get(head, head)
-    # 'PORT OF X' / 'X PORT' wrappers
-    head = re.sub(r"^PORT OF ", "", head)
     return PortKey(core=head, qual=frozenset(quals), code=code)
 
 
-def ports_equal(a: str, b: str) -> Cmp:
+def ports_equal(a: str, b: str, near_miss_floor: float = 0.88) -> Cmp:
     ka, kb = norm_port(a), norm_port(b)
     if ka.core == kb.core:
         if ka.qual == kb.qual:
@@ -181,7 +285,7 @@ def ports_equal(a: str, b: str) -> Cmp:
         if ka.qual <= kb.qual or kb.qual <= ka.qual:
             return Cmp(True, "terminal/qualifier difference ignored")
         return Cmp(False, "same port, different terminal qualifier")
-    near = _sim(ka.core, kb.core) >= 0.88
+    near = _sim(ka.core, kb.core) >= near_miss_floor
     return Cmp(False, "near-identical text (possible typo)" if near else None, near)
 
 
@@ -212,6 +316,12 @@ def parse_container_count(raw: str | None) -> ContainerParse:
     if terms:
         n = sum(int(t[0]) for t in terms)
         sizes = " + ".join(f"{t[0]}x{re.sub(r'[^A-Z0-9]', '', t[1])}" for t in terms)
+        return ContainerParse(n, sizes)
+    # reversed order: "40'HC x 6" (size before count)
+    terms_r = re.findall(r"(\d{2}\s*['’`]?\s*[A-Z]{1,4})\s*(?:X|\*)\s*(\d{1,4})\b", s)
+    if terms_r:
+        n = sum(int(t[1]) for t in terms_r)
+        sizes = " + ".join(f"{t[1]}x{re.sub(r'[^A-Z0-9]', '', t[0])}" for t in terms_r)
         return ContainerParse(n, sizes)
     m = re.match(r"^(\d{1,4})\s*(?:X|\*)\s*$", s)
     if m:

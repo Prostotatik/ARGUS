@@ -136,7 +136,29 @@ class Pipeline:
 
         # ---- non-comparison categories stop here ---------------------------------
         if cls.category != "BL_COMPARISON":
-            result.update({"status": None, "headline": f"Classified as {cls.category} - no document comparison needed"})
+            headline = f"Classified as {cls.category} - no document comparison needed"
+            # A genuinely uncertain classification (no rule fired at all, not just "matched but
+            # not super sure") is itself grey-zone material for the fly gate, regardless of
+            # category - ties classifier confidence into the same non-circular gate job as the
+            # field-level signals below (see reviews/developer.md item #1/#10). Deterministic
+            # triggers are untouched; this can only ever ADD an escalation, never suppress one.
+            x = build_input_vector([], classifier_conf=cls.confidence)
+            ev("gate", "start", "flynet", "fly-brain confidence gate (classification confidence)")
+            t = time.perf_counter()
+            gd = self.gate.decide(x)
+            gate = gd.to_payload()
+            gate["decided_by"] = "flynet"
+            status, review_reason = None, None
+            if gd.escalate:
+                status, review_reason = "NEEDS_REVIEW", "low_confidence"
+                headline = f"{headline} (low-confidence classification flagged for review)"
+            ev("gate", "done", "flynet",
+               f"suspicion {gd.suspicion:.2f} vs {gd.threshold:.2f} -> {'ESCALATE' if gd.escalate else 'confident'}",
+               gate, time.perf_counter() - t)
+            result.update({"status": status, "review_reason": review_reason, "headline": headline, "gate": gate})
+            if status == "NEEDS_REVIEW":
+                result["escalation"] = {"open": True, "reason": _escalation_reason(review_reason, None),
+                                        "evidence": [], "resolved": False}
             return self._finalize(result, st, ev, new_events), st
 
         # ---- intake / preflight ------------------------------------------------
@@ -233,19 +255,33 @@ class Pipeline:
         status = decision["status"]
         review_reason = decision["review_reason"]
         review_detail = decision.get("review_detail")
-        suspected: list[str] = []
+        # Keep whatever compare already confirmed (has_defect/defect_fields) even if the gate
+        # escalates on top of it: a gate escalation means "a human should look at this", not
+        # "throw away what the pure compare step already established". Fixes reviews/judge.md
+        # #2 (escalation used to silently drop confirmed real defects and always claimed
+        # 'missing_value' even when nothing was missing).
+        confirmed_has_defect = decision["has_defect"]
+        confirmed_defect_fields = list(decision["defect_fields"])
+        gate_escalated = False
         if gd.escalate and status in ("OK", "MISMATCH"):
-            suspected = list(decision["defect_fields"])
+            gate_escalated = True
             status = "NEEDS_REVIEW"
-            review_reason = "unreadable" if ocr else "missing_value"
+            # Honest reason: nothing is missing and (usually) nothing is unreadable - this is the
+            # gate's own low-confidence/grey-zone call, which review_reason's 4-value spec enum
+            # has no dedicated slot for. 'low_confidence' is used in the live Result/API/UI; the
+            # required submission.json schema (only wrong_doc_type|missing_attachment|unreadable|
+            # missing_value) maps it to the closest of those four at export time (submission.py) -
+            # see reviews/developer.md for the design note on this gap.
+            review_reason = "unreadable" if ocr else "low_confidence"
             review_detail = gd.reason
-            decision = {**decision, "status": status, "review_reason": review_reason, "has_defect": False,
-                        "defect_fields": [], "headline": cmp.headline(status, [], fields, review_reason, "low confidence")}
+            headline = cmp.headline("MISMATCH" if confirmed_has_defect else "OK", confirmed_defect_fields, fields, None)
+            headline = f"Needs review: {review_reason.replace('_', ' ')} - {headline}"
         result.update({
-            "status": status, "review_reason": review_reason, "has_defect": decision["has_defect"],
-            "defect_fields": decision["defect_fields"], "headline": decision["headline"],
+            "status": status, "review_reason": review_reason,
+            "has_defect": confirmed_has_defect, "defect_fields": confirmed_defect_fields,
+            "headline": headline if gate_escalated else decision["headline"],
             "fields": fields, "gate": gate, "review_detail": review_detail,
-            "suspected_defect_fields": suspected,
+            "suspected_defect_fields": confirmed_defect_fields if gate_escalated else [],
             "comparison_performed": True,
             "docs": {"si": si.to_dict(), "bl": bl.to_dict()},
             "engine": {"classifier": cls.engine, "fields": _fields_engine(st, engine)},
@@ -334,6 +370,8 @@ def _escalation_reason(reason: str | None, detail: str | None) -> str:
         "wrong_doc_type": "An attachment is not the expected document type.",
         "unreadable": "A document could not be read reliably.",
         "missing_value": "A required value is missing or the extraction is not confident enough.",
+        "low_confidence": "Nothing is missing or unreadable, but the fly-brain gate found this "
+                           "pattern of extraction confidence/near-misses novel enough to ask a human to double-check.",
     }.get(reason or "", "The system could not decide confidently.")
     return f"{base} {detail}" if detail else base
 

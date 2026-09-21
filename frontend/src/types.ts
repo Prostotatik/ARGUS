@@ -61,6 +61,8 @@ export interface GateInfo {
   winner_kc?: number | null
   /** per-input share of the drive that pushed suspicion up (backend explain()) */
   drivers?: { input: string; index: number; share: number }[]
+  /** 'flynet' = the gate itself decided this; 'deterministic_trigger' = a fixed rule bypassed it */
+  decided_by?: 'flynet' | 'deterministic_trigger' | string
 }
 
 export interface EvidenceItem {
@@ -93,6 +95,7 @@ export interface Result {
   engine?: { classifier?: string; fields?: string } | null
   errors?: unknown[]
   events?: TraceEvent[]
+  review?: ReviewRecord | null
 }
 
 /** Row in the inbox list. */
@@ -167,4 +170,26 @@ export interface FlyFeedback {
   kc?: KcDelta[]
   /** bumps on every new review so animations restart */
   nonce?: number
+  /** set when this escalation was a deterministic trigger, not a fly-gate decision: no weight
+   * update was applied (there is nothing for the gate to reinforce), and before/after are equal
+   * on purpose - shown as an explicit "nothing to learn here" message, not a misleading no-op. */
+  skippedReason?: string | null
+}
+
+/** POST /api/review response's own `review` block (avoids a second GET /api/flybrain round trip -
+ * innovator.md request #2). `fly` is either the real learn() event or `{skipped, reason}`. */
+export interface ReviewRecord {
+  decision: string
+  field?: string | null
+  escalation_verdict?: string | null
+  fly?: {
+    skipped?: boolean
+    reason?: string
+    before?: number
+    after?: number
+    verdict?: string
+    kc_active?: number[]
+    kc_weights_before?: number[]
+    kc_weights_after?: number[]
+  } | null
 }

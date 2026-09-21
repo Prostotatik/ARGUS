@@ -104,7 +104,7 @@ export default function Sidebar({ stats, engine, mode, online, canProcessAll, bu
           <path d="M0 100 L30 84 L58 96 L92 70 L128 94 L160 80 L190 96 L220 84 L220 140 L0 140Z" fill="url(#mt-mid)" />
           <path d="M0 122 L40 110 L84 120 L132 106 L176 118 L220 108 L220 140 L0 140Z" fill="#050b1a" fillOpacity=".9" />
         </svg>
-        <p>Smarter checks.<br />Smoother trade.</p>
+        <p>Compare with confidence.<br />Escalate when unsure.</p>
         <div className="bar"><span /></div>
       </div>
     </aside>

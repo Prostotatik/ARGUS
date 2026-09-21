@@ -86,10 +86,23 @@ def compare_field(field: str, si: Any, bl: Any) -> dict:
         res["confidence"] = 0.0
         return res
 
+    if "possibly_truncated" in sflags or "possibly_truncated" in bflags:
+        # A document that does not end with a newline and whose value for this field sits on
+        # its last line may have been cut off mid-value (e.g. a BL number or weight truncated
+        # mid-digit). Never report a confident MISMATCH from a partial number/name: treat the
+        # value as untrustworthy so it escalates for human review instead of silently lying.
+        side = "SI" if "possibly_truncated" in sflags and "possibly_truncated" not in bflags else \
+            ("BL" if "possibly_truncated" in bflags and "possibly_truncated" not in sflags else "SI/BL")
+        res["state"] = "missing"
+        res["note"] = f"document ends abruptly; the {side} value for this field may be truncated mid-value"
+        res["confidence"] = 0.0
+        return res
+
+    ocr_noisy = "ocr" in sflags or "ocr" in bflags
     if field in ("shipper", "consignee", "notify_party"):
-        c = nz.names_equal(sv, bv)
+        c = nz.names_equal(sv, bv, near_miss_floor=0.72 if ocr_noisy else 0.88)
     elif field in ("port_of_loading", "port_of_discharge"):
-        c = nz.ports_equal(sv, bv)
+        c = nz.ports_equal(sv, bv, near_miss_floor=0.72 if ocr_noisy else 0.88)
     elif field == "container_count":
         c = nz.Cmp(sk == bk, None)
         if c.match and sm.get("sizes") and bm.get("sizes") and sm["sizes"] != bm["sizes"]:

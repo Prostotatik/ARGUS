@@ -8,7 +8,7 @@
   "GENERAL": 60,
   "SPAM": 40
  },
- "comparisons": 114,
+ "comparisons": 117,
  "mismatches": 46,
  "needs_review": 20,
  "discrepancies_found": 72,
@@ -43,8 +43,8 @@
    "count": 6
   },
   {
-   "label": "needs review: wrong doc type",
-   "count": 5
+   "label": "needs review: missing value",
+   "count": 6
   }
  ],
  "engine": "rules"

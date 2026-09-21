@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Activity, FileText, Keyboard, Network, Pause, Play, SkipForward } from 'lucide-react'
+import { Activity, AlertTriangle, FileText, Keyboard, Network, Pause, Play, SkipForward } from 'lucide-react'
 import type { EmailRow, FlyBrain, FlyFeedback, GateInfo, KcDelta, Result, ReviewBody, Stats, TraceEvent } from './types'
 import { FIELD_KEYS } from './types'
 import { deriveStats, detectSource, type DataSource } from './data/source'
@@ -83,7 +83,7 @@ export default function App() {
   }, [])
 
   // ---- selecting / playing an email
-  const select = useCallback(async (id: string, src: DataSource | null = source) => {
+  const select = useCallback(async (id: string, src: DataSource | null = source, injectFail?: string) => {
     if (!src) return
     const my = ++runRef.current
     abortRef.current?.abort()
@@ -96,7 +96,7 @@ export default function App() {
       setOverrides((o) => { const n = { ...o }; delete n[id]; return n })
       player.begin(false)
       try {
-        await src.process!(id, (ev) => { if (runRef.current === my) player.push(ev) }, ctl.signal)
+        await src.process!(id, (ev) => { if (runRef.current === my) player.push(ev) }, ctl.signal, injectFail ? { injectFail } : undefined)
       } catch (e) {
         if (!ctl.signal.aborted && runRef.current === my) say(`Backend error while processing ${id}: ${e instanceof Error ? e.message : e}`, 'error')
       } finally {
@@ -275,6 +275,16 @@ export default function App() {
             fbFinal = { ...fbFinal, kc }
           }
         } catch { /* keep the suspicion-only feedback */ }
+      } else if (result.gate && result.gate.decided_by !== 'flynet') {
+        // A deterministic trigger never went through the gate's own decision - mirror the
+        // backend's honesty here too: no simulated weight update, an explicit "nothing to
+        // learn" message instead of a misleading before==after no-op.
+        const s = result.gate.suspicion ?? 0
+        fbFinal = {
+          before: s, after: s, verdict: body.escalation_verdict ?? 'escalation_correct', simulated: true,
+          skippedReason: 'this escalation was a deterministic trigger, not a fly-gate decision - no weight '
+            + 'update applied (the gate never decided anything here to reinforce)', nonce: Date.now(),
+        }
       } else if (fly && fly.weights && act.length) {
         // REPLAY/mock: no backend, so apply the documented Hebbian rule to the exported weights locally (labelled simulated)
         const verdict = f?.verdict ?? body.escalation_verdict ?? (result.gate?.escalate ? 'escalation_correct' : 'escalation_unneeded')
@@ -353,6 +363,12 @@ export default function App() {
               player.playing
                 ? <button type="button" className="btn small" onClick={player.skip}><SkipForward size={13} /> Skip</button>
                 : <button type="button" className="btn small" onClick={() => void select(selectedId)} title={mode === 'live' ? 'Run the pipeline again' : 'Replay the recorded trace'}><Play size={13} /> {mode === 'live' ? 'Re-run' : 'Replay'}</button>
+            )}
+            {selectedId && mode === 'live' && !player.playing && (
+              <button type="button" className="btn small warn" onClick={() => void select(selectedId, source, 'classifier')}
+                title="Demo: force the classifier node to fail once on this email, so you can try the Retry button">
+                <AlertTriangle size={13} /> Simulate failure
+              </button>
             )}
             <span className={`mode-pill m-${mode}`} title={MODE_HINT[mode]}>
               <span className="dot" />

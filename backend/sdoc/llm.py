@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import random
 import re
 from typing import Any
 
@@ -83,14 +84,43 @@ class GeminiError(RuntimeError):
     pass
 
 
+_RATE_LIMIT_MARKERS = ("429", "RESOURCE_EXHAUSTED", "RATE_LIMIT", "rate limit", "quota")
+
+
+def _is_rate_limited(exc: Exception) -> bool:
+    msg = str(exc)
+    return any(m in msg for m in _RATE_LIMIT_MARKERS)
+
+
+def _retry_delay_hint(exc: Exception) -> float | None:
+    """Best-effort extraction of a server-suggested retry delay (google-genai surfaces 429 detail
+    as text, not a structured header, in the versions this was written against)."""
+    m = re.search(r"retry[_ -]?(?:after|delay)[^0-9]{0,10}(\d+(?:\.\d+)?)", str(exc), re.I)
+    if m:
+        try:
+            return float(m.group(1))
+        except ValueError:
+            return None
+    return None
+
+
 class GeminiClient:
-    """Thin async wrapper. ``client`` may be injected (tests use a fake with the same surface)."""
+    """Thin async wrapper. ``client`` may be injected (tests use a fake with the same surface).
+
+    Throttling (reviews/judge.md #6 - up to 8 calls/email with no backoff -> 429s on a real key):
+    a shared ``asyncio.Semaphore`` caps in-flight requests to ``SDOC_GEMINI_CONCURRENCY`` (default
+    3) across ALL calls made through one client (classifier + all 7 field agents share one client
+    per pipeline), and failed attempts back off exponentially with jitter, waiting longer (and
+    honouring a server-suggested delay when present in the error text) specifically on a 429/
+    RESOURCE_EXHAUSTED response instead of the same short delay as any other error.
+    """
 
     def __init__(self, api_key: str | None = None, model: str | None = None, client: Any = None,
-                 timeout_s: float = 45.0, max_attempts: int = 2) -> None:
+                 timeout_s: float = 45.0, max_attempts: int | None = None, concurrency: int | None = None) -> None:
         self.model = model or config.gemini_model()
         self.timeout_s = timeout_s
-        self.max_attempts = max_attempts
+        self.max_attempts = max_attempts or config.gemini_max_attempts()
+        self._sem = asyncio.Semaphore(concurrency or config.gemini_concurrency())
         if client is not None:
             self.client = client
         else:
@@ -105,17 +135,22 @@ class GeminiClient:
             "temperature": 0.0,
         }
         last: Exception | None = None
-        for attempt in range(self.max_attempts):
-            try:
-                resp = await asyncio.wait_for(
-                    self.client.aio.models.generate_content(model=self.model, contents=prompt, config=cfg),
-                    timeout=self.timeout_s,
-                )
-                return parse_json_text(getattr(resp, "text", None))
-            except Exception as e:  # noqa: BLE001 - surfaced to the node as a visible error
-                last = e
-                if attempt + 1 < self.max_attempts:
-                    await asyncio.sleep(0.8 * (attempt + 1))
+        async with self._sem:
+            for attempt in range(self.max_attempts):
+                try:
+                    resp = await asyncio.wait_for(
+                        self.client.aio.models.generate_content(model=self.model, contents=prompt, config=cfg),
+                        timeout=self.timeout_s,
+                    )
+                    return parse_json_text(getattr(resp, "text", None))
+                except Exception as e:  # noqa: BLE001 - surfaced to the node as a visible error
+                    last = e
+                    if attempt + 1 >= self.max_attempts:
+                        break
+                    rate_limited = _is_rate_limited(e)
+                    base = 4.0 if rate_limited else 0.8
+                    wait = _retry_delay_hint(e) or (base * (2 ** attempt) + random.uniform(0, 0.5))
+                    await asyncio.sleep(wait)
         raise GeminiError(f"{type(last).__name__}: {last}") from last
 
 

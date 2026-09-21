@@ -120,7 +120,21 @@ def test_non_comparison_stops_after_classifier(tmp_path):
                                     "body": "Click here http://bit.ly/claim-prize-now", "from": "w@prize-claims.info"}, {})])
     r, _ = run(pipe_for(inbox), "e1")
     assert r["category"] == "SPAM" and r["status"] is None
-    assert [e["node"] for e in r["events"] if e["state"] != "start"] == ["inbox", "classifier", "report"]
+    # a confidently-classified non-comparison email still passes through the gate (classifier
+    # confidence is itself one of the gate's grey-zone inputs now - reviews/developer.md #1/#10)
+    # but a clean, high-confidence SPAM call does not escalate it.
+    assert [e["node"] for e in r["events"] if e["state"] != "start"] == ["inbox", "classifier", "gate", "report"]
+
+
+def test_low_confidence_non_comparison_can_escalate(tmp_path):
+    # No rule fires at all (confidence floors at the classifier's own 0.35 "no signal" default) -
+    # genuinely uncertain, unlike a normal low-but-matched confidence - the gate may ask for review.
+    inbox = make_inbox(tmp_path, [({"email_id": "e1", "subject": "hey", "body": "ok thanks", "from": "a@b.com"}, {})])
+    r, _ = run(pipe_for(inbox), "e1")
+    assert r["category"] == "GENERAL"
+    assert r["gate"]["decided_by"] == "flynet"
+    if r["status"] == "NEEDS_REVIEW":
+        assert r["review_reason"] == "low_confidence"
 
 
 def test_missing_attachment_variants(tmp_path):
@@ -252,7 +266,14 @@ def test_dataset_edge_cases_and_known_mismatch():
         r, _ = run(p, f"email_{i}")
         assert r["status"] == "NEEDS_REVIEW"
         reasons[r["review_reason"]] = reasons.get(r["review_reason"], 0) + 1
-    assert reasons == {"wrong_doc_type": 5, "missing_attachment": 5, "unreadable": 5, "missing_value": 5}
+    # email_512/513/514 are genuinely scanned (image-only) PDFs: OCR (rapidocr, reviews/developer.md
+    # #5) now actually reads 2 of them (513/514) well enough that the FLY GATE - not a deterministic
+    # trigger - decides to escalate them on its own (real, non-circular grey-zone job on the
+    # official dataset, not just synthetic calibration data); the third still lands on a genuine
+    # missing_value (a field the OCR text did not carry). email_511/515 are corrupt (non-image)
+    # PDFs, unreadable by design and unrelated to OCR.
+    assert reasons == {"wrong_doc_type": 5, "missing_attachment": 5, "unreadable": 4, "missing_value": 6}
+    assert (run(p, "email_513")[0]["gate"] or {}).get("decided_by") == "flynet"
 
 
 @needs_data

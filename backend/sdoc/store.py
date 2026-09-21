@@ -150,22 +150,35 @@ def apply_review(result: dict, body: dict, gate: FlyBrain, state_path: Path | No
         r["escalation"]["resolved"] = True
 
     # ---- fly gate learning ------------------------------------------------------
+    # Only teach the gate when the GATE itself made the escalation call (`decided_by == "flynet"`).
+    # A deterministic trigger (missing_attachment/wrong_doc_type/unreadable/missing_value) bypasses
+    # the gate entirely - it never decided anything there, so "was this escalation correct?" has no
+    # gate-connection to reinforce or depress. Learning from it anyway was also why the shipped demo
+    # showed a visible no-op: every deterministic case starts from the exact same untouched weights,
+    # so "escalation was correct" (LTP) on an already-near-ceiling weight barely moves (see
+    # DEFAULT_INIT_W in flybrain.py for the other half of that fix). Gate-decided (flynet) escalations
+    # still learn exactly as before - that is the gate's real, measurable job.
     gate_info = r.get("gate") or {}
     vec = gate_info.get("input_vector")
+    gate_decided = gate_info.get("decided_by") == "flynet"
     verdict = body.get("escalation_verdict")
-    if verdict is None and vec and gate_info.get("decided_by") == "flynet":
+    if verdict is None and vec and gate_decided:
         if decision == "correct_field":
             verdict = "escalation_correct"
         elif was_escalated:
             verdict = "escalation_unneeded"
     elif verdict is None and vec and not was_escalated and decision == "correct_field":
         verdict = "escalation_correct"      # a report the human had to correct should have been escalated
+        gate_decided = True                 # the gate stayed silent when it should have flagged this
     fly = None
-    if verdict in ("escalation_correct", "escalation_unneeded") and vec:
+    if verdict in ("escalation_correct", "escalation_unneeded") and vec and gate_decided:
         fly = gate.learn(vec, verdict, note=f"{r['email_id']}: {decision}")
         fly["simulated"] = False
         if state_path:
             gate.save(state_path)
+    elif verdict in ("escalation_correct", "escalation_unneeded") and vec and not gate_decided:
+        fly = {"skipped": True, "reason": "this escalation was a deterministic trigger, not a fly-gate "
+               "decision - no weight update applied (the gate never decided anything here to reinforce)"}
     r["review"] = {"decision": decision, "field": field, "corrected_si": body.get("corrected_si"),
                    "corrected_bl": body.get("corrected_bl"), "escalation_verdict": verdict,
                    "previous_status": before_status, "ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "fly": fly}

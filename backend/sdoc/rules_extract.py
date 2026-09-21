@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 
 from . import normalize as nz
 from .docparse import ParsedDoc
-from .labels import match_label
+from .labels import match_label, match_label_prefix_words
 
 _CONTAINER_NO = re.compile(r"\b[A-Z]{4}\d{7}\b")
 _LABEL_LIKE = re.compile(r"^[^:：]{1,60}[:：]\s")
@@ -49,10 +49,10 @@ def _label_candidates(label: str) -> list[str]:
     return out
 
 
-def _match_any(label: str) -> tuple[str | None, bool]:
+def _match_any(label: str, *, exact_only: bool = False) -> tuple[str | None, bool]:
     fuzzy: tuple[str | None, bool] = (None, False)
     for c in _label_candidates(label):
-        f, exact = match_label(c)
+        f, exact = match_label(c, exact_only=exact_only)
         if f and exact:
             return f, True          # an exact synonym in any variant beats a fuzzy hit
         if f and fuzzy[0] is None:
@@ -63,11 +63,24 @@ def _match_any(label: str) -> tuple[str | None, bool]:
 def split_line(line: str) -> tuple[str, str, str] | None:
     """Return (canonical_field, value, kind) for a 'label: value' style line, else None.
 
+    Accepted separators: colon, whitespace-column, ' - ', ' = ', and a markdown-table row
+    (``| Label | value |``). A candidate is only accepted when the text left of the separator
+    actually resolves to a known field synonym (``_match_any``), so a value that happens to
+    contain a dash/equals ("Jebel Ali - UAE") is never mistaken for a label line.
+
     kind: 'exact' | 'fuzzy'.
     """
     s = line.strip()
     if not s:
         return None
+    # markdown table row: '| Label | value |' (also '| Label | value | extra |')
+    if s.startswith("|") and s.count("|") >= 2:
+        segs = [x.strip() for x in s.strip("|").split("|")]
+        if len(segs) >= 2 and segs[0]:
+            f, exact = _match_any(segs[0], exact_only=True)
+            if f:
+                val = " | ".join(x for x in segs[1:] if x)
+                return f, val, "exact" if exact else "fuzzy"
     # colon separated: try each colon as the label/value boundary (label may contain ';' or '(:)')
     idx = [m.start() for m in re.finditer(r"[:：]", s)][:4]
     for i in idx:
@@ -81,6 +94,20 @@ def split_line(line: str) -> tuple[str, str, str] | None:
         f, exact = _match_any(m.group(1).strip())
         if f:
             return f, m.group(2).strip(), "exact" if exact else "fuzzy"
+    # dash / equals separated: 'Label - value' / 'Label = value'
+    m = re.match(r"^(.{2,60}?)\s+[-=]\s+(\S.*)$", s)
+    if m:
+        f, exact = _match_any(m.group(1).strip(), exact_only=True)
+        if f:
+            return f, m.group(2).strip(), "exact" if exact else "fuzzy"
+    # separator-free 'Label value' (seen on OCR-read scanned documents, which often drop the
+    # colon): only fires on an exact multi/single-word synonym prefix, so ordinary prose is safe.
+    toks = s.split()
+    if len(toks) >= 2:
+        norm_toks = [re.sub(r"[^a-z0-9]", "", t.lower()) for t in toks]
+        f, n = match_label_prefix_words(norm_toks)
+        if f and 0 < n < len(toks):
+            return f, " ".join(toks[n:]), "exact"
     return None
 
 
@@ -177,9 +204,17 @@ def extract_field(doc: ParsedDoc, field_name: str) -> Extracted:
         ex.evidence = None
         return ex
 
-    rank, _, raw_value, ev, kind = cands[0]
+    rank, line_no, raw_value, ev, kind = cands[0]
     value = _clean_value(field_name, raw_value)
     ex.evidence = ev
+    if doc.truncated:
+        last_content = max((i for i, l in enumerate(doc.lines) if l.strip()), default=-1)
+        if line_no >= last_content - 1:
+            # the document does not end with a newline (looks cut off mid-transfer) and this
+            # value's evidence sits on/near the very last line: it may be a partial number/name
+            # (e.g. 'Gross Weight: 21577' cut to 'Gross Weight: 2'). Never report this as a
+            # confident value - the caller (compare.py) treats 'possibly_truncated' as missing.
+            ex.flags.append("possibly_truncated")
     if kind == "fuzzy":
         ex.flags.append("fuzzy_label")
         conf_base -= 0.12

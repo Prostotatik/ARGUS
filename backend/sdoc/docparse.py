@@ -77,6 +77,7 @@ class ParsedDoc:
     role_hint: str | None = None  # SI/BL guessed from the file name (hint only)
     ocr_used: bool = False
     n_bytes: int = 0
+    truncated: bool = False       # plain-text attachment does not end with a newline: looks cut off mid-transfer
 
     @property
     def text(self) -> str:
@@ -97,6 +98,7 @@ class ParsedDoc:
             "type_confidence": self.type_confidence,
             "role_hint": self.role_hint,
             "ocr_used": self.ocr_used,
+            "truncated": self.truncated,
             "n_bytes": self.n_bytes,
             "n_lines": len(self.lines),
         }
@@ -141,9 +143,15 @@ def _emit_kv(lines: list[str], label: str, value: str) -> None:
 # ---------------------------------------------------------------------------
 # format readers
 # ---------------------------------------------------------------------------
-def _read_txt(data: bytes) -> tuple[list[str], str]:
+def _read_txt(data: bytes) -> tuple[list[str], str, bool]:
+    """Return (lines, detail, truncated). ``truncated`` is a generic, content-free signal:
+    every well-formed attachment in this pipeline ends with a trailing newline; a plain-text
+    file that does not is a strong sign it was cut off mid-transfer (verified: all 192 real
+    .txt attachments in the bundle end with '\\n'). It is only a hint - the caller decides
+    what to do with fields whose evidence sits on the last line of a truncated document."""
     if b"\x00" in data[:2048] and not data.startswith((b"\xff\xfe", b"\xfe\xff")):
-        return [], "binary content in .txt"
+        return [], "binary content in .txt", False
+    truncated = len(data) > 0 and not data.endswith((b"\n", b"\r"))
     for enc in ("utf-8-sig", "utf-16", "cp1252", "latin-1"):
         try:
             txt = data.decode(enc)
@@ -153,7 +161,7 @@ def _read_txt(data: bytes) -> tuple[list[str], str]:
     else:  # pragma: no cover
         txt = data.decode("latin-1", errors="replace")
     lines = [l.rstrip() for l in txt.replace("\r\n", "\n").replace("\r", "\n").split("\n")]
-    return lines, ""
+    return lines, "", truncated
 
 
 def _read_docx(path: Path) -> tuple[list[str], str]:
@@ -172,6 +180,7 @@ def _read_docx(path: Path) -> tuple[list[str], str]:
                 lines.append(t)
         elif tag == "tbl":
             tbl = Table(child, d)
+            raw_rows: list[list[str]] = []
             for row in tbl.rows:
                 # de-duplicate merged cells (python-docx repeats them)
                 cells: list[str] = []
@@ -181,11 +190,26 @@ def _read_docx(path: Path) -> tuple[list[str], str]:
                         continue
                     prev = c._tc
                     cells.append(_clean_cell(c.text))
-                cells = [c for c in cells]
+                raw_rows.append(cells)
+            # transposed table: exactly one header row of labels + one aligned row of values
+            # (e.g. 'Port of Loading | Port of Discharge | ...' over 'SINGAPORE | ROTTERDAM | ...')
+            if (len(raw_rows) == 2 and len(raw_rows[0]) >= 3 and len(raw_rows[0]) == len(raw_rows[1])
+                    and all(c.strip() for c in raw_rows[0])):
+                for lab, val in zip(raw_rows[0], raw_rows[1]):
+                    if lab or val:
+                        _emit_kv(lines, lab, val)
+                continue
+            for cells in raw_rows:
                 nonempty = [c for c in cells if c]
                 if not nonempty:
                     continue
-                if len(cells) >= 2:
+                if len(cells) >= 4 and len(cells) % 2 == 0:
+                    # 4-column (or more) layout: TWO+ label/value pairs packed into one row
+                    for i in range(0, len(cells), 2):
+                        lab, val = cells[i], cells[i + 1] if i + 1 < len(cells) else ""
+                        if lab or val:
+                            _emit_kv(lines, lab, val)
+                elif len(cells) >= 2:
                     _emit_kv(lines, cells[0], " | ".join(c for c in cells[1:] if c) if len(cells) > 2 else cells[1])
                 else:
                     for i, seg in enumerate(nonempty[0].split("\n")):
@@ -200,21 +224,37 @@ def _read_xlsx(path: Path) -> tuple[list[str], str]:
     wb = openpyxl.load_workbook(str(path), data_only=True, read_only=False)
     lines: list[str] = []
     for ws in wb.worksheets:
-        for row in ws.iter_rows(values_only=True):
-            cells = [_clean_cell(v) for v in row]
+        rows = [[_clean_cell(v) for v in row] for row in ws.iter_rows(values_only=True)]
+        rows = [r for r in rows if any(c for c in r)]
+        i = 0
+        while i < len(rows):
+            row = rows[i]
+            nxt = rows[i + 1] if i + 1 < len(rows) else None
+            # transposed layout: a full row of labels immediately followed by a full row of
+            # aligned values ('hdr' style xlsx sheets), both the same width, >=3 columns.
+            if nxt is not None and len(row) == len(nxt) and len(row) >= 3 and all(c.strip() for c in row):
+                for lab, val in zip(row, nxt):
+                    if lab or val:
+                        _emit_kv(lines, lab, val)
+                i += 2
+                continue
+            cells = row
             nonempty = [c for c in cells if c]
             if not nonempty:
+                i += 1
                 continue
             if len(nonempty) == 1:
                 for seg in nonempty[0].split("\n"):
                     if seg.strip():
                         lines.append(seg.strip())
+                i += 1
                 continue
             # first non-empty cell = label, rest = value cells
-            first_idx = next(i for i, c in enumerate(cells) if c)
+            first_idx = next(j for j, c in enumerate(cells) if c)
             label = cells[first_idx]
             rest = [c for c in cells[first_idx + 1:] if c]
             _emit_kv(lines, label, " | ".join(rest))
+            i += 1
     return lines, ""
 
 
@@ -315,7 +355,8 @@ def parse_document(path: str | Path, data: bytes | None = None) -> ParsedDoc:
 
     try:
         if pd.fmt == "txt" or pd.fmt == "unknown":
-            lines, detail = _read_txt(data)
+            lines, detail, truncated = _read_txt(data)
+            pd.truncated = truncated
             if not lines and detail:
                 pd.status, pd.status_detail = "unreadable", detail
         elif pd.fmt == "pdf":

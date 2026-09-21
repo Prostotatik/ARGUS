@@ -58,7 +58,7 @@ export default function NodePopover({ nodeId, anchor, panelW, panelH, pinned, no
       <dl className="kv">
         <dt>From</dt><dd>{str(result?.from)}</dd>
         <dt>Subject</dt><dd>{str(result?.subject)}</dd>
-        <dt>Received</dt><dd>{str(result?.received_at)}</dd>
+        <dt>Received</dt><dd title="Arrival time is simulated - the dataset has no timestamps">{str(result?.received_at)} <em className="pop-dim">(simulated)</em></dd>
         <dt>Email</dt><dd className="mono">{str(result?.email_id)}</dd>
       </dl>
     )

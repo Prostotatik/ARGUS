@@ -76,6 +76,12 @@ DEFAULT_K_FRAC = 0.05        # ~5% of KCs may fire (APL / WTA)
 INPUT_FLOOR = 0.25           # receptor-neuron style response floor: weaker input is treated as silence
 KC_THRESHOLD = 0.95          # KCs are coincidence detectors: one lone input cannot make a KC spike
 APL_GAIN = 0.6               # global inhibition proportional to mean KC current
+# Initial KC->decision weight. Deliberately just under 1.0 (not exactly 1.0): a weight already at
+# the ceiling cannot be potentiated further, so an "escalation was correct" verdict on a
+# never-touched pattern would be a silent, visually-confusing no-op (0.63 -> 0.63). Starting at
+# 0.9 keeps "everything is novel" (still saturating almost immediately) while leaving real,
+# visible headroom for LTP on the very first confirmation of any pattern.
+DEFAULT_INIT_W = 0.9
 
 
 def build_input_vector(fields: Sequence[Mapping[str, Any]], *, classifier_conf: float = 1.0,
@@ -104,7 +110,13 @@ def build_input_vector(fields: Sequence[Mapping[str, Any]], *, classifier_conf: 
             x[14 + i] = 1.0
         elif state == "match" and f.get("note"):
             fmt_note = True
-    x[21] = 1.0 if n_mis >= 3 else 0.0
+    # >=3 confident mismatches is only a "genuinely uncertain pair of documents" signal when at
+    # least one of those mismatches is itself shaky (near-miss/typo-like or low extraction
+    # confidence); three clean, high-confidence mismatches are a confirmed multi-field defect,
+    # not an anomaly to gate-escalate away from the report (previously this fired on count alone,
+    # which could trade a caught real defect for an unnecessary review - see reviews/developer.md).
+    shaky_mismatch = any(x[i] == 1.0 and (x[14 + i] == 1.0 or x[7 + i] > 0.3) for i in range(7))
+    x[21] = 1.0 if (n_mis >= 3 and shaky_mismatch) else 0.0
     x[22] = 1.0 if ocr_used or "ocr" in any_flags else 0.0
     x[23] = float(np.clip((0.8 - doc_type_conf) / 0.3, 0.0, 1.0))
     x[24] = float(np.clip((0.8 - classifier_conf) / 0.4, 0.0, 1.0))
@@ -159,7 +171,7 @@ class FlyBrain:
         self.proj = np.stack([rng.choice(n_in, size=degree, replace=False) for _ in range(n_kc)]).astype(np.int32)
         # fixed per-KC excitability offset (also breaks ties deterministically)
         self.kc_bias = rng.uniform(0.0, 0.08, size=n_kc)
-        self.w = np.ones(n_kc, dtype=np.float64)     # plastic KC -> decision-neuron weights
+        self.w = np.full(n_kc, DEFAULT_INIT_W, dtype=np.float64)  # plastic KC -> decision-neuron weights
         self.history: list[dict] = []
         self.calibration: dict = {}
 
@@ -235,9 +247,13 @@ class FlyBrain:
     # -- learning --------------------------------------------------------
     def learn(self, x: Sequence[float] | np.ndarray, verdict: str, *, note: str | None = None,
               record: bool = True) -> dict:
-        """Human-verdict update. verdict: 'escalation_unneeded' | 'escalation_correct'."""
+        """Human-verdict update. verdict: 'escalation_unneeded' | 'escalation_correct'.
+        Returns per-KC before/after weights for the cells that actually changed (not just the
+        aggregate suspicion), so a caller (e.g. POST /api/review) can show the real update
+        directly without a second GET /api/flybrain round trip (innovator.md request #2)."""
         x = np.asarray(x, dtype=np.float64)
         act, _ = self._active(x)
+        w_before = self.w[act].copy() if act.size else np.zeros(0)
         before = self._sus(act)
         if act.size:
             if verdict == "escalation_unneeded":
@@ -246,9 +262,13 @@ class FlyBrain:
                 self.w[act] += self.eta_pot * (1.0 - self.w[act])  # LTP
             else:
                 raise ValueError(f"unknown verdict {verdict!r}")
+        w_after = self.w[act].copy() if act.size else np.zeros(0)
         after = self._sus(act)
         ev = {"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "before": round(before, 4), "after": round(after, 4),
-              "verdict": verdict, "n_kc_updated": int(act.size), "note": note}
+              "verdict": verdict, "n_kc_updated": int(act.size), "note": note,
+              "kc_active": [int(a) for a in act],
+              "kc_weights_before": [round(float(v), 4) for v in w_before],
+              "kc_weights_after": [round(float(v), 4) for v in w_after]}
         if record:
             self.history.append(ev)
         return ev
@@ -263,7 +283,7 @@ class FlyBrain:
         """Teach 'normal' from synthetic normal vectors (unsupervised familiarity), set the threshold
         from a held-out normal set, then report recall on held-out synthetic anomalies (never trained on)."""
         rng = np.random.default_rng(seed)
-        self.w[:] = 1.0
+        self.w[:] = DEFAULT_INIT_W
         for _ in range(n_train):
             self.familiarise(synthetic_normal(rng), 0.6)
         val = np.array([self.suspicion(synthetic_normal(rng)) for _ in range(n_val)])
@@ -336,6 +356,8 @@ class FlyBrain:
         return {
             "n_inputs": self.n_in, "n_kc": self.n_kc, "kc_sparsity": self.k_frac,
             "connectivity": round(self.degree / self.n_in, 3), "threshold": self.threshold,
+            "eta_dep": self.eta_dep, "eta_pot": self.eta_pot, "tau": round(self.tau, 4),
+            "init_w": DEFAULT_INIT_W,
             "projection": self.proj.tolist(), "weights": [round(float(v), 4) for v in self.w],
             "history": self.history[-100:], "input_names": INPUT_NAMES,
             "calibration": self.calibration,

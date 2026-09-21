@@ -1,5 +1,5 @@
 import type {
-  EmailRow, FlyBrain, FlyFeedback, FieldResult, Health, Mode, Result, ReviewBody, Stats, TraceEvent,
+  EmailRow, FlyBrain, FlyFeedback, FieldResult, Health, KcDelta, Mode, Result, ReviewBody, Stats, TraceEvent,
 } from '../types'
 import { MOCK_RESULTS, MOCK_ROWS, MOCK_STATS, schematicFly } from '../mock'
 
@@ -137,7 +137,7 @@ export interface DataSource {
   loadFly(): Promise<FlyBrain>
   loadTrace(id: string): Promise<Result | null>
   /** live only: run pipeline, streaming events. Resolves when stream ends. */
-  process?(id: string, onEvent: (e: TraceEvent) => void, signal: AbortSignal, opts?: { retry?: boolean; forceEngine?: string }): Promise<void>
+  process?(id: string, onEvent: (e: TraceEvent) => void, signal: AbortSignal, opts?: { retry?: boolean; forceEngine?: string; injectFail?: string }): Promise<void>
   processAll?(onProgress: (m: unknown) => void, signal: AbortSignal): Promise<void>
   review(id: string, body: ReviewBody, current: Result): Promise<{ result: Result; feedback: FlyFeedback | null }>
 }
@@ -162,8 +162,11 @@ class LiveSource implements DataSource {
   async loadTrace(id: string) {
     try { return await fetchJson<Result>(`/api/result/${encodeURIComponent(id)}`) } catch { return null }
   }
-  async process(id: string, onEvent: (e: TraceEvent) => void, signal: AbortSignal, opts: { retry?: boolean; forceEngine?: string } = {}) {
-    const q = opts.forceEngine ? `?force_engine=${opts.forceEngine}` : ''
+  async process(id: string, onEvent: (e: TraceEvent) => void, signal: AbortSignal, opts: { retry?: boolean; forceEngine?: string; injectFail?: string } = {}) {
+    const params = new URLSearchParams()
+    if (opts.forceEngine) params.set('force_engine', opts.forceEngine)
+    if (opts.injectFail) params.set('inject_fail', opts.injectFail)
+    const q = params.toString() ? `?${params.toString()}` : ''
     const path = opts.retry ? 'retry' : 'process'
     const res = await fetch(`/api/${path}/${encodeURIComponent(id)}${q}`, { method: 'POST', signal })
     await readStream(res, (m) => { if (isEvent(m)) onEvent(m) }, signal)
@@ -173,18 +176,33 @@ class LiveSource implements DataSource {
     await readStream(res, onProgress, signal)
   }
   async review(id: string, body: ReviewBody, current: Result) {
-    let before = current.gate?.suspicion ?? 0.5
     const res = await fetch(`/api/review/${encodeURIComponent(id)}`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
     })
     if (!res.ok) throw new Error(`review failed: ${res.status} ${await res.text().catch(() => '')}`)
     const result = (await res.json()) as Result
     let feedback: FlyFeedback | null = null
-    try {
-      const f = await fetchJson<FlyBrain>('/api/flybrain')
-      const h = f.history?.[f.history.length - 1]
-      if (h) { before = h.before; feedback = { before, after: h.after, verdict: h.verdict, simulated: false } }
-    } catch { /* optional */ }
+    // Read the Hebbian update straight off this response (innovator.md request #2): no second
+    // GET /api/flybrain round trip, so no race with a second review landing in between.
+    const fly = result.review?.fly
+    if (fly?.skipped) {
+      feedback = {
+        before: current.gate?.suspicion ?? 0, after: current.gate?.suspicion ?? 0,
+        verdict: result.review?.escalation_verdict ?? body.escalation_verdict ?? '', simulated: false,
+        skippedReason: fly.reason ?? null,
+      }
+    } else if (fly && fly.before != null && fly.after != null) {
+      const active = fly.kc_active ?? []
+      const kc: KcDelta[] = active.map((i, idx) => ({ i, before: fly.kc_weights_before?.[idx] ?? 0, after: fly.kc_weights_after?.[idx] ?? 0 }))
+      feedback = { before: fly.before, after: fly.after, verdict: fly.verdict ?? '', simulated: false, kc }
+    } else {
+      // fall back to the old two-call path only if this backend build predates the enriched response
+      try {
+        const f = await fetchJson<FlyBrain>('/api/flybrain')
+        const h = f.history?.[f.history.length - 1]
+        if (h) feedback = { before: h.before, after: h.after, verdict: h.verdict, simulated: false }
+      } catch { /* optional */ }
+    }
     return { result, feedback }
   }
 }

@@ -60,6 +60,23 @@ def gemini_model() -> str:
     return os.environ.get("SDOC_GEMINI_MODEL", "gemini-2.5-flash")
 
 
+def gemini_concurrency() -> int:
+    """Max concurrent in-flight Gemini calls (classifier + 7 field agents = up to 8 per email).
+    Free-tier flash-class models allow only a small number of requests/minute; keeping this low
+    avoids firing all 8 calls of one email at once and tripping 429s (reviews/judge.md #6)."""
+    try:
+        return max(1, int(os.environ.get("SDOC_GEMINI_CONCURRENCY", "3")))
+    except ValueError:
+        return 3
+
+
+def gemini_max_attempts() -> int:
+    try:
+        return max(1, int(os.environ.get("SDOC_GEMINI_MAX_ATTEMPTS", "4")))
+    except ValueError:
+        return 4
+
+
 def default_engine() -> str:
     """'gemini' iff a key exists (and SDOC_ENGINE does not force rules), else 'rules'."""
     forced = os.environ.get("SDOC_ENGINE")

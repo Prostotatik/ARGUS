@@ -71,11 +71,36 @@ for _f, _syns in FIELD_SYNONYMS.items():
     for _s in _syns:
         _SYN_INDEX[_s] = _f
 
+# word-tuple index for prefix matching ('Containers 6 x 40HC' - no colon/dash separator at all,
+# seen on OCR-read scanned documents): the same synonym table, keyed by its word tuple instead of
+# the joined string, tried longest-first so 'gross weight' wins over a lone 'gross'.
+_SYN_TOKENS: dict[tuple[str, ...], str] = {tuple(_s.split()): _f for _s, _f in _SYN_INDEX.items()}
+_MAX_SYN_WORDS = max((len(k) for k in _SYN_TOKENS), default=1)
 
-def match_label(raw_label: str) -> tuple[str | None, bool]:
+
+def match_label_prefix_words(words: list[str]) -> tuple[str | None, int]:
+    """``words``: lightly-normalised (lower-case, alnum-only) leading tokens of a line.
+    Returns (field, n_words_consumed) for the longest known synonym matching a PREFIX of
+    ``words``, else (None, 0). Used only as a last-resort separator-free layout fallback."""
+    for n in range(min(_MAX_SYN_WORDS, len(words)), 0, -1):
+        f = _SYN_TOKENS.get(tuple(words[:n]))
+        if f:
+            return f, n
+    return None, 0
+
+
+def match_label(raw_label: str, *, exact_only: bool = False) -> tuple[str | None, bool]:
     """Return (field, exact). exact=False means a fuzzy/derived match (lower confidence).
 
     Never matches long free text: a label longer than ~8 words is not a field label.
+
+    ``exact_only``: skip the difflib fuzzy fallback below. That fallback scans all ~90 known
+    synonyms with ``SequenceMatcher`` and is the expensive part of this function; callers that try
+    many candidate substrings per line that are usually NOT a label at all (e.g. every dash/equals-
+    split line, since real labels are a minority of those) should pass ``exact_only=True`` so a
+    document full of non-label dashed text (addresses, vessel/voyage refs, date ranges) does not
+    pay a ~90-way fuzzy scan per line for nothing. Exact and stop-word-normalised matches - the
+    common case - are unaffected either way.
     """
     if not raw_label or len(raw_label) > 90:
         return None, False
@@ -98,6 +123,8 @@ def match_label(raw_label: str) -> tuple[str | None, bool]:
         c3 = " ".join(t2)
         if c3 and c3 in _SYN_INDEX:
             return _SYN_INDEX[c3], True
+    if exact_only:
+        return None, False
     # conservative fuzzy fallback (typos such as 'Consgnee', 'Port of Loadng')
     best, best_r = None, 0.0
     c = cands[0]

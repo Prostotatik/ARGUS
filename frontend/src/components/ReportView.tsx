@@ -84,6 +84,79 @@ export default function ReportView({ result, nodes, mode, busy, feedback, onBack
   const bad = fields.filter((f) => !f.match)
   const ev = result.escalation?.evidence ?? []
 
+  // Rendered right after the headline (above the comparison table) when a review is actually
+  // needed, so it is not pushed below the fold by the table at 1536x1024 (reviews/judge.md #8);
+  // kept in its normal place after the table for the "correct a field" / "already resolved" cases,
+  // which are not urgent in the same way.
+  const reviewSection = (needsReview || editField || resolved) && (
+    <section className={`review${needsReview ? ' open' : ''}`} aria-label="Human review">
+      <header>
+        <ShieldAlert size={17} />
+        <h4>{needsReview ? 'Human review needed' : resolved ? 'Human review recorded' : 'Correct a field'}</h4>
+        {mode !== 'live' && <span className="sim" title="No backend in this mode; the update is applied locally only">{mode === 'replay' ? 'REPLAY: simulated locally' : 'MOCK: simulated locally'}</span>}
+      </header>
+
+      {(result.review_reason || result.escalation?.reason) && (
+        <p className="why">
+          {result.review_reason && <b>{REASON_TEXT[result.review_reason] ?? result.review_reason}</b>}
+          {result.escalation?.reason && <span> {result.escalation.reason}</span>}
+        </p>
+      )}
+      {ev.length > 0 && (
+        <ul className="evidence">
+          {ev.map((e, i) => (
+            <li key={i}><span className="doc">{e.doc}</span>{e.field && <span className="ef">{label(e.field)}</span>}<q>{e.text}</q></li>
+          ))}
+        </ul>
+      )}
+
+      {!resolved && (
+        <fieldset className="vd">
+          <legend>Was the escalation warranted?</legend>
+          <label><input type="radio" name="vd" checked={verdict === 'escalation_correct'} onChange={() => setVerdict('escalation_correct')} /> Yes, escalation was correct</label>
+          <label><input type="radio" name="vd" checked={verdict === 'escalation_unneeded'} onChange={() => setVerdict('escalation_unneeded')} /> No, it was unneeded</label>
+          <span className="pop-dim">Feeds the fly-net weight update.</span>
+        </fieldset>
+      )}
+
+      {editField && (
+        <form className="fix" onSubmit={(e) => { e.preventDefault(); void submit({ decision: 'correct_field', field: editField, corrected_si: si, corrected_bl: bl }) }}>
+          <label>Field
+            <select value={editField} onChange={(e) => startEdit(e.target.value)}>
+              {FIELD_KEYS.map((k) => <option key={k} value={k}>{label(k)}</option>)}
+            </select>
+          </label>
+          <label>Corrected SI value<input value={si} onChange={(e) => setSi(e.target.value)} /></label>
+          <label>Corrected BL value<input value={bl} onChange={(e) => setBl(e.target.value)} /></label>
+          <div className="row">
+            <button type="submit" className="btn small primary" disabled={busy}>Apply correction</button>
+            <button type="button" className="btn small ghost" onClick={() => setEditField(null)}>Cancel</button>
+          </div>
+        </form>
+      )}
+
+      {!resolved && !editField && (
+        <div className="row actions">
+          <button type="button" className="btn small primary" disabled={busy} onClick={() => void submit({ decision: 'confirm_mismatch', field: bad[0] ? String(bad[0].field) : null })}>Confirm mismatch</button>
+          <button type="button" className="btn small" disabled={busy} onClick={() => void submit({ decision: 'confirm_ok' })}>Confirm: no mismatch</button>
+          <button type="button" className="btn small ghost" disabled={busy} onClick={() => startEdit(String((bad[0] ?? fields[0])?.field ?? 'shipper'))}><Pencil size={13} /> Correct a field</button>
+        </div>
+      )}
+      {err && <p className="pop-err" role="alert">{err}</p>}
+      {feedback && feedback.skippedReason && (
+        <p className="fb fb-skip" role="status">
+          No fly-net weight update: {feedback.skippedReason}
+        </p>
+      )}
+      {feedback && !feedback.skippedReason && (
+        <p className="fb" role="status">
+          Fly net updated from your verdict ({feedback.verdict.replace('_', ' ')}): suspicion {feedback.before.toFixed(2)} &rarr; {feedback.after.toFixed(2)}
+          {feedback.simulated ? ' (simulated)' : ''}.
+        </p>
+      )}
+    </section>
+  )
+
   return (
     <div className="report">
       <div className="rep-top">
@@ -94,7 +167,7 @@ export default function ReportView({ result, nodes, mode, busy, feedback, onBack
       <div className="rep-mail">
         <div>
           <h3>{result.subject || '(no subject)'}</h3>
-          <p>{result.from} &middot; {fmtTime(result.received_at)}</p>
+          <p>{result.from} &middot; <span title="Arrival time is simulated - the dataset has no timestamps">{fmtTime(result.received_at)} (simulated)</span></p>
         </div>
         <div className="rep-chips">
           <span className="cat" style={{ color: catColor, borderColor: catColor + '55', background: catColor + '18' }}>{CATEGORY_LABEL[result.category] ?? result.category}</span>
@@ -133,6 +206,8 @@ export default function ReportView({ result, nodes, mode, busy, feedback, onBack
         </div>
       )}
 
+      {isCmp && needsReview && reviewSection}
+
       {isCmp && (
         <div className="cmp-wrap">
           <table className="cmp">
@@ -158,69 +233,7 @@ export default function ReportView({ result, nodes, mode, busy, feedback, onBack
         </div>
       )}
 
-      {isCmp && (needsReview || editField || resolved) && (
-        <section className={`review${needsReview ? ' open' : ''}`} aria-label="Human review">
-          <header>
-            <ShieldAlert size={17} />
-            <h4>{needsReview ? 'Human review needed' : resolved ? 'Human review recorded' : 'Correct a field'}</h4>
-            {mode !== 'live' && <span className="sim" title="No backend in this mode; the update is applied locally only">{mode === 'replay' ? 'REPLAY: simulated locally' : 'MOCK: simulated locally'}</span>}
-          </header>
-
-          {(result.review_reason || result.escalation?.reason) && (
-            <p className="why">
-              {result.review_reason && <b>{REASON_TEXT[result.review_reason] ?? result.review_reason}</b>}
-              {result.escalation?.reason && <span> {result.escalation.reason}</span>}
-            </p>
-          )}
-          {ev.length > 0 && (
-            <ul className="evidence">
-              {ev.map((e, i) => (
-                <li key={i}><span className="doc">{e.doc}</span>{e.field && <span className="ef">{label(e.field)}</span>}<q>{e.text}</q></li>
-              ))}
-            </ul>
-          )}
-
-          {!resolved && (
-            <fieldset className="vd">
-              <legend>Was the escalation warranted?</legend>
-              <label><input type="radio" name="vd" checked={verdict === 'escalation_correct'} onChange={() => setVerdict('escalation_correct')} /> Yes, escalation was correct</label>
-              <label><input type="radio" name="vd" checked={verdict === 'escalation_unneeded'} onChange={() => setVerdict('escalation_unneeded')} /> No, it was unneeded</label>
-              <span className="pop-dim">Feeds the fly-net weight update.</span>
-            </fieldset>
-          )}
-
-          {editField && (
-            <form className="fix" onSubmit={(e) => { e.preventDefault(); void submit({ decision: 'correct_field', field: editField, corrected_si: si, corrected_bl: bl }) }}>
-              <label>Field
-                <select value={editField} onChange={(e) => startEdit(e.target.value)}>
-                  {FIELD_KEYS.map((k) => <option key={k} value={k}>{label(k)}</option>)}
-                </select>
-              </label>
-              <label>Corrected SI value<input value={si} onChange={(e) => setSi(e.target.value)} /></label>
-              <label>Corrected BL value<input value={bl} onChange={(e) => setBl(e.target.value)} /></label>
-              <div className="row">
-                <button type="submit" className="btn small primary" disabled={busy}>Apply correction</button>
-                <button type="button" className="btn small ghost" onClick={() => setEditField(null)}>Cancel</button>
-              </div>
-            </form>
-          )}
-
-          {!resolved && !editField && (
-            <div className="row actions">
-              <button type="button" className="btn small primary" disabled={busy} onClick={() => void submit({ decision: 'confirm_mismatch', field: bad[0] ? String(bad[0].field) : null })}>Confirm mismatch</button>
-              <button type="button" className="btn small" disabled={busy} onClick={() => void submit({ decision: 'confirm_ok' })}>Confirm: no mismatch</button>
-              <button type="button" className="btn small ghost" disabled={busy} onClick={() => startEdit(String((bad[0] ?? fields[0])?.field ?? 'shipper'))}><Pencil size={13} /> Correct a field</button>
-            </div>
-          )}
-          {err && <p className="pop-err" role="alert">{err}</p>}
-          {feedback && (
-            <p className="fb" role="status">
-              Fly net updated from your verdict ({feedback.verdict.replace('_', ' ')}): suspicion {feedback.before.toFixed(2)} &rarr; {feedback.after.toFixed(2)}
-              {feedback.simulated ? ' (simulated)' : ''}.
-            </p>
-          )}
-        </section>
-      )}
+      {isCmp && !needsReview && (editField || resolved) && reviewSection}
     </div>
   )
 }
