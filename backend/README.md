@@ -15,7 +15,7 @@ python -m sdoc.run_all --engine rules  # 520 emails -> out/submission.json (+ ou
 python tools/score_local.py --errors   # DEV ONLY: scores with work/docker/server/scoring.py
 python -m sdoc.export_replay           # -> ../frontend/public/replay/ (static replay for the Vercel build)
 uvicorn sdoc.api:app --port 8000       # HTTP API + SSE (CONTRACT.md), CORS open
-python -m pytest tests -q              # 63 tests
+python -m pytest tests -q              # 69 tests
 python -m tools.grey_zone_eval         # held-out fly-gate eval (separate from the 520-email score)
 ```
 
@@ -98,4 +98,4 @@ Our own small network in the style of the Drosophila mushroom body. It is not re
 
 ## Known gaps
 
-Retry state is in memory (a server restart loses it); classifier rules, while re-verified against fresh phrasing (23/23) and much broader label/legal-suffix/country coverage this round, are still ultimately tuned against this inbox's genre of language; container size/type (20' vs 40') is not compared (spec compares count only, a locked scope decision); the grey-zone gate's `ambiguous_role` recall (0.375, see the held-out eval above) is the weakest of the three grey-zone categories and was not artificially tuned up; a handful of name/port/weight/container normalisation edge cases in a hand-written adversarial test remain unresolved by design (documented per-case in `reviews/developer.md` Round 2 item #3 - e.g. a name with zero legal suffix always "matches" one that has one, an inherited design trade-off, not a Round 2 regression).
+Retry state is in memory (a server restart loses it); classifier rules, while re-verified against fresh phrasing (23/23) and much broader label/legal-suffix/country coverage this round, are still ultimately tuned against this inbox's genre of language; container size/type (20' vs 40') is not compared (spec compares count only, a locked scope decision); the grey-zone gate's `ambiguous_role` recall (0.375, see the held-out eval above) is the weakest of the three grey-zone categories and was not artificially tuned up; a handful of name/port/weight/container normalisation edge cases in a hand-written adversarial test remain unresolved by design (documented per-case in `reviews/developer.md` Round 2 item #3 - e.g. a name with zero legal suffix always "matches" one that has one, an inherited design trade-off, not a Round 2 regression); the 7 field agents genuinely run concurrently (`asyncio.gather`), so their `done`/`error` trace events land in real completion order, not a fixed one - re-running `export_replay` therefore reorders (never changes the *values* of) a comparison email's field-agent events between runs, which shows up as a large but purely cosmetic diff in `frontend/public/replay/traces/*.json`. Left as-is on purpose (reviews/developer.md Round 4): forcing a fixed order would mean faking the very thing the pitch stakes itself on - that the graph reflects real, not staged, execution.

@@ -55,10 +55,11 @@ cd ../frontend && npm install && npm run dev   # terminal 2, proxies /api -> :80
 
 Open the printed `localhost:5173` URL — it auto-detects LIVE vs REPLAY. ARGUS ships wired for
 Google Gemini and it's been proven, not just plumbed: classifier and all 7 field-agents verified
-live on `gemini-3.5-flash-lite` across a 14-email mix — clean matches, real mismatches, both
-deterministic and fly-gate-decided escalations — zero errors, every value agreeing independently
-with the rules engine. Pre-emptive rate limiting keeps every call under the account's real ceiling
-before it's ever sent, with exponential backoff as a second line of defense. Drop in
+live on `gemini-3.5-flash-lite` across a 14-email mix (6 of them exercising all 7 field-agents) —
+clean matches, real mismatches, both deterministic and fly-gate-decided escalations — zero errors,
+every value agreeing independently with the rules engine. Pre-emptive rate limiting keeps every
+call under the account's real ceiling before it's ever sent, with exponential backoff as a second
+line of defense. Drop in
 `GEMINI_API_KEY` (env or `backend/.env`) and it's live — plus a deterministic engine underneath so
 the system never goes down if a key isn't set or a quota runs dry. Every result is labelled with
 which engine actually produced it.
