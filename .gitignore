@@ -1,0 +1,8 @@
+work/
+node_modules/
+.env
+__pycache__/
+*.pyc
+dist/
+backend/out/
+.claude/
