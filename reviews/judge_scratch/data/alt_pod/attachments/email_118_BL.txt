@@ -7,7 +7,7 @@ Consignee (Non-Negotiable): EAST BRIGHT FZ-LLC
   RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
 Notify Party: EAST BRIGHT FZ-LLC
 Port of Loading: BUATAN, INDONESIA (IDBUA)
-Place of Delivery: LONG BEACH, US (USLGB)
+Port of Destination: LONG BEACH, US (USLGB)
 No. of Containers or Packages: 3 x 40'HC
 Gross Wt (kgs): 67,668 KG
 Vessel Name: SOLID 16 V.044NW2

@@ -7,7 +7,7 @@ Consignee: UAB NOVAKOPA
   SAVANORIU PR. 187; LT-02300 VILNIUS, LITHUANIA
 Notify Party/Intermediate Consignee: UAB NOVAKOPA
 PORT OF LOADING: SINGAPORE (SGSIN)
-Place of Delivery: CONAKRY, GUINEA (GNCKY)
+Port of Destination: CONAKRY, GUINEA (GNCKY)
 No. of Containers or Packages: 5 x 40'HC
 Gross Wt (kgs): 105,815 KG
 Vessel: INDO SUKSES 65 V.51NW1

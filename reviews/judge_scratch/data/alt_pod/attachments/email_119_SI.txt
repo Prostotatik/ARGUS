@@ -7,7 +7,7 @@ Consignee (Non-Negotiable): CLIFFORD PAPER INC
   70 EAST STREET; RIDGEFIELD, NJ 07657, USA
 Notify: CLIFFORD PAPER INC
 PORT OF LOADING: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
-Place of Delivery: SAVANNAH, US (USSAV)
+Port of Destination: SAVANNAH, US (USSAV)
 No. of Containers: 15 x 40'HC
 Gross Weight毛重(KGS): 322,590 KG
 Export Carrier (vessel, voyage): NAP 914 V.BS007

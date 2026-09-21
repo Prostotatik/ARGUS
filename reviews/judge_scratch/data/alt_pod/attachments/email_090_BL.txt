@@ -7,7 +7,7 @@ Consignee (Non-Negotiable): CLIFFORD PAPER INC
   70 EAST STREET; RIDGEFIELD, NJ 07657, USA
 Notify Party: CLIFFORD PAPER INC
 Port of Loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
-Place of Delivery: BALTIMORE, US (USBAL)
+Port of Destination: BALTIMORE, US (USBAL)
 Total Containers: 1 x 40'HC
 Gross Wt (kgs): 20,370 KG
 Ocean Vessel: MMSS 2507 V.257087E

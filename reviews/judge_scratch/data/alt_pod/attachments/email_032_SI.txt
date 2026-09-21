@@ -7,7 +7,7 @@ Consignee (Non-Negotiable): TOPKOPY MIDDLE EAST FZE
   P.O. BOX 17436; JEBEL ALI FREE ZONE, DUBAI, UAE
 Notify Party: TOPKOPY MIDDLE EAST FZE
 Port of Loading (POL): RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
-Place of Delivery: KARACHI, PAKISTAN (PKKHI)
+Port of Destination: KARACHI, PAKISTAN (PKKHI)
 Total Containers: 3 x 40'HC
 Gross Wt (kgs): 64,092 KG
 Ocean Vessel: LE HAVRE V.QI540A

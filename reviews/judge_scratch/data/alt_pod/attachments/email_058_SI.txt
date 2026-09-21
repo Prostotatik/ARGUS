@@ -7,7 +7,7 @@ To the Order of: CLIFFORD PAPER INC
   70 EAST STREET; RIDGEFIELD, NJ 07657, USA
 Notify: CLIFFORD PAPER INC
 Load Port: SINGAPORE (SGSIN)
-Place of Delivery: MERSIN, TURKEY (TRMER)
+Port of Destination: MERSIN, TURKEY (TRMER)
 No. of Containers: 4 x 40'HC
 Gross Wt (kgs): 81,512 KG
 Ocean Vessel: MARCOPOLO 810 V.BS005

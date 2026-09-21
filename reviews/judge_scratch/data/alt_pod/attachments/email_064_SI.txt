@@ -7,7 +7,7 @@ CONSIGNEE: ORIENT LINKS CO (LLC)
   P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
 Notify Party/Intermediate Consignee: ORIENT LINKS CO (LLC)
 Port of Loading: RUGAO/NANTONG/SHANGHAI, CHINA (CNSHA)
-Place of Delivery: CONAKRY, GUINEA (GNCKY)
+Port of Destination: CONAKRY, GUINEA (GNCKY)
 No. of Containers: 5 x 20'GP
 Gross Weight毛重(KGS): 103,800 KG
 Export Carrier (vessel, voyage): LE HAVRE V.QI540A

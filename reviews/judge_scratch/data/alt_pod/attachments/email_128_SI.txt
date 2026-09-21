@@ -7,7 +7,7 @@ To the Order of: BALL & DOGGETT AUSTRALIA PTY LTD
   43-45 METROPOLITAN ROAD; ENFIELD NSW 2136, AUSTRALIA
 Notify: BALL & DOGGETT AUSTRALIA PTY LTD
 Port of Loading (POL): NHAVA SHEVA, INDIA (INNSA)
-Place of Delivery: NEW YORK, US (USNYC)
+Port of Destination: NEW YORK, US (USNYC)
 No. of Containers or Packages: 15 x 40'HC
 Gross Wt (kgs): 323,250 KG
 Ocean Vessel: LE HAVRE V.QI540A

@@ -7,7 +7,7 @@ Consignee (Non-Negotiable): SAFQA LIMITED
   P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
 Notify Party: SAFQA LIMITED
 Port of Loading: NHAVA SHEVA, INDIA (INNSA)
-Place of Delivery: CALLAO, PERU (PECLL)
+Port of Destination: CALLAO, PERU (PECLL)
 No. of Containers: 3 x 40'HC
 Gross Wt (kgs): 61,026 KG
 Export Carrier (vessel, voyage): LE HAVRE V.QI540A

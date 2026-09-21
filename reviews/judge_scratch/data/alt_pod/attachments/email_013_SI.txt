@@ -7,7 +7,7 @@ CONSIGNEE: ROXCEL TRADING GMBH
   OPERNRING 3-5; 1010 VIENNA, AUSTRIA
 Notify Party: ROXCEL TRADING GMBH
 Port of Loading: SINGAPORE (SGSIN)
-Place of Delivery: MOMBASA, KENYA (KEMBA)
+Port of Destination: MOMBASA, KENYA (KEMBA)
 No. of Containers: 3 x 40'HC
 Gross Weight毛重(KGS): 67,311 KG
 Vessel: VISION 202 V.002

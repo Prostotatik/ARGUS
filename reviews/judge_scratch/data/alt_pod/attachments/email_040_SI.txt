@@ -7,7 +7,7 @@ CONSIGNEE: TOPKOPY MIDDLE EAST FZE
   P.O. BOX 17436; JEBEL ALI FREE ZONE, DUBAI, UAE
 Notify: SAFQA LIMITED
 Port of Loading: NHAVA SHEVA, INDIA (INNSA)
-Place of Delivery: CONAKRY, GUINEA (GNCKY)
+Port of Destination: CONAKRY, GUINEA (GNCKY)
 No. of Containers or Packages: 10 x 20'FCL
 Gross Wt (kgs): 222,690 KG
 Export Carrier (vessel, voyage): PACIFIC SUN 1 V.251073E

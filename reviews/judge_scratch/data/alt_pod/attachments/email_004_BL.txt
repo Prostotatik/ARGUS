@@ -7,7 +7,7 @@ To the Order of: UAB NOVAKOPA
   RAKEZ AMENITY CENTER; AL HAMRA INDUSTRIAL ZONE, RAK, UAE
 Notify Party: UAB NOVAKOPA
 Port of Loading (POL): NANTONG, CHINA (CNNTG)
-Place of Delivery: KARACHI, PAKISTAN (PKKHI)
+Port of Destination: KARACHI, PAKISTAN (PKKHI)
 Container Count: 6 x 40'HC
 Gross Weight (KG): 131,058 KG
 Export Carrier (vessel, voyage): NAP 914 V.BS007

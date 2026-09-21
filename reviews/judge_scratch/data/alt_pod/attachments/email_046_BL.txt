@@ -7,7 +7,7 @@ Consignee: SAFQA LIMITED
   P.O. BOX 99423-80100; TONONOKA ROAD; MOMBASA, KENYA; PIN NO.: P051376597X
 Notify: MOORIM SP CO., LTD
 Port of Loading: PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
-Place of Delivery: SAVANNAH, US (USSAV)
+Port of Destination: SAVANNAH, US (USSAV)
 No. of Containers or Packages: 12 x 20'FCL
 Gross Weight毛重(KGS): 257,340 KG
 Vessel Name: MARCOPOLO 810 V.BS005

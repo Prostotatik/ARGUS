@@ -7,7 +7,7 @@ Consignee (Non-Negotiable): CERIEX
   ZONE INDUSTRIELLE; CONAKRY, GUINEA
 Notify: ROXCEL TRADING GMBH
 Port of Loading (POL): PORT KLANG (WESTPORT), MALAYSIA (MYPKG)
-Place of Delivery: BUSAN, SOUTH KOREA (AUFRE)
+Port of Destination: BUSAN, SOUTH KOREA (AUFRE)
 Total Containers: 5 x 20'GP
 Gross Weight (KG): 135,126 KG
 Vessel Name: MMSS 2507 V.257087E

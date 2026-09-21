@@ -7,7 +7,7 @@ Consignee (Non-Negotiable): ROXCEL TRADING GMBH
   OPERNRING 3-5; 1010 VIENNA, AUSTRIA
 NOTIFY PARTY: ROXCEL TRADING GMBH
 POL: SINGAPORE (SGSIN)
-Place of Delivery: TUTICORIN, INDIA (KEMBA)
+Port of Destination: TUTICORIN, INDIA (KEMBA)
 Container Count: 3 x 40'HC
 Gross Weight毛重(KGS): 67,311 KG
 Export Carrier (vessel, voyage): VISION 202 V.002

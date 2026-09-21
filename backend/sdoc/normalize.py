@@ -52,6 +52,11 @@ _LEGAL = {
     "LTD", "CO", "INC", "CORP", "LLC", "PTE", "PVT", "PTY", "SDN", "BHD", "GMBH", "FZE", "FZ", "FZC",
     "FZCO", "FZLLC", "PLC", "LLP", "AG", "SA", "BV", "NV", "JSC", "SAS", "SRL", "SPA", "OY", "CV",
     "DMCC", "TBK", "LP", "THE", "AND",
+    # additional global legal-form suffixes (Round 3): Scandinavia (AB/AS/ASA/APS/OYJ), Iberia/Latin
+    # America (LDA/LTDA), East Asia (KK/YK/GK), Balkans (DOO/AD), France (SARL/SA already covered),
+    # Central/Eastern Europe (KFT/ZRT/SRO/SIA/UAB/EOOD), US professional forms (PC/PLLC).
+    "AB", "AS", "ASA", "APS", "OYJ", "LDA", "LTDA", "KK", "YK", "GK", "DOO", "AD", "SARL",
+    "KFT", "ZRT", "SRO", "SIA", "UAB", "EOOD", "PC", "PLLC",
 }
 # Leading (not trailing) corporate-form markers, e.g. Indonesian 'PT' ('Perseroan Terbatas' - the
 # local equivalent of 'Ltd', always a prefix): stripped from the front like 'THE' already was.
@@ -74,6 +79,20 @@ _LEGAL_ABBREV: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"\bL\.?\s*L\.?\s*C\.?\b", re.I), " LLC "),
     (re.compile(r"\bS\s*/\s*B\b", re.I), " SDN BHD "),   # 'S/B' == 'SDN BHD'
 ]
+# Generic dotted-initialism collapse (Round 3): ANY run of 2-5 single letters each separated by a
+# dot ('S.A.', 'N.V.', 'B.V.', 'A.G.', 'K.K.', 'D.O.O.', 'S.A.R.L.', 'S.p.A.', 'C.V.', the 'O.O.'
+# half of 'SP. Z O.O.', etc.) collapses to the same bare letters as the undotted form used
+# elsewhere ('SA', 'NV', 'BV', 'AG', 'KK', 'DOO', 'SARL', 'SPA', 'CV', 'OO') BEFORE the generic
+# non-alnum strip runs - otherwise each single letter survives as its own token ('S A') and never
+# converges with the undotted spelling. This is a general punctuation-normalisation rule (same
+# family as the LLC/S-B collapses above), not a hard-coded list of specific suffixes, so it
+# generalises to any global legal-form abbreviation written with dots, not just the ones already
+# observed in this dataset.
+_DOTTED_INITIALISM = re.compile(r"\b[A-Z](?:\.[A-Z]){1,4}\.?\b")
+
+
+def _collapse_dotted(m: re.Match) -> str:
+    return m.group(0).replace(".", "")
 
 
 @dataclass(frozen=True)
@@ -92,6 +111,7 @@ def _ascii_upper(s: str) -> str:
 
 def norm_name(raw: str) -> NameKey:
     s = _ascii_upper(raw).replace("&", " AND ")
+    s = _DOTTED_INITIALISM.sub(_collapse_dotted, s)
     for pat, repl in _LEGAL_ABBREV:
         s = pat.sub(repl, s)
     # parenthetical qualifier, e.g. '(S)' / '(Malaysia)': not part of the core name, but not

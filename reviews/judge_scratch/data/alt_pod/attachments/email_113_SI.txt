@@ -7,7 +7,7 @@ CONSIGNEE: CERIEX
   ZONE INDUSTRIELLE; CONAKRY, GUINEA
 Notify Party/Intermediate Consignee: CERIEX
 Port of Loading: NHAVA SHEVA, INDIA (INNSA)
-Place of Delivery: BRISBANE, AUSTRALIA (AUBNE)
+Port of Destination: BRISBANE, AUSTRALIA (AUBNE)
 Total Containers: 2 x 20'GP
 Gross Weight毛重(KGS): 45,006 KG
 Vessel: SOLID 16 V.044NW2

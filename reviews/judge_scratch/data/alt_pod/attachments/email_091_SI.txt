@@ -7,7 +7,7 @@ To the Order of: ORIENT LINKS CO (LLC)
   P.O. BOX 61041; JEBEL ALI, DUBAI, UAE
 NOTIFY PARTY: VITAL SOLUTIONS PTE. LTD.
 Load Port: NHAVA SHEVA, INDIA (INNSA)
-Place of Delivery: CALLAO, PERU (PECLL)
+Port of Destination: CALLAO, PERU (PECLL)
 No. of Containers or Packages: 3 x 40'HC
 GROSS WEIGHT: 67,953 KG
 Vessel Name: VISION 202 V.002

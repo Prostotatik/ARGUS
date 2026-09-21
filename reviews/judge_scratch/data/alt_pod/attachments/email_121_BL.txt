@@ -7,7 +7,7 @@ Consignee: CLIFFORD PAPER INC
   70 EAST STREET; RIDGEFIELD, NJ 07657, USA
 Notify Party: CLIFFORD PAPER INC
 Port of Loading: NANTONG, CHINA (CNNTG)
-Place of Delivery: BRISBANE, AUSTRALIA (AUBNE)
+Port of Destination: BRISBANE, AUSTRALIA (AUBNE)
 No. of Containers: 1 x 20'GP
 Gross Weight毛重(KGS): 21,342 KG
 Vessel Name: LE HAVRE V.QI540A

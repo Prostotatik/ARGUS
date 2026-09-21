@@ -60,17 +60,26 @@ def _match_any(label: str, *, exact_only: bool = False) -> tuple[str | None, boo
     return fuzzy
 
 
+_LIST_PREFIX = re.compile(r"^(?:\(?\d{1,3}[.)]|\(?[a-zA-Z][.)])\s+")
+
+
 def split_line(line: str) -> tuple[str, str, str] | None:
     """Return (canonical_field, value, kind) for a 'label: value' style line, else None.
 
-    Accepted separators: colon, whitespace-column, ' - ', ' = ', and a markdown-table row
-    (``| Label | value |``). A candidate is only accepted when the text left of the separator
-    actually resolves to a known field synonym (``_match_any``), so a value that happens to
-    contain a dash/equals ("Jebel Ali - UAE") is never mistaken for a label line.
+    Accepted separators: colon, whitespace-column, ' - ', ' = ', ' --> ', ' > ', ';',
+    'Label (value)', and a markdown-table row (``| Label | value |``). A leading numbered/
+    lettered/bulleted list marker ('1.', '2)', 'a.') is stripped first so a numbered-list layout
+    ('1. Shipper: ACME') still resolves the label. A candidate is only accepted when the text
+    left of the separator actually resolves to a known field synonym (``_match_any``), so a value
+    that happens to contain a dash/equals/arrow ("Jebel Ali --> UAE") is never mistaken for a
+    label line.
 
     kind: 'exact' | 'fuzzy'.
     """
     s = line.strip()
+    if not s:
+        return None
+    s = _LIST_PREFIX.sub("", s)
     if not s:
         return None
     # markdown table row: '| Label | value |' (also '| Label | value | extra |')
@@ -94,12 +103,28 @@ def split_line(line: str) -> tuple[str, str, str] | None:
         f, exact = _match_any(m.group(1).strip())
         if f:
             return f, m.group(2).strip(), "exact" if exact else "fuzzy"
-    # dash / equals separated: 'Label - value' / 'Label = value'
-    m = re.match(r"^(.{2,60}?)\s+[-=]\s+(\S.*)$", s)
+    # dash / equals / arrow / greater-than separated: 'Label - value', 'Label = value',
+    # 'Label --> value', 'Label > value'
+    m = re.match(r"^(.{2,60}?)\s+(?:-->|>|[-=])\s+(\S.*)$", s)
     if m:
         f, exact = _match_any(m.group(1).strip(), exact_only=True)
         if f:
             return f, m.group(2).strip(), "exact" if exact else "fuzzy"
+    # semicolon separated: 'Label; value'
+    m = re.match(r"^(.{2,60}?)\s*;\s*(\S.*)$", s)
+    if m:
+        f, exact = _match_any(m.group(1).strip(), exact_only=True)
+        if f:
+            return f, m.group(2).strip(), "exact" if exact else "fuzzy"
+    # NOTE (Round 3): a 'Label (value)' layout (no colon/dash at all, value wrapped in a trailing
+    # paren) was deliberately NOT added here. This dataset's real values routinely contain their
+    # own legitimate parens (port qualifiers like 'PORT KLANG (WESTPORT)', UN/LOCODEs, name
+    # qualifiers like '(Non-Negotiable)'), so a label itself is often already 'Port of Loading
+    # (POL):' - a blind trailing-paren grab on such a line produces a garbled, wrong value (a
+    # SILENT MISMATCH) rather than failing safe. Tried and reverted after `run_fresh_layout.py`
+    # showed 70/84 emails changed - not to a safe NEEDS_REVIEW but to fabricated defects (see
+    # developer.md Round 3 #3). Left as a documented fail-safe gap: this layout still degrades to
+    # NEEDS_REVIEW (never a silently wrong answer), which is the acceptable outcome idea.md allows.
     # separator-free 'Label value' (seen on OCR-read scanned documents, which often drop the
     # colon): only fires on an exact multi/single-word synonym prefix, so ordinary prose is safe.
     toks = s.split()
@@ -139,7 +164,7 @@ def _scan(doc: ParsedDoc, field_name: str) -> list[tuple[int, int, str, str, str
     lines = doc.lines
     out: list[tuple[int, int, str, str, str]] = []
     for i, raw in enumerate(lines):
-        if raw.startswith("  ") and not re.match(r"^\s{2}[A-Za-z][^:]{0,40}[:：]", raw):
+        if raw.startswith("  ") and not re.match(r"^\s{2,}[A-Za-z][^:]{0,40}[:：]", raw):
             continue  # continuation / address line
         sp = split_line(raw)
         if not sp or sp[0] != field_name:
