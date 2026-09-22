@@ -119,3 +119,106 @@ connectome — said plainly everywhere it appears in the product and the docs.
 different email in the list and click back. If the whole page is blank, you probably forgot the
 `?mode=replay` part of the URL, or `npm run dev` isn't still running in the terminal — check that
 terminal window for red error text.
+
+## Technical Architecture
+
+```
+inbox -> classifier -> 7 parallel field agents -> aggregator -> compare (pure, no LLM)
+       -> fly-brain confidence gate -> confident report / escalate to a human with evidence + reason
+```
+
+- **Classifier.** One structured-output call sorts every inbound email into `BL_COMPARISON`,
+  `SI_REQUEST`, `INVOICE_QUERY`, `GENERAL`, or `SPAM`. Only `BL_COMPARISON` continues past this
+  point — everything else gets a report immediately, no wasted downstream work.
+- **7 parallel field agents.** shipper, consignee, notify_party, port_of_loading,
+  port_of_discharge, container_count, gross_weight_kg — one independent agent per field, all
+  reading both the Shipping Instruction and the draft Bill of Lading at once (`asyncio.gather`),
+  each responsible for exactly one value and its supporting evidence line.
+- **Aggregator + compare.** The aggregator collects all 7 outputs; comparison itself is a pure
+  Python function with zero LLM involvement — deterministic, auditable, and the actual thing the
+  official scoring formula measures.
+- **Fly-brain confidence gate.** A small network in the architecture of the fruit fly's olfactory
+  circuit (sparse random projection → Kenyon cells → winner-take-all via global inhibition → one
+  decision neuron), trained online with a Hebbian update from human verdicts. It never touches the
+  match/mismatch decision — its only job is *escalate vs. report*, sitting as a confidence gate in
+  front of every result.
+- **Dual engine, one graph.** Every node above runs on Google Gemini when a key is configured, and
+  on a deterministic rules/regex engine when it isn't — same pipeline shape, same trace format,
+  automatic per-call fallback on any Gemini failure. Every event is labelled with which engine
+  actually produced it.
+- **Two frontend modes.** LIVE streams the graph over Server-Sent Events straight from the FastAPI
+  backend; REPLAY serves 520 precomputed traces as static JSON, so the entire demo (graph, fly
+  panel, human review, the works) runs on Vercel with zero backend.
+
+## Implementation Details
+
+- **Multi-format document parsing.** Plain text, PDF (PyMuPDF/pdfplumber, including scanned pages
+  via `rapidocr-onnxruntime` OCR), Word (python-docx, including tables), and Excel (openpyxl,
+  including transposed sheets) — the real dataset ships all four, so this wasn't optional.
+- **Label-synonym alignment.** SI and BL documents label the same field differently ("Port of
+  Loading" vs "Load Port"); a normalization layer maps both to the canonical field by meaning, plus
+  handles legal-suffix variants (S.A., GmbH, Sdn Bhd, Pte Ltd, …), unit/format differences
+  (kg/MT/lbs, "2 x 40HC"), and a broad country-name table.
+- **Hallucination guard rails on the LLM path.** Temperature 0, structured JSON output only, every
+  returned evidence string is verified to actually occur in the source document text before it's
+  trusted — evidence that can't be verified caps the field's confidence and is visible to the fly
+  gate as a signal.
+- **Pre-emptive rate limiting.** A sliding-window limiter tracks real per-minute and per-day usage
+  against the account's actual published ceilings and makes a call wait *before* it's ever sent,
+  with exponential backoff as a second line of defense — built after hitting a real 429 on a
+  free-tier key during development (see Challenges below).
+- **The fly gate's math.** Sparse input vector (per-field discrepancy flags, extraction
+  confidences, missing-value flags, doc-type anomalies) → random ~5% sparse projection into ~1600
+  Kenyon cells → global inhibition keeps only the top few percent active → one decision neuron
+  reads their weighted sum against a threshold. A human's confirm/correct verdict runs a
+  Hebbian-style update on exactly the Kenyon cells that fired for that case — nothing else moves,
+  which is the whole point: a single wrong association can be corrected precisely, unlike an LLM.
+- **REPLAY export pipeline.** `python -m sdoc.export_replay` runs the real backend once and
+  serializes every trace event, the fly net's actual weights, and dashboard stats to static JSON —
+  the deployed frontend never fakes data, it just doesn't need a live server to show real data.
+
+## Challenges Faced
+
+- **Making the fly gate matter, not decorate.** The most tempting failure mode was a gate that
+  looks alive but never actually changes an outcome. We built a held-out grey-zone evaluation
+  (ambiguous cases with no deterministic trigger like a missing attachment) specifically so the
+  gate's escalation call has a real, non-circular, measurable job — and it independently escalates
+  real emails in the live dataset on its own suspicion score.
+- **Free-tier LLM quota is small and not obviously documented.** The account's real per-model
+  limits (single-digit-to-low-teens requests/minute, tens to low-hundreds requests/day depending on
+  model) only became clear by actually hitting a live 429 mid-development — one model that looked
+  fine on paper turned out to require billing just to be reachable at all. Fixed by building
+  pre-emptive rate limiting against the real numbers and picking the model with the best available
+  ceiling, rather than trusting generic published limits.
+- **A silent default that would have burned a demo's daily quota.** The bulk tools (`run_all`,
+  `export_replay`, and the live API's "process entire inbox" endpoint) originally deferred to
+  "use Gemini if a key exists" — reasonable for a single interactive email, dangerous for a
+  520-email batch run that could exhaust the whole day's quota by accident. All three now default
+  to the deterministic engine explicitly; Gemini only runs across the full set on purpose.
+- **Keeping a demo honest without making it boring.** The instinct to oversell the fly-brain as "a
+  real connectome" was there and was deliberately rejected — a single follow-up question would
+  expose it live. The harder, more interesting version shipped instead: a real, working, testably
+  useful small network in that architecture, which survives scrutiny instead of avoiding it.
+- **Non-deterministic event ordering under real concurrency.** The 7 field agents genuinely run in
+  parallel, so their completion order (and therefore their trace event order) varies run to run —
+  discovered when re-exporting REPLAY data produced a large but purely cosmetic diff. Left as
+  genuine, unforced concurrency rather than faking a stable order, since staging that would
+  undercut the same honesty the project is built on.
+
+## Future Roadmap
+
+- **Broaden Gemini vision coverage** for scanned/image-only documents beyond the current
+  OCR path, using the same evidence-verification guard rails already in place for text.
+- **Expand adversarial classifier training** — the rules engine's ceiling on genuinely unseen
+  phrasing is real and disclosed; a larger, continuously-updated fresh-phrasing test set (and
+  eventually a fine-tuned or few-shot Gemini classifier) would push this further.
+- **Calibrate the fly gate on production data**, not just synthetic and hand-built grey-zone sets,
+  once real human-reviewer verdicts accumulate from actual use.
+- **Wider layout/label coverage** for the long tail of real-world document formatting (the current
+  build already generalizes well beyond the shipped dataset, but the space of real inboxes is
+  larger still).
+- **A real inbox connector** (IMAP/Gmail/Outlook API) in place of the static JSON inbox loader, so
+  the same pipeline can run against a live company mailbox rather than a fixed dataset.
+- **Multi-tenant / ops dashboard** — the current UI is built for one inbox and one demo session;
+  a production version would add per-team views, audit history, and configurable escalation
+  policies on top of the same underlying gate.
