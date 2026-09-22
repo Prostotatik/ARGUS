@@ -3,7 +3,7 @@
 Python 3.10, FastAPI, numpy. Package `sdoc`. Pipeline (every node is a real call and emits a trace event):
 
 ```
-inbox -> classifier -> 7 parallel field agents -> aggregator -> compare (pure function, no LLM) -> fly-brain gate -> report
+inbox -> classifier (LLM) -> 7 parallel field agents (LLM) -> aggregator -> compare -> fly-brain gate -> report
 ```
 
 ## Run

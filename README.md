@@ -7,7 +7,7 @@ through two PDFs hunting for a typo'd port name. When it isn't sure, it doesn't 
 asks a human, with the evidence already pulled up.
 
 ```
-inbox -> classifier -> 7 parallel field agents -> aggregator -> compare (pure, no LLM)
+inbox -> classifier (LLM) -> 7 parallel field agents (LLM) -> aggregator -> compare
        -> fly-brain confidence gate -> confident report / escalate to a human with evidence + reason
 ```
 

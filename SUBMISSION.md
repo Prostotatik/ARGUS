@@ -123,7 +123,7 @@ terminal window for red error text.
 ## Technical Architecture
 
 ```
-inbox -> classifier -> 7 parallel field agents -> aggregator -> compare (pure, no LLM)
+inbox -> classifier (LLM) -> 7 parallel field agents (LLM) -> aggregator -> compare
        -> fly-brain confidence gate -> confident report / escalate to a human with evidence + reason
 ```
 
