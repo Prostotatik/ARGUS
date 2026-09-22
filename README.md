@@ -19,9 +19,7 @@ round's evidence: `reviews/`.
 
 ## The fly brain
 
-We could've called it "a real fly connectome" and hoped nobody asked. We didn't, because someone
-would ask, and that's a bad way to lose a demo. What we actually built is more interesting anyway:
-a small network in the *architecture* of the fruit fly's olfactory circuit — sparse random
+A network in the architecture of the fruit fly's olfactory circuit — sparse random
 projection into Kenyon cells, winner-take-all via global inhibition, one decision neuron, and a
 Hebbian update that learns directly from a human's verdict. That architecture is a genuinely good
 fit for exactly the job an escalation gate needs: spot the unfamiliar case from a handful of
