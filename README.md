@@ -134,6 +134,50 @@ that isn't there.
    isn't a slide, it's a button.
 6. **Close on the number.** 1.0000, official scorer, all 520 emails.
 
+## Technical Architecture
+
+- Real 8-stage pipeline: classifier (LLM) → 7 parallel field agents (LLM) → aggregator → compare →
+  fly-brain confidence gate → report / escalate. Every stage a genuine call, live on screen.
+- Dual engine on every LLM stage: Google Gemini with an automatic deterministic fallback, honestly
+  labelled per result — one pipeline, two ways to run it, zero downtime either way.
+- Fly-brain gate: sparse projection → Kenyon cells → winner-take-all → decision neuron, trained
+  online with a Hebbian update — a precision confidence layer, not a black box.
+- Two frontend modes on one codebase: LIVE (FastAPI + Server-Sent Events) and REPLAY (static
+  precomputed JSON) — the exact same graph, report, and fly panel either way.
+
+## Implementation Details
+
+- One extraction path for four document formats — text, PDF (incl. scanned pages via OCR), Word
+  tables, and Excel — all normalized into the same 7 fields.
+- Label-synonym and normalization engine: matches fields by meaning across differently-labelled
+  documents, and reconciles legal-suffix, unit, and country-name variants automatically.
+- Hallucination guard rails: every LLM-returned evidence string is verified against the source
+  document before it's trusted.
+- Pre-emptive rate limiting matched to the account's real request ceilings, with exponential
+  backoff as a second layer — Gemini calls never get ahead of the account's quota.
+- Kenyon-cell-level interpretability: a human correction updates exactly the cells responsible,
+  visible in real time.
+
+## Challenges Faced
+
+- Gave the confidence gate a real, measurable job: a held-out grey-zone evaluation proves it
+  separates genuinely uncertain cases from confident ones, and it independently escalates real
+  emails on its own judgment.
+- Solved "the same field, different label" generically — one alignment layer handles it across
+  every document format, not a special case per template.
+- Shipped a zero-backend demo that shows real pipeline output, not mocked data, entirely as a
+  static site.
+- Verified the Gemini integration end to end on live traffic — classifier and every field agent,
+  zero errors, values matching the deterministic engine independently.
+
+## Future Roadmap
+
+- Extend vision-LLM coverage for scanned and image-only documents.
+- Keep hardening classifier generalization with an ever-expanding fresh-phrasing test set.
+- Calibrate the fly gate further on real reviewer verdicts as usage grows.
+- Connect directly to a live mailbox (IMAP / Gmail / Outlook) in place of the static inbox loader.
+- Add a multi-team ops dashboard — audit history and configurable escalation policy on the same gate.
+
 ## Engineering depth
 
 Every design decision, every fresh-phrasing stress test, and every independent review round's
